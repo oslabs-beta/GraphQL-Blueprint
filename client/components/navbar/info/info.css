@@ -1,0 +1,24 @@
+.info-container{
+  text-align: center;
+  margin-top: -7vh;
+}
+
+.info-box{
+  width: 400px;
+  height: 300px; 
+}
+
+
+#subtitle{
+  font-size: 50px;
+}
+
+.info-btn{
+  display: flex;
+  justify-content: space-around;
+  border: '1px solid white';
+  width: '125px';
+  font-size: '1.2em';
+  color: 'white';
+}
+
