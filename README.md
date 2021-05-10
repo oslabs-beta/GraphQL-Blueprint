@@ -1,8 +1,9 @@
 # GraphQL Blueprint
 
-GraphQL Blueprint helps you build full stack React apps with boilerplate code. 
+GraphQL Blueprint helps you build full stack apps with boilerplate code. Currently on a React, Express, Apollo stack, you can template out GraphQL code by modeling your database schema with our easy-to-use interface.
 
-### GraphQL Blueprint is cloned from a previous open source project called GraphQL Designer. More information:
+### GraphQL Blueprint is cloned from a previous open source project called GraphQL Designer. 
+More information:
 
 [GraphQL Designer](http://graphqldesigner.com/) is a prototyping tool to develop full-stack GraphQL applications.
 
