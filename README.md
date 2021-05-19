@@ -44,7 +44,15 @@ Lastly export your code!
 
 ## GraphQL Blueprint Authors
 
-Sean Yalda, Dylan Li, Kevin Berlanga, Newas Azad, Ethan Yeh
+[Sean Yalda]
+
+[Dylan Li]
+
+[Kevin Berlanga]
+
+[Newas Azad] (https://wwwlinkedin.com/in/newas-azad-0b0152134/) [@nazad23] (https://github.com/nazad23)
+
+[Ethan Yeh]
 
 ### GraphQL Designer Authors
 
