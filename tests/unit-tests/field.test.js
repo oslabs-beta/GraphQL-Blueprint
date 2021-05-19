@@ -1,4 +1,6 @@
-import reducers from '../../client/reducers/schemaReducers';
+// import reducers from '../../client/reducers/schemaReducers';
+
+const reducers = require('../../client/reducers/schemaReducers');
 
 test('User clicks "Add Field" in a table, a new selected field is made in reducers', () => {
   const state = reducers({
