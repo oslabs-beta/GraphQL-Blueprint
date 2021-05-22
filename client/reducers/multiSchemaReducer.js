@@ -4,8 +4,11 @@ const initialState = {
   //  maps to each database wireframe
   databases: {},
 
+  // state that holds type of databases in order
+  databaseTypes: [],
+
   // make sure to delete from schemaReducers, use search feature to ensure 
-  //  
+  // 
   projectReset: true,
   databaseIndex: 0,
   selectedDatabase: {
