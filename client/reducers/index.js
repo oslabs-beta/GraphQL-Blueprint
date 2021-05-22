@@ -13,7 +13,7 @@ const combinedReducers = combineReducers({
   general: generalReducers,
   schema: schemaReducers,
   // query: queryReducers,
-  //  parentSchemas: parentSchemasReducers
+  //  multiSchema: multiSchemaReducers
 });
 
 // make the combined reducers available for import
