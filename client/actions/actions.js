@@ -72,6 +72,12 @@ export const handleNewProject = reset => ({
 
 // ----------------------------- Query App -------------------------------//
 
+
+
+
+
+// ----------------------------- Query App -------------------------------//
+
 export const createQuery = query => ({
   type: types.CREATE_QUERY,
   payload: query,
