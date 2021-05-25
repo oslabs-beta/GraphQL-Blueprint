@@ -44,7 +44,12 @@ const mapDispatchToProps = dispatch => ({
   openTableCreator: () => dispatch(actions.openTableCreator()),
   handleSnackbarUpdate: status => dispatch(actions.handleSnackbarUpdate(status)),
 });
-
+// function notifyAndSetInventory(notify, inventoryItem) {
+//   return dispatch => {
+//       dispatch(displayNotification(notify));
+//       return dispatch(setInventory(inventoryItem));
+//   };
+// }
 const CreateTable = ({
   tables,
   selectedTable,

@@ -31,7 +31,9 @@ const Field = ({
 
   function handleUpdateField(event) {
 
-    console.log(event.currentTarget);
+    console.log("event:", event);
+    console.log('event.currentTarget.value:', event.currentTarget.value)
+
     handleFieldsSelect({
       location: event.currentTarget.value,
       submitUpdate: false,
