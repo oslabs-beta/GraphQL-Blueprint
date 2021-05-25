@@ -1,19 +1,39 @@
 import * as types from '../actions/action-types';
 
 const initialState = {
-  name: '',
+  //  New state added to name database purpose (i.e. books, authors, etc.)
+  name: '', 
+
+  // this corresponds to type of DB chosen (i.e. mongoDb, PostgresQL, MySQL)
   database: '',
-  // take out projectRest
+
+  // take out projectRest (this state is used to determine whehter "welcome" component pops up)
   projectReset: true,
+
+  //  number of tables in the database
   tableIndex: 0,
+
+  // New state added to refer to a selected database
+  databaseID: -1,
+
+  //  object holding each table state
   tables: {},
+
   selectedTable: {
+    //  table name
     type: '',
+    
+    //  object holding selectedTable fields
     fields: {},
+
+    //  number of fields in the selected table
     fieldsIndex: 1,
+    
+    //  corresponds to which table ID is selected. -1 means none which brings up the default "create table" sidebar
     tableID: -1,
   },
   selectedField: {
+    //  name of field
     name: '',
     type: 'String',
     primaryKey: false,
@@ -108,7 +128,8 @@ const reducers = (state = initialState, action) => {
 
     //  used in the "Welcome" component, takes in the chosen DB (mongo, mysql, or postgres) as payload, 
     //  and updates "database" (i.e. mongodb) and "selectedTable" (keep intiital state for sql or utilize mongodbtable)
-    case 'CHOOSE_DATABASE':
+    // case 'CHOOSE_DATABASE':
+    case types.CHOOSE_DATABASE:
       const database = action.payload;
       // go to the schema tab if they start a new project
       let selectedTable = state.selectedTable;
@@ -142,9 +163,9 @@ const reducers = (state = initialState, action) => {
 
     // ------------------------------- Add Or Update Table -------------------------------//
     // Gets dispatched when user creates 'Create Table'
-    // If the selectedTable is reset kind (meaning that the tableID is equal to -1), then create
+    // If the selectedTable is reset (meaning that the tableID is equal to -1), then create
     // a new table, add it to the tables object (array-like object of all tables), and create a
-    // new state with all these updates.  
+    // new state with all these updates.   
     case types.SAVE_TABLE_DATA_INPUT:
       // SAVE A NEW TABLE
       if (state.selectedTable.tableID < 0) {
