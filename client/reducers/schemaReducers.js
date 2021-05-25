@@ -1,7 +1,9 @@
 import * as types from '../actions/action-types';
 
 const initialState = {
+  name: '',
   database: '',
+  // take out projectRest
   projectReset: true,
   tableIndex: 0,
   tables: {},
@@ -95,13 +97,17 @@ const reducers = (state = initialState, action) => {
     fieldNum: 0,
   };
 
+  //  if mongodb is selected, this state object is set up and utilized
   const mongoTable = Object.assign({}, tableReset, {
     fields: {
       0: Object.assign({}, idDefault, { type: 'String' }, { tableNum: state.tableIndex }),
     },
   });
-
+  
   switch (action.type) {
+
+    //  used in the "Welcome" component, takes in the chosen DB (mongo, mysql, or postgres) as payload, 
+    //  and updates "database" (i.e. mongodb) and "selectedTable" (keep intiital state for sql or utilize mongodbtable)
     case 'CHOOSE_DATABASE':
       const database = action.payload;
       // go to the schema tab if they start a new project
@@ -117,8 +123,10 @@ const reducers = (state = initialState, action) => {
       };
 
       // ----------------------------- Open Table Creator ---------------------------------//
-
+    
+    //  used in "TableOptions" Component, function dispatched to store when clicking the back button on the side bar
     case types.OPEN_TABLE_CREATOR:
+      //  fieldReset is a defined object. newlyselected F
       newSelectedField = Object.assign({}, fieldReset);
       if (state.database === 'MongoDB') {
         newSelectedTable = Object.assign({}, mongoTable);
@@ -133,6 +141,10 @@ const reducers = (state = initialState, action) => {
       };
 
     // ------------------------------- Add Or Update Table -------------------------------//
+    // Gets dispatched when user creates 'Create Table'
+    // If the selectedTable is reset kind (meaning that the tableID is equal to -1), then create
+    // a new table, add it to the tables object (array-like object of all tables), and create a
+    // new state with all these updates.  
     case types.SAVE_TABLE_DATA_INPUT:
       // SAVE A NEW TABLE
       if (state.selectedTable.tableID < 0) {
@@ -370,7 +382,7 @@ const reducers = (state = initialState, action) => {
     case types.DELETE_FIELD:
       tableNum = Number(action.payload[0]);
       const fieldNum = Number(action.payload[1]);
-
+ 
       // Deleted field has relation. Delete reference in related field
       if (state.tables[tableNum].fields[fieldNum].relationSelected) {
         const relatedTableIndex = state.tables[tableNum].fields[fieldNum].relation.tableIndex;
@@ -414,8 +426,9 @@ const reducers = (state = initialState, action) => {
         selectedField: newSelectedField,
       };
 
-      // -------------------------------- HANDLE FIELD UPDATE ---------------------------------//
-
+    // -------------------------------- HANDLE FIELD UPDATE ---------------------------------//
+    // Gets dispatched when you click on add field; Used in table-options.jsx. Field gets passed
+    // in the payload.      
     // updates selected field on each data entry
     case types.HANDLE_FIELDS_UPDATE:
       // parse if relations field is selected
@@ -443,12 +456,13 @@ const reducers = (state = initialState, action) => {
       };
 
       // --------------------------- FIELD SELECTED FOR UPDATE -------------------------------//
+      
     // when a user selects a field, it changes selectedField to be an object with the necessary
-    // info from the selected table and field.
+    // info from the selected table and field. this function is in the "field" component
     case types.HANDLE_FIELDS_SELECT:
-      // location contains the table index at [0], and field at [1]
+      // location object contains the table index at [0], and field at [1]
       const location = action.payload.location.split(' ');
-
+      
       newSelectedField = Object.assign({}, state.tables[Number(location[0])].fields[Number(location[1])]);
 
       if (state.database === 'MongoDB') {
@@ -463,9 +477,11 @@ const reducers = (state = initialState, action) => {
         selectedField: newSelectedField,
       };
 
-      // ----------------------------- OPEN FIELD CREATOR ----------------------------------//
-
-    // Add Field in Table was clicked to display field options
+    // ----------------------------- OPEN FIELD CREATOR ----------------------------------//
+    // Gets dispatched when user clicks 'Add Field'; Gets dispatched in table.jsx
+    // Add Field in Table was clicked to display field options. This reducer creates a new 
+    // field and updates the tableNum to reflect the proper tableIndex to which the field
+    // will belong to.
     case types.ADD_FIELD_CLICKED:
       newSelectedField = fieldReset;
       newSelectedField.tableNum = Number(action.payload);
@@ -478,9 +494,12 @@ const reducers = (state = initialState, action) => {
 
       // ---------------------------------- New Project -------------------------------------//
 
-    // User clicked New Project
+    // User clicked "New Project" button or at init (function is in welcome component)
+    // used to change "projectReset" state (if state is true, the "welcome" component is shown )
     case types.HANDLE_NEW_PROJECT:
       newState = Object.assign({}, initialState, { projectReset: action.payload });
+
+      //  used to mimic a click to ensure view is on schemaTab
       document.getElementById('schemaTab').click();
 
       return newState;

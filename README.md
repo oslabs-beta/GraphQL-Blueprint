@@ -66,7 +66,9 @@ Lastly export your code!
 
 ## Running Your Own Version
 
-Use `npm run dev` for hot module reloading
+Add `"webpack": "webpack --watch --hot` to package.json file in scripts for hot module reloading. After adding, be sure to uncomment out "devtool" and "watch" keys from webpack.config file. 
+
+Be sure to undo above actions when creating pull request to pass Circle.Ci tests.
 
 To start the server:
 ```

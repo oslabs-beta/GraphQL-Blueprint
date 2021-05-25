@@ -30,6 +30,8 @@ const Field = ({
   }
 
   function handleUpdateField(event) {
+
+    console.log(event.currentTarget);
     handleFieldsSelect({
       location: event.currentTarget.value,
       submitUpdate: false,
