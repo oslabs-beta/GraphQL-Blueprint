@@ -70,11 +70,12 @@ export const handleNewProject = reset => ({
   payload: reset,
 });
 
-// ----------------------------- Query App -------------------------------//
+// ----------------------------- Database App -------------------------------//
 
-
-
-
+export const saveDatabaseDataInput = state => ({
+  type: types.SAVE_DATABASE_DATA_INPUT,
+  payload: state,
+})
 
 // ----------------------------- Query App -------------------------------//
 
