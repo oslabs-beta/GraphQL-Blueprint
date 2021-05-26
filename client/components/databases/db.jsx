@@ -22,23 +22,33 @@ const style = {
 };
 
 const mapStateToProps = store => ({
-  tables: store.schema.tables,
-  database: store.schema.database,
+  databases: store.multiSchema.databases,
+
+  // database prop might not be needed, (the equivilent is databaseTypes)
+  // database: store.schema.database,
 });
 
 const mapDispatchToProps = dispatch => ({
+  //  requires reducer to delete database
   deleteTable: tableIndex => dispatch(actions.deleteTable(tableIndex)),
-  addField: fieldName => dispatch(actions.addFieldClicked(fieldName)),
+  //  this reducer doesnt seem necessary in our db view
+  // addField: fieldName => dispatch(actions.addFieldClicked(fieldName)),
+
+  //  requires a reducer to handleSelectedDatabase
   handleSelectedTable: tableIndex => dispatch(actions.handleSelectedTable(tableIndex)),
-  deletedFieldRelationUpdate: indexes => dispatch(actions.deletedFieldRelationUpdate(indexes)),
+
+  //  fields dont exist in db view, so reducer may be unnecessary
+  // deletedFieldRelationUpdate: indexes => dispatch(actions.deletedFieldRelationUpdate(indexes)),
 });
 
 const Table = ({
-  tableIndex,
-  tableData,
-  database,
+  //  props are passed in from db-app.jsx
+  databaseIndex,
+  databaseData,
+
+  // database,
   deleteTable,
-  addField,
+  // addField,
   handleSelectedTable,
 }) => {
   const colors = ['darkcyan', 'dodgerblue', 'crimson', 'orangered', 'darkviolet',
@@ -47,7 +57,7 @@ const Table = ({
     'darkslategrey', 'goldenrod', 'deeppink'];
 
   function renderFields() {
-    return Object.keys(tableData.fields).map((property) => {
+    return Object.keys(databaseData.fields).map((property) => {
       const field = tableData.fields[property];
       const relation = field.relation.tableIndex;
       const refBy = field.refBy;
@@ -81,7 +91,7 @@ const Table = ({
           key={property}
           buttonColor={buttonColor}
           refColor={refColor}
-          tableIndex={tableIndex}
+          databaseIndex={databaseIndex}
           fieldIndex={property}
           buttonDisabled={buttonDisabled}
           field={field}
@@ -91,21 +101,21 @@ const Table = ({
   }
 
   return (
-    <div className="table" style={{ border: `1px solid ${colors[tableData.tableID]}` }}>
+    <div className="table" style={{ border: `1px solid ${colors[databaseData.databaseID]}` }}>
       <div>
         <div className="type">
           <FlatButton
-            backgroundColor={colors[tableData.tableID]}
-            value={tableIndex}
+            backgroundColor={colors[databaseData.databaseID]}
+            value={databaseIndex}
             onClick={event => handleSelectedTable(event.currentTarget.value)}
             className="tableButton"
           >
-            <h4>{tableData.type}</h4>
+            <h4>{databaseData.name}</h4>
           </FlatButton>
           <FlatButton
             className="delete-button"
             icon={<Delete />}
-            value={tableIndex}
+            value={databaseIndex}
             onClick={event => deleteTable(event.currentTarget.value)}
             style={style.deleteStyle}
           />

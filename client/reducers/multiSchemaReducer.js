@@ -27,7 +27,7 @@ const initialState = {
     //  ID for each database (necessary to refer to which database's state to inject from schema object)
     databaseID: -1
     }
-  },
+  }
 
   const reducers = (state = initialState, action) => {
     let newDatabase;
@@ -51,9 +51,11 @@ const initialState = {
 
       //  reducer for updating "databases" state, after database schema is created add schema states as another object
       //  (this reducer would be tied to a save button, where the action's payload would be store.schema state object)
+      //  this reducer is called in both Schema view and Database view
       case types.SAVE_DATABASE_DATA_INPUT:
         
-        //  replace action.payload with getState() from redux-thunk
+        //  replace action.payload with getState() from redux-thunk (maybe not)
+        //  databaseState can be both selectedDB or schema state object (depends on what's being passed in as payload)
         const databaseState = action.payload;
 
         //  Saving a new database
@@ -77,15 +79,37 @@ const initialState = {
         }
 
         return newState;
-      
+      // ----------------------------- Open Table Creator ---------------------------------//
+    
+    //  used in "create-db" component, function dispatched to store when clicking the back button on the side bar
+    //  resets selectedDatabase state since conditional rendering on view makes a different side menu appear
+    case types.OPEN_DATABASE_CREATOR:
+      newSelectedDatabase = Object.assign({}, databaseReset);
+
+      return {
+        ...state,
+        selectedDatabase: newSelectedField,
+      };
+
+      // ---------------------------- Change Database Name -----------------------------------//
+      //  payload = databaseName
+      case types.HANDLE_DATABASE_NAME_CHANGE:
+      newSelectedDatabase = Object.assign({}, state.selectedDatabase, { name: action.payload });
+
+        return {
+          ...state,
+          selectedDatabase: newSelectedDatabase,
+        };
+
       //  add reducer for changing projectreset state (the one that triggers welcome dialog)
-      //  this is triggerd when clicking "add new db"
+      //  this is triggered when clicking "add new db"
 
 
-      //  reducer for when you click a database, updates "selectedDatabase" 
-      //  (dependent on what states you want to show in new component (database layer))
-      //  think default side bar of create table
+      //  reducer for when you click a database, updates "selectedDatabase" state
+      //  (payload would be the event.target.currentValue which should equal databaseID)
 
+      
+      // -------------------------------- Select Database for Update -------------------------------//
       case types.HANDLE_SELECTED_DATABASE:
         databaseNum = Number(action.payload);
 
@@ -93,9 +117,22 @@ const initialState = {
 
         return {
           ...state,
-          selectedDatabase = newSelectedDatabase,
+          selectedDatabase: newSelectedDatabase,
         }
       
+      // -------------------------------- Delete Database -------------------------------// 
+      case types.DELETE_DATABASE:
+        databaseNum = Number(action.payload);
+
+        newDatabases = Object.assign({}, state.databases)
+        delete newDatabases[databaseNum];
+
+        // must be refactored to update databaseIndex and to update databaseType state
+        return {
+          ...state,
+          databases: newDatabases,
+        }
+        
       default:
         return state;
       //  reducer for when you go into schemaView, injects "selectedDatabase" state into "schema" state object
@@ -103,7 +140,7 @@ const initialState = {
       //  must use access.payload object, where payload refers to onclick event object
       // case types.
 
-      //  add reducer for deleting database
+
       
     }
   };

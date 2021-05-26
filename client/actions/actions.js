@@ -75,7 +75,21 @@ export const handleNewProject = reset => ({
 export const saveDatabaseDataInput = state => ({
   type: types.SAVE_DATABASE_DATA_INPUT,
   payload: state,
-})
+});
+
+export const handleSelectedDatabase = databaseIndex => ({
+  type: types.HANDLE_SELECTED_DATABASE,
+  payload: databaseIndex,
+});
+
+export const handleDatabaseNameChange = databaseName => ({
+  type: types.HANDLE_DATABASE_NAME_CHANGE,
+  payload: databaseName,
+});
+
+export const openDatabaseCreator = () => ({
+  type: types.OPEN_DATABASE_CREATOR,
+});
 
 // ----------------------------- Query App -------------------------------//
 

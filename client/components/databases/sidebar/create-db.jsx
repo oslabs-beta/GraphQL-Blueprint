@@ -12,40 +12,52 @@ import * as actions from '../../../actions/actions';
 import './sidebar.css';
 
 const mapStateToProps = store => ({
-  tables: store.schema.tables,
-  selectedTable: store.schema.selectedTable,
-  tableName: store.schema.selectedTable.type,
-  tableID: store.schema.selectedTable.tableID,
-  database: store.schema.database,
+  databases: store.multiSchema.databases,
+  selectedDatabase: store.multiSchema.selectedDatabase,
+  databaseName: store.multiSchema.selectedDatabase.name,
+
+  //  if ID = -1, this is a new DB, else it corresponds to db id
+  databaseID: store.multiSchema.selectedDatabase.databaseID,
+  
+  //  type of db (i.e. MongoDb), this prop equivilent (database) was used to check if it was MongoDb to display a different sidebar, not needed in our view
+  // databaseTypes: store.multiSchema.databaseTypes,
 });
 
 const mapDispatchToProps = dispatch => ({
-  saveTableDataInput: database => dispatch(actions.saveTableDataInput(database)),
-  tableNameChange: tableName => dispatch(actions.handleTableNameChange(tableName)),
-  idSelector: () => dispatch(actions.handleTableID()),
-  openTableCreator: () => dispatch(actions.openTableCreator()),
+  //  passes in selectedDB, and this reducer updates name changes or dbID.
+  saveDatabaseDataInput: selectedDatabase => dispatch(actions.saveDatabaseDataInput(selectedDatabase)),
+  databaseNameChange: databaseName => dispatch(actions.handleDatabaseNameChange(databaseName)),
+
+  //  this doesn't seem needed in our DB view
+  // idSelector: () => dispatch(actions.handleTableID()),
+
+  openDatabaseCreator: () => dispatch(actions.openDatabaseCreator()),
+  // error message display
   handleSnackbarUpdate: status => dispatch(actions.handleSnackbarUpdate(status)),
 });
 
 const CreateTable = ({
-  tables,
-  selectedTable,
-  tableName,
-  tableID,
-  database,
-  saveTableDataInput,
-  tableNameChange,
-  idSelector,
-  openTableCreator,
+  databases,
+  selectedDatabase,
+  databaseName,
+  databaseID,
+  //  this used to be a single string for dbType (i.e. mongoDb) that is now an object
+  databaseTypes,
+  saveDatabaseDataInput,
+  databaseNameChange,
+  // idSelector, 
+  openDatabaseCreator,
   handleSnackbarUpdate
 }) => {
-  function saveTableData(e) {
+  function saveDatabaseData(e) {
     e.preventDefault();
 
     // remove whitespace and symbols
-    let name = selectedTable.type.replace(/[^\w]/gi, '');
+    // //  following previous convention would be, but i refactored
+    let name = selectedDatabase.name.replace(/[^\w]/gi, '');
+    // let name = databaseName.replace(/[^\w]/gi, '');
 
-    // confirm table name was entered
+    // confirm database name was entered
     if (!name.length) {
       return handleSnackbarUpdate('Please enter a database name (no symbols or spaces)');
     }
@@ -53,32 +65,33 @@ const CreateTable = ({
     // capitalize first letter
     name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 
-    const tableIndices = Object.keys(tables);
-    const selectedTableIndex = String(selectedTable.tableID);
-    // confirm table name does not exist
-    for (let x = 0; x < tableIndices.length; x += 1) {
-      const existingTableName = tables[tableIndices[x]].type;
+    const databaseIndices = Object.keys(databases);
+    const selectedDatabaseIndex = String(selectedDatabase.databaseID);
+    // confirm database name does not exist
+    for (let x = 0; x < databaseIndices.length; x += 1) {
+      const existingDatabaseName = databases[databaseIndices[x]].name;
       // if table name is a duplicate (not counting our selected table if updating)
-      if (existingTableName === name && tableIndices[x] !== selectedTableIndex) {
+      if (existingDatabaseName === name && databaseIndices[x] !== selectedDatabaseIndex) {
         return handleSnackbarUpdate('Error: Database name already exist');
       }
     }
 
     // update table name with uppercase before saving/updating
-    tableNameChange(name);
-    return saveTableDataInput();
+    databaseNameChange(name);
+    //  not sure why i had to make this difference, but the action doesn't dispatch if i take out "selectedDatbase"
+    return saveDatabaseDataInput(selectedDatabase);
   }
 
-  function renderTableName() {
-    if (tableID >= 0) {
-      return <h2>{tables[tableID].type} Database</h2>;
+  function renderDatabaseName() {
+    if (databaseID >= 0) {
+      return <h2>{databases[databaseID].name} Database</h2>;
     }
     return <h2>Create Database</h2>;
   }
 
   return (
-    <div id="newTable" key={tableID}>
-      {tableID >= 0 && (
+    <div id="newTable" key={databaseID}>
+      {databaseID >= 0 && (
         <FlatButton
           id="back-to-create"
           label="Create Database"
@@ -86,15 +99,15 @@ const CreateTable = ({
           onClick={openTableCreator}
         />
       )}
-      <form id="create-table-form" onSubmit={saveTableData}>
-        {renderTableName()}
+      <form id="create-table-form" onSubmit={saveDatabaseData}>
+        {renderDatabaseName()}
         <TextField
           floatingLabelText="Database Name"
           id="tableName"
           fullWidth={true}
           autoFocus
-          onChange={(e) => tableNameChange(e.target.value)}
-          value={tableName}
+          onChange={(e) => databaseNameChange(e.target.value)}
+          value={databaseName}
         />
         <h5 style={{ textAlign: 'center', marginTop: '-4px' }}>( Singular naming convention )</h5>
         
@@ -105,7 +118,7 @@ const CreateTable = ({
         </SelectField>
         
         <RaisedButton
-          label={tableID >= 0 ? 'Update Database' : 'Create Database'}
+          label={databaseID >= 0 ? 'Update Database' : 'Create Database'}
           fullWidth={true}
           secondary={true}
           type="submit"

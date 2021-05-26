@@ -12,23 +12,23 @@ import './schema.css';
 
 // We use store.data, because of index.js reduce function
 const mapStateToProps = store => ({
-  tables: store.schema.tables,
-  selectedField: store.schema.selectedField,
+  databases: store.multiSchema.databases,
+  selectedDatabase: store.multiSchema.selectedDatabase,
 });
 
-const SchemaApp = ({ tables, selectedField }) => {
+const SchemaApp = ({ databases, selectedDatabase }) => {
   // Dynamically renders each table based on the number of tables.
   function renderTables() {
-    return Object.keys(tables).map(tableIndex => (
+    return Object.keys(databases).map(databaseIndex => (
       <CSSTransition
-        key={tableIndex}
+        key={databaseIndex}
         timeout={100}
         classNames="fadeScale"
       >
         <Table
-          key={tableIndex}
-          tableData={tables[tableIndex]}
-          tableIndex={tableIndex}
+          key={databaseIndex}
+          databaseData={databases[databaseIndex]}
+          databaseIndex={databaseIndex}
         />
       </CSSTransition>
     ));
@@ -43,7 +43,7 @@ const SchemaApp = ({ tables, selectedField }) => {
       >
         <div id="sidebar-container">
           <CSSTransition
-            in={selectedField.tableNum < 0}
+            in={selectedDatabase.databaseID < 0}
             key="table"
             timeout={200}
             classNames="fade"
@@ -51,7 +51,7 @@ const SchemaApp = ({ tables, selectedField }) => {
             <CreateTable />
           </CSSTransition>
           <CSSTransition
-            in={selectedField.tableNum >= 0}
+            in={selectedDatabase.databaseID >= 0}
             key="fields"
             timeout={200}
             classNames="fade"
