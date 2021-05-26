@@ -81,7 +81,7 @@ const CreateTable = ({
       {tableID >= 0 && (
         <FlatButton
           id="back-to-create"
-          label="Create Table"
+          label="Create Database"
           icon={<KeyboardArrowLeft />}
           onClick={openTableCreator}
         />
