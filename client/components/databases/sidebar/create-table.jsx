@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import KeyboardArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import FlatButton from 'material-ui/FlatButton';
@@ -95,13 +96,14 @@ const CreateTable = ({
           onChange={(e) => tableNameChange(e.target.value)}
           value={tableName}
         />
-        <InputLabel id="databaseType">Database Type</InputLabel>
-        <SelectField labelId="databaseType" id="select" value="20">
-          <MenuItem value="10">MongoDB</MenuItem>
-          <MenuItem value="20">PostgreSQL</MenuItem>
-          <MenuItem value="30">MySQL</MenuItem>
-        </SelectField>
         <h5 style={{ textAlign: 'center', marginTop: '-4px' }}>( Singular naming convention )</h5>
+        
+        <SelectField labelId="databaseType" id="select" floatingLabelText="Choose Database Type" value={1}>
+          <MenuItem value={1} primaryText="MongoDB" />
+          <MenuItem value={2} primaryText="PostgreSQL" />
+          <MenuItem value={3} primaryText="MySQL" />
+        </SelectField>
+        
         <RaisedButton
           label={tableID >= 0 ? 'Update Database' : 'Create Database'}
           fullWidth={true}

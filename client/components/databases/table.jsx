@@ -115,6 +115,11 @@ const Table = ({
         <h4 style={{ margin: '0.5rem 0' }}>MongoDB</h4>
         <p style={{ margin: '0.25rem 0' }}>4 tables</p>
       </div>
+      <div onClick={() => addField(tableIndex)} className="addField">
+        <p style={{ marginTop: '10px' }}>
+            Edit Tables
+        </p>
+      </div>
     </div>
   );
 }
