@@ -1,19 +1,20 @@
-import { combineReducers } from 'redux';
 
 // import all reducers here
+import { combineReducers } from 'redux';
 import schemaReducers from './schemaReducers.js';
 import generalReducers from './generalReducers.js';
+import multiSchemaReducer from './multiSchemaReducer.js';
 // import queryReducers from './queryReducers.js';
 
-//  import parentSchemasReducers from './databaseReducers.js'
+
 
 
 // combine reducers
 const combinedReducers = combineReducers({
   general: generalReducers,
   schema: schemaReducers,
+  multiSchema: multiSchemaReducer,
   // query: queryReducers,
-  //  multiSchema: multiSchemaReducers
 });
 
 // make the combined reducers available for import
