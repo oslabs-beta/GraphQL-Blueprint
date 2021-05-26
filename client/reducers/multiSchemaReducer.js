@@ -5,7 +5,7 @@ const initialState = {
   databases: {},
 
   // state that holds type of databases in order
-  databaseTypes: [],
+  databaseTypes: {},
 
   // make sure to delete from schemaReducers, use search feature to ensure projectReset state is refactored
   projectReset: true,
@@ -33,6 +33,9 @@ const initialState = {
     let newDatabase;
     let newDatabases;
     let newState;
+    let databaseNum;
+    let newSelectedDatabase;
+    let newDatabaseTypes;
 
     const databaseReset = {
       name: '',
@@ -55,11 +58,13 @@ const initialState = {
 
         //  Saving a new database
         if (action.payload.databaseID < 0) {
-          newDatabase = Object.assign ({}, action.payload, { databaseID: action.payload.databaseIndex });
+          newDatabase = Object.assign ({}, action.payload, { databaseID: state.databaseIndex });
           newDatabases = Object.assign ({}, state.databases, { [state.databaseIndex]: newDatabase });
+          newDatabaseTypes = Object.assign ({}, state.databaseTypes, { [state.databaseIndex]: action.payload.database })
           newState = Object.assign({}, state, {
             databaseIndex: state.databaseIndex + 1, 
-            databases: newDatabases
+            databases: newDatabases,
+            databaseTypes: newDatabaseTypes
           });
         }
         //  Updating a saved database
@@ -80,14 +85,27 @@ const initialState = {
       //  reducer for when you click a database, updates "selectedDatabase" 
       //  (dependent on what states you want to show in new component (database layer))
       //  think default side bar of create table
-      case types.
 
+      case types.HANDLE_SELECTED_DATABASE:
+        databaseNum = Number(action.payload);
+
+        newSelectedDatabase = JSON.parse(JSON.stringify(state.databases[databaseNum]));
+
+        return {
+          ...state,
+          selectedDatabase = newSelectedDatabase,
+        }
+      
+      default:
+        return state;
       //  reducer for when you go into schemaView, injects "selectedDatabase" state into "schema" state object
       //  (similar to a handle_fields_select)
       //  must use access.payload object, where payload refers to onclick event object
-      case types.
+      // case types.
 
       //  add reducer for deleting database
       
     }
-  }
+  };
+
+  export default reducers;
