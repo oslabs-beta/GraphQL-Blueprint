@@ -49,12 +49,13 @@ class ExportCode extends Component {
     }
     const tableData = Object.assign({}, tables, changedTables);
     const data = Object.assign({}, { 'data': tableData }, { 'database': this.props.database });
+    console.log(data);
     return data;
   }
 
   
 // Current data object
-// data: {
+// body: {
 //   data: {
 //     ‘1’: { type: ‘Table1’, fields: [Object], fieldsIndex: 3, tableID: 1 },
 //     ‘2’: { type: ‘Table2’, fields: [Object], fieldsIndex: 2, tableID: 2 }
@@ -87,13 +88,14 @@ class ExportCode extends Component {
 
     // JSON.stringify doesn't work with Sets. Change Sets to arrays for export
     const data = this.changeSetsToArrays();
-
+    console.log ('json stringify result', JSON.stringify(data, this.props.database));
     setTimeout(() => {
       fetch('/write-files', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        //  not sure why prop was passed as second argument
         body: JSON.stringify(data, this.props.database),
       })
         .then(res => res.blob())
