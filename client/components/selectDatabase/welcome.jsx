@@ -40,7 +40,6 @@ class Welcome extends React.Component {
 
   handleClose() {
     this.setState({ open: false });
-    this.props.handleNewProject(false);
   }
 
   handleDatabaseClick(database) {
@@ -59,16 +58,17 @@ class Welcome extends React.Component {
           className="welcome-container"
           paperClassName="welcome-box"
         >
-          <div id="subheading">Rapidly prototype a full stack React GraphQL Application.</div>
-          <div className="iconContainer">
-            <img alt="" id="icon_graphql" src="./images/graphql.png" />
-            <img alt="" id="icon_express" src="./images/express.png" />
-            <img alt="" id="icon_react" src="./images/react.png" />
-          </div>
           <hr className="welcome-hr" />
+          <h4>Select your database type</h4>
           <div id="buttonsContainer">
-            <RaisedButton onClick={() => this.handleClose()} buttonStyle={styles}>
-              Get Started
+            <RaisedButton onClick={() => this.handleDatabaseClick('MongoDB')} buttonStyle={styles}>
+              MongoDB
+            </RaisedButton>
+            <RaisedButton onClick={() => this.handleDatabaseClick('MySQL')} buttonStyle={styles}>
+              MySQL
+            </RaisedButton>
+            <RaisedButton onClick={() => this.handleDatabaseClick('PostgreSQL')} buttonStyle={styles}>
+              PostgreSQL
             </RaisedButton>
           </div>
         </Dialog>

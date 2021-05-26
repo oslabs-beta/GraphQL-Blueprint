@@ -41,6 +41,10 @@ button{
   margin-top: 5px;
 }
 
+button:disabled {
+  opacity: 0.5;
+}
+
 .table div span {
   margin-top: 5px;
 }
