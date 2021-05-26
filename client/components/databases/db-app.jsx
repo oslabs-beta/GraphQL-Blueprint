@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 // components
-import Table from './table.jsx';
-import CreateTable from './sidebar/create-table.jsx';
-import TableOptions from './sidebar/table-options.jsx';
+import Table from './db.jsx';
+import CreateTable from './sidebar/create-db.jsx';
+import TableOptions from './sidebar/db-options.jsx';
 
 // styles
 import './schema.css';
