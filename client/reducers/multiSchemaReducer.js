@@ -142,12 +142,14 @@ const initialState = {
 
         for (let key in newDatabases){
           newDatabasesCopy[counter] = newDatabases[key];
+          counter++
         }
 
         // must be refactored to update databaseIndex and to update databaseType state
         return {
           ...state,
           databases: newDatabasesCopy,
+          databaseIndex: counter,
         }
         
       default:
@@ -158,7 +160,7 @@ const initialState = {
       //  (similar to a handle_fields_select)
       //  must use access.payload object, where payload refers to onclick event object
       // case types.
-
+      
 
       
     }
