@@ -80,7 +80,7 @@ const initialState = {
 
         return newState;
       // ----------------------------- Open Table Creator ---------------------------------//
-    
+     
     //  used in "create-db" component, function dispatched to store when clicking the back button on the side bar
     //  resets selectedDatabase state since conditional rendering on view makes a different side menu appear
     case types.OPEN_DATABASE_CREATOR:
@@ -100,6 +100,16 @@ const initialState = {
           ...state,
           selectedDatabase: newSelectedDatabase,
         };
+      
+      case types.HANDLE_DATABASE_TYPE_CHANGE:
+        console.log(action.payload);
+        newSelectedDatabase = Object.assign({}, state.selectedDatabase, { database: action.payload });
+        
+          return {
+            ...state,
+            selectedDatabase: newSelectedDatabase,
+          };
+      
 
       //  add reducer for changing projectreset state (the one that triggers welcome dialog)
       //  this is triggered when clicking "add new db"
@@ -127,14 +137,23 @@ const initialState = {
         newDatabases = Object.assign({}, state.databases)
         delete newDatabases[databaseNum];
 
+        const newDatabasesCopy = {};
+        let counter = 0;
+
+        for (let key in newDatabases){
+          newDatabasesCopy[counter] = newDatabases[key];
+        }
+
         // must be refactored to update databaseIndex and to update databaseType state
         return {
           ...state,
-          databases: newDatabases,
+          databases: newDatabasesCopy,
         }
         
       default:
         return state;
+
+
       //  reducer for when you go into schemaView, injects "selectedDatabase" state into "schema" state object
       //  (similar to a handle_fields_select)
       //  must use access.payload object, where payload refers to onclick event object

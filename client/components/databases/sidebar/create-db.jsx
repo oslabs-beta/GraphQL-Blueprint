@@ -10,12 +10,13 @@ import * as actions from '../../../actions/actions';
 
 // styles
 import './sidebar.css';
+import { OPEN_DATABASE_CREATOR } from '../../../actions/action-types';
 
 const mapStateToProps = store => ({
   databases: store.multiSchema.databases,
   selectedDatabase: store.multiSchema.selectedDatabase,
   databaseName: store.multiSchema.selectedDatabase.name,
-
+  databaseType: store.multiSchema.selectedDatabase.database,
   //  if ID = -1, this is a new DB, else it corresponds to db id
   databaseID: store.multiSchema.selectedDatabase.databaseID,
   
@@ -27,7 +28,8 @@ const mapDispatchToProps = dispatch => ({
   //  passes in selectedDB, and this reducer updates name changes or dbID.
   saveDatabaseDataInput: selectedDatabase => dispatch(actions.saveDatabaseDataInput(selectedDatabase)),
   databaseNameChange: databaseName => dispatch(actions.handleDatabaseNameChange(databaseName)),
-
+  handleDatabaseTypeChange: databaseType => dispatch(actions.handleDatabaseTypeChange(databaseType)),
+  
   //  this doesn't seem needed in our DB view
   // idSelector: () => dispatch(actions.handleTableID()),
 
@@ -40,6 +42,7 @@ const CreateTable = ({
   databases,
   selectedDatabase,
   databaseName,
+  databaseType,
   databaseID,
   //  this used to be a single string for dbType (i.e. mongoDb) that is now an object
   databaseTypes,
@@ -47,7 +50,8 @@ const CreateTable = ({
   databaseNameChange,
   // idSelector, 
   openDatabaseCreator,
-  handleSnackbarUpdate
+  handleSnackbarUpdate,
+  handleDatabaseTypeChange
 }) => {
   function saveDatabaseData(e) {
     e.preventDefault();
@@ -111,10 +115,17 @@ const CreateTable = ({
         />
         <h5 style={{ textAlign: 'center', marginTop: '-4px' }}>( Singular naming convention )</h5>
         
-        <SelectField labelId="databaseType" id="select" floatingLabelText="Choose Database Type" value={1}>
-          <MenuItem value={1} primaryText="MongoDB" />
-          <MenuItem value={2} primaryText="PostgreSQL" />
-          <MenuItem value={3} primaryText="MySQL" />
+        <SelectField 
+          labelId="databaseType" 
+          id="select" 
+          floatingLabelText="Choose Database Type" 
+          value={databaseType}
+          onChange={(e, index, value) => handleDatabaseTypeChange(value)}
+        >
+          <MenuItem value='MongoDb' primaryText="MongoDB" />
+          <MenuItem value='PostgreSQL' primaryText="PostgreSQL" />
+          <MenuItem value='MySQL' primaryText="MySQL" />
+          
         </SelectField>
         
         <RaisedButton
