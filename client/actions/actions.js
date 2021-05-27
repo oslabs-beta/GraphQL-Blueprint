@@ -87,6 +87,12 @@ export const handleDatabaseNameChange = databaseName => ({
   payload: databaseName,
 });
 
+export const handleDatabaseTypeChange = databaseType => ({
+  type: types.HANDLE_DATABASE_TYPE_CHANGE,
+  payload: databaseType,
+});
+
+
 export const openDatabaseCreator = () => ({
   type: types.OPEN_DATABASE_CREATOR,
 });

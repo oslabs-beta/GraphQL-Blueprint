@@ -56,50 +56,6 @@ const Table = ({
     'purple', 'darkkhaki', 'firebrick', 'steelblue', 'limegreen', 'sienna',
     'darkslategrey', 'goldenrod', 'deeppink'];
 
-  function renderFields() {
-    return Object.keys(databaseData.fields).map((property) => {
-      const field = tableData.fields[property];
-      const relation = field.relation.tableIndex;
-      const refBy = field.refBy;
-
-      // if MongoDB is selected, the ID field is no longer clickable
-      let buttonDisabled = false;
-      if (database === 'MongoDB' && tableData.fields[property].name === 'id') {
-        buttonDisabled = true;
-      }
-
-      // button color is clear unless there is a relation
-      let buttonColor = 'rgba(0,0,0,0)';
-      if (relation >= 0) buttonColor = colors[relation];
-
-      // create relation colors if field has relation
-      let refColor = 'rgba(0,0,0,0)';
-      if (refBy.size > 0) {
-        const transparent = ', transparent';
-        let gradient = `linear-gradient(-45deg${transparent.repeat(25)}`;
-
-        refBy.forEach((ref) => {
-          gradient += `, #363A42, ${colors[ref.split('.')[0]]}`;
-        });
-
-        gradient += ', #363A42, transparent, transparent)';
-        refColor = gradient;
-      }
-
-      return (
-        <Field
-          key={property}
-          buttonColor={buttonColor}
-          refColor={refColor}
-          databaseIndex={databaseIndex}
-          fieldIndex={property}
-          buttonDisabled={buttonDisabled}
-          field={field}
-        />
-      );
-    });
-  }
-
   return (
     <div className="table" style={{ border: `1px solid ${colors[databaseData.databaseID]}` }}>
       <div>
@@ -122,10 +78,13 @@ const Table = ({
         </div>
       </div>
       <div style={{ textAlign: 'center', color: '#ffffff', margin: '2rem 0' }}>
-        <h4 style={{ margin: '0.5rem 0' }}>MongoDB</h4>
-        <p style={{ margin: '0.25rem 0' }}>4 tables</p>
+        <h4 style={{ margin: '0.5rem 0' }}>{databaseData.database}</h4>
+        <p style={{ margin: '0.25rem 0' }}>{databaseData.tableIndex} tables</p>
       </div>
-      <div onClick={() => addField(tableIndex)} className="addField">
+      <div onClick={() => 
+          {document.getElementById('schemaTab').click()
+          addField(tableIndex)}} 
+          className="addField">
         <p style={{ marginTop: '10px' }}>
             Edit Tables
         </p>

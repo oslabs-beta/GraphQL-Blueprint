@@ -52,7 +52,7 @@ const App = ({ snackBar, handleSnackbarUpdate }) => {
           <Tab id="databasesTab" label="Databases" style={style.tabStyle}>
             <DBApp />
           </Tab>
-          <Tab id="schemaTab" label="Schemas" style={style.tabStyle} disabled>
+          <Tab id="schemaTab" label="Schemas" style={style.tabStyle}>
             <SchemaApp />
           </Tab>
           {/* <Tab label="Queries" style={style.tabStyle}>
