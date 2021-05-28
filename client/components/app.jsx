@@ -6,6 +6,7 @@ import * as actions from '../actions/actions';
 import MainNav from './navbar/navbar.jsx';
 import Welcome from './welcome/welcome.jsx';
 import SchemaApp from './schema/schema-app.jsx';
+import DBApp from './databases/db-app.jsx';
 import CodeApp from './code/code-app.jsx';
 //import QueryApp from './query/query-app.jsx';
 
@@ -48,6 +49,9 @@ const App = ({ snackBar, handleSnackbarUpdate }) => {
       <Welcome />
       <div className="app-body-container">
         <Tabs className="tabs">
+          <Tab id="databasesTab" label="Databases" style={style.tabStyle}>
+            <DBApp />
+          </Tab>
           <Tab id="schemaTab" label="Schemas" style={style.tabStyle}>
             <SchemaApp />
           </Tab>

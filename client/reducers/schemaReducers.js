@@ -521,7 +521,7 @@ const reducers = (state = initialState, action) => {
       newState = Object.assign({}, initialState, { projectReset: action.payload });
 
       //  used to mimic a click to ensure view is on schemaTab
-      document.getElementById('schemaTab').click();
+      document.getElementById('databasesTab').click();
 
       return newState;
 
