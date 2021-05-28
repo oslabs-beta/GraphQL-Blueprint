@@ -131,7 +131,7 @@ const initialState = {
       // -------------------------------- Delete Database -------------------------------// 
       case types.DELETE_DATABASE:
         databaseNum = Number(action.payload);
-
+        
         newDatabases = Object.assign({}, state.databases)
         delete newDatabases[databaseNum];
 
@@ -142,12 +142,17 @@ const initialState = {
           newDatabasesCopy[counter] = newDatabases[key];
           counter++
         }
-
+        if (counter > 0 ) {
+          newSelectedDatabase = JSON.parse(JSON.stringify(state.databases[databaseNum - 1]));
+        } else {
+          newSelectedDatabase = Object.assign({}, databaseReset);
+        }
         // must be refactored to update databaseIndex and to update databaseType state
         return {
           ...state,
           databases: newDatabasesCopy,
           databaseIndex: counter,
+          selectedDatabase: newSelectedDatabase,
         }
         
       default:

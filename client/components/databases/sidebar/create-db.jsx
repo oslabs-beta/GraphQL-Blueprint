@@ -38,7 +38,7 @@ const mapDispatchToProps = dispatch => ({
   handleSnackbarUpdate: status => dispatch(actions.handleSnackbarUpdate(status)),
 });
 
-const CreateTable = ({
+const CreateDatabase = ({
   databases,
   selectedDatabase,
   databaseName,
@@ -144,4 +144,4 @@ const CreateTable = ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CreateTable);
+)(CreateDatabase);
