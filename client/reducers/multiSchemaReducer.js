@@ -83,13 +83,13 @@ const initialState = {
      
     //  used in "create-db" component, function dispatched to store when clicking the back button on the side bar
     //  resets selectedDatabase state since conditional rendering on view makes a different side menu appear
-    case types.OPEN_DATABASE_CREATOR:
+      case types.OPEN_DATABASE_CREATOR:
       newSelectedDatabase = Object.assign({}, databaseReset);
 
-      return {
-        ...state,
-        selectedDatabase: newSelectedField,
-      };
+        return {
+          ...state,
+          selectedDatabase: newSelectedField,
+        };
 
       // ---------------------------- Change Database Name -----------------------------------//
       //  payload = databaseName
@@ -143,7 +143,7 @@ const initialState = {
         for (let key in newDatabases){
           newDatabasesCopy[counter] = newDatabases[key];
           counter++
-        }
+        };
 
         // must be refactored to update databaseIndex and to update databaseType state
         return {
@@ -151,18 +151,39 @@ const initialState = {
           databases: newDatabasesCopy,
           databaseIndex: counter,
         }
-        
-      default:
-        return state;
-
 
       //  reducer for when you go into schemaView, injects "selectedDatabase" state into "schema" state object
       //  (similar to a handle_fields_select)
       //  must use access.payload object, where payload refers to onclick event object
       // case types.
-      
+      // case types.HANDLE_INJECT_DATABASE:
+      //   selectedDatabaseID = Number(action.payload);
 
-      
+      //   newSelectedDatabase = JSON.parse(JSON.stringify(state.databases[selectedDatabaseID]));
+
+      //   return {
+      //     ...state,
+      //     selectedDatabase: newSelectedDatabase,
+      //   }
+
+
+      // reducer from when you go from schemaView back to databse view. It saves the tables that user was working on in the schema state and the database state.
+
+      // case types.SAVE_SCHEMA_TO_DATABASES:
+      //   databaseNum = action.payload.databaseID
+
+      //   const newDatabase = JSON.parse(JSON.stringify(action.payload));
+      //   const newDatabases = JSON.parse(JSON.stringify(state.databases));
+
+      //   newDatabases[databaseNum] = newDatabase;
+
+      //   return {
+      //     ...state,
+      //     databases: newDatabases,
+      //   }
+
+        default:
+        return state;
     }
   };
 

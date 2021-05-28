@@ -70,6 +70,11 @@ export const handleNewProject = reset => ({
   payload: reset,
 });
 
+export const handleInjectDatabase = database => ({
+  type: types.HANDLE_INJECT_DATABASE,
+  payload: database,
+});
+
 // ----------------------------- Database App -------------------------------//
 
 export const saveDatabaseDataInput = state => ({
@@ -148,3 +153,10 @@ export const deletedFieldRelationUpdate = indexes => ({
   type: types.DELETED_FIELD_RELATION_UPDATE,
   payload: indexes,
 });
+
+export const saveSchemasToDatabases = () => {
+  return (dispatch, getState) => {
+    const { schema } = getState();
+  }
+}
+
