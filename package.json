@@ -17,6 +17,7 @@
   "scripts": {
     "pack": "webpack -p",
     "dev": "webpack-dev-server",
+    "webpack": "webpack --watch --hot",
     "server": "nodemon server/index.js",
     "start": "nodemon server/index.js",
     "test": "jest"

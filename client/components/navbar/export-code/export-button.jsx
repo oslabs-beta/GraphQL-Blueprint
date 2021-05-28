@@ -28,6 +28,7 @@ class ExportCode extends Component {
 
   changeSetsToArrays() {
     const tables = this.props.tables;
+    
     const changedTables = {};
     for (let tableId in tables) {
       const changedFields = {};
@@ -51,6 +52,15 @@ class ExportCode extends Component {
     const data = Object.assign({}, { 'data': tableData }, { 'database': this.props.database });
     return data;
   }
+// data backend (body for fetch request)
+  // data: {
+  //   data: {
+  //     '1': { type: 'Table1', fields: [Object], fieldsIndex: 3, tableID: 1 },
+  //     '2': { type: 'Table2', fields: [Object], fieldsIndex: 2, tableID: 2 }
+  //   },
+  //   database: 'MySQL'
+  // }
+  
 
   handleExport() {
     this.toggleLoader();
