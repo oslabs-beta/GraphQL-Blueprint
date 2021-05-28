@@ -28,7 +28,7 @@ class ExportCode extends Component {
     });
   }
 
-  changeSetsToArrays(tables, databaseType) {
+  changeSetsToArrays(tables, databaseType, databaseName) {
     // const tables = this.props.tables;
     const changedTables = {};
     for (let tableId in tables) {
@@ -50,7 +50,7 @@ class ExportCode extends Component {
       }
     }
     const tableData = Object.assign({}, tables, changedTables);
-    const data = Object.assign({}, { 'data': tableData }, { 'database': databaseType});
+    const data = Object.assign({}, {'name': databaseName }, { 'data': tableData }, { 'database': databaseType});
     console.log(data);
     return data;
   }
@@ -89,8 +89,9 @@ class ExportCode extends Component {
     this.toggleLoader();
     const data = {}
     for (const [key, value] of Object.entries(this.props.databases)) {
+
       const databaseName = value['name']
-      data[databaseName] = this.changeSetsToArrays(value['tables'], this.props.databaseTypes[key])
+      data[key] = this.changeSetsToArrays(value['tables'], this.props.databaseTypes[key], databaseName)
     };
     // JSON.stringify doesn't work with Sets. Change Sets to arrays for export
     // const data = this.changeSetsToArrays();
