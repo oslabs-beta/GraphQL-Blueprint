@@ -30,12 +30,12 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
   //  requires reducer to delete database
-  deleteTable: tableIndex => dispatch(actions.deleteTable(tableIndex)),
+  deleteDatabase: databaseIndex => dispatch(actions.deleteDatabase(databaseIndex)),
   //  this reducer doesnt seem necessary in our db view
   // addField: fieldName => dispatch(actions.addFieldClicked(fieldName)),
 
   //  requires a reducer to handleSelectedDatabase
-  handleSelectedTable: tableIndex => dispatch(actions.handleSelectedTable(tableIndex)),
+  handleSelectedDatabase: databaseIndex => dispatch(actions.handleSelectedDatabase(databaseIndex)),
 
   //  fields dont exist in db view, so reducer may be unnecessary
   // deletedFieldRelationUpdate: indexes => dispatch(actions.deletedFieldRelationUpdate(indexes)),
@@ -45,11 +45,8 @@ const Table = ({
   //  props are passed in from db-app.jsx
   databaseIndex,
   databaseData,
-
-  // database,
-  deleteTable,
-  // addField,
-  handleSelectedTable,
+  deleteDatabase,
+  handleSelectedDatabase
 }) => {
   const colors = ['darkcyan', 'dodgerblue', 'crimson', 'orangered', 'darkviolet',
     'gold', 'hotpink', 'seagreen', 'darkorange', 'tomato', 'mediumspringgreen',
@@ -63,7 +60,7 @@ const Table = ({
           <FlatButton
             backgroundColor={colors[databaseData.databaseID]}
             value={databaseIndex}
-            onClick={event => handleSelectedTable(event.currentTarget.value)}
+            onClick={event => handleSelectedDatabase(event.currentTarget.value)}
             className="tableButton"
           >
             <h4>{databaseData.name}</h4>
@@ -72,7 +69,7 @@ const Table = ({
             className="delete-button"
             icon={<Delete />}
             value={databaseIndex}
-            onClick={event => deleteTable(event.currentTarget.value)}
+            onClick={event => deleteDatabase(event.currentTarget.value)}
             style={style.deleteStyle}
           />
         </div>
