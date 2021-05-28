@@ -64,6 +64,7 @@ const reducers = (state = initialState, action) => {
   let newTableData;
   let newFields;
   let refBy;
+  let selectedDatabase;
 
   const tableReset = {
     type: '',
@@ -525,7 +526,16 @@ const reducers = (state = initialState, action) => {
 
       return newState;
 
-    default:
+
+      // ---------------------------------- INJECT DATABASE -------------------------------------//
+    case types.HANDLE_INJECT_DATABASE:
+
+      selectedDatabase = action.payload;
+      newState = Object.assign({}, state, selectedDatabase, {projectReset: false});
+
+      return newState;
+    
+      default:
       return state;
   }
 };
