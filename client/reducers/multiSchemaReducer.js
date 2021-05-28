@@ -60,7 +60,8 @@ const initialState = {
 
         //  Saving a new database
         if (action.payload.databaseID < 0) {
-          newDatabase = Object.assign ({}, action.payload, { databaseID: state.databaseIndex });
+          //  maybe 'field' here doesn't work
+          newDatabase = Object.assign ({}, {'tables': {}}, action.payload, { databaseID: state.databaseIndex });
           newDatabases = Object.assign ({}, state.databases, { [state.databaseIndex]: newDatabase });
           newDatabaseTypes = Object.assign ({}, state.databaseTypes, { [state.databaseIndex]: action.payload.database })
           newState = Object.assign({}, state, {
