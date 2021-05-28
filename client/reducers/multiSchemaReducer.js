@@ -123,9 +123,7 @@ const initialState = {
       // -------------------------------- Select Database for Update -------------------------------//
       case types.HANDLE_SELECTED_DATABASE:
         databaseNum = Number(action.payload);
-
         newSelectedDatabase = JSON.parse(JSON.stringify(state.databases[databaseNum]));
-
         return {
           ...state,
           selectedDatabase: newSelectedDatabase,
@@ -134,7 +132,7 @@ const initialState = {
       // -------------------------------- Delete Database -------------------------------// 
       case types.DELETE_DATABASE:
         databaseNum = Number(action.payload);
-
+        
         newDatabases = Object.assign({}, state.databases)
         delete newDatabases[databaseNum];
 
@@ -146,27 +144,18 @@ const initialState = {
           counter++
         };
 
+        if (counter > 0 ) {
+          newSelectedDatabase = JSON.parse(JSON.stringify(state.databases[databaseNum - 1]));
+        } else {
+          newSelectedDatabase = Object.assign({}, databaseReset);
+        }
         // must be refactored to update databaseIndex and to update databaseType state
         return {
           ...state,
           databases: newDatabasesCopy,
           databaseIndex: counter,
+          selectedDatabase: newSelectedDatabase,
         }
-
-      //  reducer for when you go into schemaView, injects "selectedDatabase" state into "schema" state object
-      //  (similar to a handle_fields_select)
-      //  must use access.payload object, where payload refers to onclick event object
-      // case types.
-      // case types.HANDLE_INJECT_DATABASE:
-      //   selectedDatabaseID = Number(action.payload);
-
-      //   newSelectedDatabase = JSON.parse(JSON.stringify(state.databases[selectedDatabaseID]));
-
-      //   return {
-      //     ...state,
-      //     selectedDatabase: newSelectedDatabase,
-      //   }
-
 
       // reducer from when you go from schemaView back to databse view. It saves the tables that user was working on in the schema state and the database state.
 
