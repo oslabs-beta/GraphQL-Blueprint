@@ -82,6 +82,11 @@ export const saveDatabaseDataInput = state => ({
   payload: state,
 });
 
+export const deleteDatabase = databaseIndex => ({
+  type: types.DELETE_DATABASE,
+  payload: databaseIndex,
+});
+
 export const handleSelectedDatabase = databaseIndex => ({
   type: types.HANDLE_SELECTED_DATABASE,
   payload: databaseIndex,
@@ -96,7 +101,6 @@ export const handleDatabaseTypeChange = databaseType => ({
   type: types.HANDLE_DATABASE_TYPE_CHANGE,
   payload: databaseType,
 });
-
 
 export const openDatabaseCreator = () => ({
   type: types.OPEN_DATABASE_CREATOR,
