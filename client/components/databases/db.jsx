@@ -35,6 +35,7 @@ const mapDispatchToProps = dispatch => ({
   // addField: fieldName => dispatch(actions.addFieldClicked(fieldName)),
 
   //  requires a reducer to handleSelectedDatabase
+  handleInjectDatabase: database => dispatch(actions.handleInjectDatabase(database)),
   handleSelectedDatabase: databaseIndex => dispatch(actions.handleSelectedDatabase(databaseIndex)),
 
   //  fields dont exist in db view, so reducer may be unnecessary
@@ -45,6 +46,8 @@ const Table = ({
   //  props are passed in from db-app.jsx
   databaseIndex,
   databaseData,
+  databases,
+  handleInjectDatabase,
   deleteDatabase,
   handleSelectedDatabase
 }) => {
@@ -52,6 +55,14 @@ const Table = ({
     'gold', 'hotpink', 'seagreen', 'darkorange', 'tomato', 'mediumspringgreen',
     'purple', 'darkkhaki', 'firebrick', 'steelblue', 'limegreen', 'sienna',
     'darkslategrey', 'goldenrod', 'deeppink'];
+
+  function grabSelectedDatabase(e) {
+    
+    const selectedDatabase = databases[Number(e)];
+    console.log(selectedDatabase);
+
+    return handleInjectDatabase(selectedDatabase)
+  };
 
   return (
     <div className="table" style={{ border: `1px solid ${colors[databaseData.databaseID]}` }}>
@@ -78,13 +89,15 @@ const Table = ({
         <h4 style={{ margin: '0.5rem 0' }}>{databaseData.database}</h4>
         <p style={{ margin: '0.25rem 0' }}>{databaseData.tableIndex} tables</p>
       </div>
-      <div onClick={() => 
-          {document.getElementById('schemaTab').click()
-          addField(tableIndex)}} 
-          className="addField">
-        <p style={{ marginTop: '10px' }}>
+      <div className="addField">
+        <FlatButton 
+          value={databaseData.databaseID}
+          onClick={(e) => 
+            { grabSelectedDatabase(e.currentTarget.value);
+              document.getElementById('schemaTab').click()}}
+        >
             Edit Tables
-        </p>
+        </FlatButton>
       </div>
     </div>
   );
