@@ -100,7 +100,7 @@ const CreateTable = ({
           id="back-to-create"
           label="Create Database"
           icon={<KeyboardArrowLeft />}
-          onClick={openTableCreator}
+          onClick={openDatabaseCreator}
         />
       )}
       <form id="create-table-form" onSubmit={saveDatabaseData}>
