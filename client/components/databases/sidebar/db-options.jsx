@@ -26,8 +26,8 @@ const style = {
 
 const mapStateToProps = store => ({
   database: store.schema.database,
-  selectedField: store.schema.selectedField,
-  tables: store.schema.tables,
+  selectedDatabase: store.multiSchema.selectedDatabase,
+  databases: store.multiSchema.databases,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -40,8 +40,8 @@ const mapDispatchToProps = dispatch => ({
 
 const TableOptions = ({
   database,
-  selectedField,
-  tables,
+  selectedDatabase,
+  databases,
   saveFieldInput,
   handleChange,
   openTableCreator,
@@ -59,32 +59,32 @@ const TableOptions = ({
   // user saves added or updated field
   function submitOptions(event) {
     event.preventDefault();
-    const currTableNum = selectedField.tableNum;
+    const currTableNum = selectedDatabase.databaseID;
 
     // remove whitespace and symbols
-    const originalFieldName = selectedField.name;
-    const newFieldName = selectedField.name.replace(/[^\w]/gi, '');
+    const originalFieldName = selectedDatabase.name;
+    const newFieldName = selectedDatabase.name.replace(/[^\w]/gi, '');
 
     if (!newFieldName.length) {
       return handleSnackbarUpdate('Please enter a field name (no space, symbols allowed)');
     }
 
     // get list of field indexes
-    const listFieldIndexes = Object.keys(tables[currTableNum].fields);
-    const selectedFieldIndex = String(selectedField.fieldNum);
+    const listFieldIndexes = Object.keys(databases[currTableNum].fields);
+    const selectedDatabaseIndex = String(selectedDatabase.tableIndex);
 
     // check that the new field name is not the same as a previous field name
     for (let i = 0; i < listFieldIndexes.length; i += 1) {
-      const existingFieldName = tables[currTableNum].fields[listFieldIndexes[i]].name;
+      const existingFieldName = databases[currTableNum].fields[listFieldIndexes[i]].name;
       // if field name is a duplicate (not counting our selected field if updating)
-      if (existingFieldName === newFieldName && listFieldIndexes[i] !== selectedFieldIndex) {
+      if (existingFieldName === newFieldName && listFieldIndexes[i] !== selectedDatabaseIndex) {
         return handleSnackbarUpdate('Error: Field name already exist');
       }
     }
 
     // confirm Type, Field, and RefType are filled out if Relation is toggled
-    if (selectedField.relationSelected) {
-      if (selectedField.relation.tableIndex === -1 || selectedField.relation.fieldIndex === -1 || !selectedField.relation.refType) {
+    if (selectedDatabase.relationSelected) {
+      if (selectedDatabase.relation.tableIndex === -1 || selectedDatabase.relation.fieldIndex === -1 || !selectedDatabase.relation.refType) {
         return handleSnackbarUpdate('Please fill out Type, Field and RefType for matching field');
       }
     }
@@ -102,28 +102,28 @@ const TableOptions = ({
     return saveFieldInput();
   }
 
-  // returns an array of the related tables
-  function renderRelatedTables() {
-    return Object.keys(tables).map(tableIndex => (
+  // returns an array of the related databases
+  function renderRelateddatabases() {
+    return Object.keys(databases).map(tableIndex => (
       <MenuItem
         key={tableIndex}
         value={tableIndex}
-        primaryText={tables[tableIndex].type}
+        primaryText={databases[tableIndex].type}
       />
     ));
   }
   
   function renderRelatedFields() {
     const renderedFields = [];
-    const selectedTableIndex = selectedField.relation.tableIndex;
+    const selectedTableIndex = selectedDatabase.relation.tableIndex;
     if (selectedTableIndex >= 0) {
-      Object.keys(tables[selectedTableIndex].fields).forEach((field) => {
+      Object.keys(databases[selectedTableIndex].fields).forEach((field) => {
         // check if field has a relation to selected field, if so, don't push
         let noRelationExists = true;
-        const tableIndex = selectedField.tableNum;
-        const fieldIndex = selectedField.fieldNum;
+        const tableIndex = selectedDatabase.databaseID;
+        const fieldIndex = selectedDatabase.tableIndex;
         if (fieldIndex >= 0) {
-          const { refBy } = tables[tableIndex].fields[fieldIndex];
+          const { refBy } = databases[tableIndex].fields[fieldIndex];
           const refTypes = ['one to one', 'one to many', 'many to one', 'many to many'];
           for (let i = 0; i < refTypes.length; i += 1) {
             const refInfo = `${selectedTableIndex}.${field}.${refTypes[i]}`;
@@ -134,12 +134,12 @@ const TableOptions = ({
         }
         // only push to fields if multiple values is false for the field,
         // and no relation exists to selected field
-        if (!tables[selectedTableIndex].fields[field].multipleValues && noRelationExists) {
+        if (!databases[selectedTableIndex].fields[field].multipleValues && noRelationExists) {
           renderedFields.push(
             <MenuItem
               key={field}
               value={field}
-              primaryText={tables[selectedTableIndex].fields[field].name}
+              primaryText={databases[selectedTableIndex].fields[field].name}
             />,
           );
         }
@@ -148,14 +148,14 @@ const TableOptions = ({
     return renderedFields;
   }
 
-  function fieldName(fieldNum, tableNum) {
+  function fieldName(fieldNum, dbNum) {
     // Header text if adding a new field
     let h2Text = 'Add Field';
-    let h4Text = `in ${tables[tableNum].type}`;
+    let h4Text = `in ${databases[dbNum].database}`;
     // Header text if updating a field
     if (fieldNum >= 0) {
-      h2Text = `Update ${tables[tableNum].fields[fieldNum].name}`;
-      h4Text = `in ${tables[tableNum].type}`;
+      h2Text = `Update ${databases[dbNum].name}`;
+      h4Text = `in ${databases[dbNum].database}`;
     }
 
     return (
@@ -168,7 +168,7 @@ const TableOptions = ({
 
   return (
     <div id="fieldOptions">
-      {selectedField.tableNum > -1 && (
+      {selectedDatabase.databaseID > -1 && (
         <div id="options" style={{ width: '250px' }}>
           <FlatButton
             id="back-to-create"
@@ -178,9 +178,9 @@ const TableOptions = ({
           />
           <form style={{ width: '100%' }}>
             {fieldName(
-              selectedField.fieldNum,
-              selectedField.tableNum,
-              tables,
+              selectedDatabase.tableIndex,
+              selectedDatabase.databaseID,
+              databases,
             )}
             <TextField
               hintText="Field Name"
@@ -189,13 +189,13 @@ const TableOptions = ({
               name="name"
               id="fieldNameOption"
               onChange={e => handleChange({ name: e.target.name, value: e.target.value })}
-              value={selectedField.name}
+              value={selectedDatabase.name}
               autoFocus
             />
             <SelectField
               floatingLabelText="Type"
               fullWidth={true}
-              value={selectedField.type}
+              value={selectedDatabase.type}
               onChange={(e, i, value) => handleChange({ name: 'type', value })}
             >
               <MenuItem value="String" primaryText="String" />
@@ -211,33 +211,33 @@ const TableOptions = ({
               id="defaultValueOption"
               name="defaultValue"
               onChange={e => handleChange({ name: e.target.name, value: e.target.value })}
-              value={selectedField.defaultValue}
+              value={selectedDatabase.defaultValue}
             />
             {database !== 'MongoDB' && (
               <Toggle
                 label="Primary Key"
-                toggled={selectedField.primaryKey}
+                toggled={selectedDatabase.primaryKey}
                 onToggle={(event, value) => handleToggle('primaryKey', value)}
                 style={style.toggle}
               />
             )}
             <Toggle
               label="Required"
-              toggled={selectedField.required}
+              toggled={selectedDatabase.required}
               onToggle={(event, value) => handleToggle('required', value)}
               style={style.toggle}
-              disabled={selectedField.primaryKey}
+              disabled={selectedDatabase.primaryKey}
             />
             <Toggle
               label="Unique"
-              toggled={selectedField.unique}
+              toggled={selectedDatabase.unique}
               onToggle={(event, value) => handleToggle('unique', value)}
               style={style.toggle}
             />
             {database !== 'MongoDB' && (
               <Toggle
                 label="Auto Increment"
-                toggled={selectedField.autoIncrement}
+                toggled={selectedDatabase.autoIncrement}
                 onToggle={(event, value) => handleToggle('autoIncrement', value)}
                 style={style.toggle}
               />
@@ -245,35 +245,35 @@ const TableOptions = ({
             {database === 'MongoDB' && (
               <Toggle
                 label="Multiple Values"
-                toggled={selectedField.multipleValues && !selectedField.relationSelected}
+                toggled={selectedDatabase.multipleValues && !selectedDatabase.relationSelected}
                 onToggle={(event, value) => handleToggle('multipleValues', value)}
                 style={style.toggle}
-                disabled={selectedField.relationSelected || selectedField.refBy.size > 0}
+                disabled={selectedDatabase.relationSelected || selectedDatabase.refBy.size > 0}
               />
             )}
             <Toggle
               label={database === 'MongoDB' ? 'Relation' : 'Foreign Key'}
-              toggled={selectedField.relationSelected && !selectedField.multipleValues}
+              toggled={selectedDatabase.relationSelected && !selectedDatabase.multipleValues}
               onToggle={(event, value) => handleToggle('relationSelected', value)}
               style={style.toggle}
-              disabled={selectedField.multipleValues}
+              disabled={selectedDatabase.multipleValues}
             />
-            {selectedField.relationSelected && !selectedField.multipleValues && (
+            {selectedDatabase.relationSelected && !selectedDatabase.multipleValues && (
             <span>
               <div className="relation-options">
                 <p>Type:</p>
                 <DropDownMenu
-                  value={selectedField.relation.tableIndex}
+                  value={selectedDatabase.relation.tableIndex}
                   style={style.customWidth}
                   onChange={(e, i, value) => handleChange({ name: 'relation.tableIndex', value })}
                 >
-                  {renderRelatedTables()}
+                  {renderRelateddatabases()}
                 </DropDownMenu>
               </div>
               <div className="relation-options">
                 <p>Field:</p>
                 <DropDownMenu
-                  value={selectedField.relation.fieldIndex}
+                  value={selectedDatabase.relation.fieldIndex}
                   style={style.customWidth}
                   onChange={(e, i, value) => handleChange({ name: 'relation.fieldIndex', value })}
                 >
@@ -283,7 +283,7 @@ const TableOptions = ({
               <div className="relation-options">
                 <p>RefType:</p>
                 <DropDownMenu
-                  value={selectedField.relation.refType}
+                  value={selectedDatabase.relation.refType}
                   style={style.customWidth}
                   onChange={(e, i, value) => handleChange({ name: 'relation.refType', value })}
                 >
@@ -296,7 +296,7 @@ const TableOptions = ({
             </span>)}
             <RaisedButton
               secondary={true}
-              label={selectedField.fieldNum > -1 ? 'Update Field' : 'Create Field'}
+              label={selectedDatabase.tableIndex > -1 ? 'Update Field' : 'Create Field'}
               type="submit"
               onClick={submitOptions}
               style={{ marginTop: '25px' }}
