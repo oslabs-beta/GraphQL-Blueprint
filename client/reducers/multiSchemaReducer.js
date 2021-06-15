@@ -89,7 +89,7 @@ const initialState = {
 
         return {
           ...state,
-          selectedDatabase: newSelectedField,
+          selectedDatabase: newSelectedDatabase,
         };
 
       // ---------------------------- Change Database Name -----------------------------------//

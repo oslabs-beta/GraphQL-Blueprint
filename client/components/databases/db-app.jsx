@@ -4,8 +4,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 // components
 import Table from './db.jsx';
-import CreateTable from './sidebar/create-db.jsx';
-import TableOptions from './sidebar/db-options.jsx';
+import CreateDb from './sidebar/create-db.jsx';
 
 // styles
 import './schema.css';
@@ -43,20 +42,12 @@ const SchemaApp = ({ databases, selectedDatabase }) => {
       >
         <div id="sidebar-container">
           <CSSTransition
-            in={selectedDatabase.databaseID < 0}
+            in={selectedDatabase.databaseID >= 0}
             key="table"
             timeout={200}
             classNames="fade"
           >
-            <CreateTable />
-          </CSSTransition>
-          <CSSTransition
-            in={selectedDatabase.databaseID >= 0}
-            key="fields"
-            timeout={200}
-            classNames="fade"
-          >
-            <TableOptions />
+            <CreateDb />
           </CSSTransition>
         </div>
       </CSSTransition>
