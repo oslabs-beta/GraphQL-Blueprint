@@ -52,7 +52,7 @@ class Welcome extends React.Component {
     return (
       <div>
         <Dialog
-          title="GraphQL Designer"
+          title="GraphQL Blueprint"
           modal={true}
           open={this.props.projectReset}
           onRequestClose={this.handleClose}
