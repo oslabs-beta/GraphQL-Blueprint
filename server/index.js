@@ -1,3 +1,9 @@
+// use graphqlkdesinger.com to see how folder structure supposed to look like
+// outside in
+// builddirectories working
+  // database folder has a folder for each database
+// modify mutatations and queries in client, (both databases should be in one text file)
+//buildqueries and buildgraphql server
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
@@ -22,6 +28,8 @@ const buildClientRootIndex = require("../utl/create_file_func/create_client_root
 const buildComponentIndex = require("../utl/create_file_func/create_component_index");
 const buildComponentStyle = require("../utl/create_file_func/create_component_style");
 const sqlPool = require("../utl/create_file_func/sql_pool");
+const { CommunicationBusiness } = require("material-ui/svg-icons");
+const { default: build } = require("material-ui/svg-icons/action/build");
 
 const PORT = process.env.PORT || 4100;
 let PATH;
@@ -206,46 +214,56 @@ function callBuildDirectories(req, res, dateStamp) {
     );
   });
 }
-
+const storage = {dateStampStorage: [], dataStorage: [], databaseNameStorage: []}
 // Figure out what exactly is being built in directories, and figure out what is being deleted in deleteTemp and deleteFolders
 app.post("/write-files-multiple", (req, res) => {
-  multipleBuildClientQueries ({dateStampStorage: [], dataStorage: [], databaseNameStorage: []});
-  res.locals.storage = req.body
-  console.log('res.locals.storage', res.locals.storage)
- function multipleBuildClientQueries(obj) {
+  multipleBuildClientQueries (req.body);
+  // res.locals.storage = {dateStampStorage: [], dataStorage: [], databaseNameStorage: []}
+  // console.log('res.locals.storage', res.locals.storage)
+
+  function multipleBuildClientQueries(obj) {
+    const dateStamp = Date.now();
+    callBuildDirectories(req, res, dateStamp);
     for (let databaseNumber in obj) {
-      const dateStamp = Date.now();
+      
       const dbNumber = obj[databaseNumber]; 
-      res.locals.storage.dateStampStorage.push(dateStamp);
-      res.locals.storage.dataStorage.push(dbNumber.data);
-      res.locals.storage.databaseNameStorage.push(dbNumber.databaseName);
-      callBuildDirectories(req, res, dateStamp);
+      
+      storage.dateStampStorage.push(dateStamp);
+      storage.dataStorage.push(dbNumber.data);
+      storage.databaseNameStorage.push(dbNumber.databaseName);
+      
       // e.g. databaseNumber -> 'Database1'
       // Everything inside 'Database1'
       console.log('before buildClientQueries')
+      // PUT OUTSIDE OF LOOP
       buildClientQueries(dbNumber.data, dateStamp, () => {
         // console.log('dbNumber:', dbNumber);
-        if (dbNumber.databaseName === "MongoDB") buildForMongo(dbNumber.data, dateStamp);
-        if (dbNumber.databaseName === "MySQL") buildForMySQL(dbNumber.data, dateStamp)
-        if (dbNumber.databaseName === "PostgreSQL") buildForPostgreSQL(dbNumber.data, dateStamp);
+        if (dbNumber.databaseName === "MongoDB") buildForMongo(dbNumber.data, dateStamp, dbNumber.name);
+        if (dbNumber.databaseName === "MySQL") buildForMySQL(dbNumber.data, dateStamp, dbNumber.name)
+        if (dbNumber.databaseName === "PostgreSQL") buildForPostgreSQL(dbNumber.data, dateStamp, dbNumber.name);
         console.log('after buildForPostgreSQL')
         
-        // sendResponse(dateStamp, res, () => {
-        //   console.log('in sendResponse in multipleBuildClientQueries')
-        //   setTimeout(() => {
-        //     console.log('after setTimeout()')
-        //     console.log('before deleteTempFiles')
-        //     deleteTempFiles(dbNumber.databaseName, dbNumber.data, dateStamp, () => {
-        //     console.log('after deleteTempFiles');
-        //     deleteTempFolders(dateStamp, () => {});
-        //     console.log('after deleteTempFolders');
-        //     });
-        //   }, 15000);
-        // });
+        
       });
     }
+    sendResponse(dateStamp, res, () => {
     
+      console.log('in sendResponse in multipleBuildClientQueries')
+      setTimeout(() => {
+        console.log('after setTimeout()')
+        console.log('before deleteTempFiles')
+        //loop here
+        deleteTempFiles(dbNumber.databaseName, dbNumber.data, dateStamp, () => {
+        console.log('after deleteTempFiles');
+        deleteTempFolders(dateStamp, () => {});
+        console.log('after deleteTempFolders');
+        });
+      }, 5000);
+    });
   }
+
+  //datestamps object
+  
 })
 // middleware function for downloading files
 
@@ -269,13 +287,15 @@ function buildDirectories(dateStamp, cb) {
   );
   fs.mkdirSync(path.join(PATH, `build-files${dateStamp}`, "server"));
   fs.mkdirSync(path.join(PATH, `build-files${dateStamp}`, "server", "db"));
+  // build folders for each database
   fs.mkdirSync(
     path.join(PATH, `build-files${dateStamp}`, "server", "graphql-schema")
   );
   fs.mkdirSync(path.join(PATH, `build-files${dateStamp}`, "server", "public"));
   return cb();
 }
-
+// Run outside of loop, add all tables to it as loop is overwriting 
+// should be one docu with every query from every database
 function buildClientQueries(data, dateStamp, cb) {
   // console.log("data from buildClientQueries (data):", data)
   // console.log(
@@ -283,6 +303,8 @@ function buildClientQueries(data, dateStamp, cb) {
   //   `build-files${dateStamp}/client/graphql/queries/index.js`
   // );
   // console.log("cb:", cb);
+
+  // LOOP HERE 
   fs.writeFileSync(
     path.join(PATH, `build-files${dateStamp}/client/graphql/queries/index.js`),
     parseClientQueries(data)
@@ -297,41 +319,49 @@ function buildClientQueries(data, dateStamp, cb) {
 
   return cb();
 }
-// files needed for indivisual database
-function buildForMongo(data, dateStamp) {
+function buildDatabaseFolder(databaseName, dateStamp) {
+  fs.mkdirSync(path.join(PATH, `build-files${dateStamp}`, "server", "db", `${databaseName}`));
+}
+
+function buildForMongo(data, dateStamp, databaseName) {
+  buildDatabaseFolder(databaseName, dateStamp);
   const indexes = Object.keys(data);
 
   indexes.forEach((index) => {
     fs.writeFileSync(
       path.join(
         PATH,
-        `build-files${dateStamp}/server/db/${data[index].type.toLowerCase()}.js`
+        `build-files${dateStamp}/server/db/${databaseName}/${data[index].type.toLowerCase()}.js`
       ),
       parseMongoSchema(data[index])
     );
   });
 }
 
-function buildForMySQL(data, dateStamp) {
+function buildForMySQL(data, dateStamp, databaseName) {
+
+  buildDatabaseFolder(databaseName, dateStamp);
   fs.writeFileSync(
-    path.join(PATH, `build-files${dateStamp}/server/db/sql_pool.js`),
+    path.join(PATH, `build-files${dateStamp}/server/db/${databaseName}/sql_pool.js`),
     sqlPool("MySQL")
   );
-  console.log('data in buildForMySQL:')
+  console.log('data in buildForMySQL:', data)
   fs.writeFileSync(
-    path.join(PATH, `build-files${dateStamp}/server/db/mysql_scripts.sql`),
+    path.join(PATH, `build-files${dateStamp}/server/db/${databaseName}/mysql_scripts.sql`),
+    // SERVER/DB/SCRIPTS
     parseMySQLTables(data)
   );
 
 }
 
-function buildForPostgreSQL(data, dateStamp) {
+function buildForPostgreSQL(data, dateStamp, databaseName) {
+  buildDatabaseFolder(databaseName, dateStamp);
   fs.writeFileSync(
-    path.join(PATH, `build-files${dateStamp}/server/db/sql_pool.js`),
+    path.join(PATH, `build-files${dateStamp}/server/db/${databaseName}/sql_pool.js`),
     sqlPool("Postgres")
   );
   fs.writeFileSync(
-    path.join(PATH, `build-files${dateStamp}/server/db/postgresql_scripts.sql`),
+    path.join(PATH, `build-files${dateStamp}/server/db/${databaseName}/postgresql_scripts.sql`),
     parsePostgresTables(data)
   );
 }
@@ -431,14 +461,13 @@ function deleteTempFolders(dateStamp, cb) {
 }
 
 function sendResponse(dateStamp, res, cb) {
-  console.log('start of sendResponse')
   zipper.sync
     .zip(path.join(PATH, `build-files${dateStamp}`))
     .compress()
     .save(path.join(PATH, `graphql${dateStamp}.zip`));
-  console.log('middle of sendResponse')
+  // console.log('middle of sendResponse')
   const filePath = path.join(PATH, `graphql${dateStamp}.zip`);
-  console.log('filePath inside sendResponse:', filePath);
+  // console.log('filePath inside sendResponse:', filePath);
   res.setHeader("Content-Type", "application/zip");
   res.setHeader("Content-disposition", "attachment");
   console.log('end of sendResponse \n')
