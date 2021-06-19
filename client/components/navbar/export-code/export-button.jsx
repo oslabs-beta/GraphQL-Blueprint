@@ -8,6 +8,8 @@ import Loader from './loader.jsx';
 const mapStateToProps = store => ({
   tables: store.schema.tables,
   database: store.schema.database,
+  databases: store.multiSchema.databases,
+  databaseTypes: store.multiSchema.databaseTypes,
 });
 
 class ExportCode extends Component {
@@ -26,9 +28,8 @@ class ExportCode extends Component {
     });
   }
 
-  changeSetsToArrays() {
-    const tables = this.props.tables;
-    
+  changeSetsToArrays(tables, databaseType, databaseName) {
+    // const tables = this.props.tables;
     const changedTables = {};
     for (let tableId in tables) {
       const changedFields = {};
@@ -49,7 +50,8 @@ class ExportCode extends Component {
       }
     }
     const tableData = Object.assign({}, tables, changedTables);
-    const data = Object.assign({}, { 'data': tableData }, { 'database': this.props.database });
+    const data = Object.assign({}, {'name': databaseName }, { 'data': tableData }, { 'database': databaseType});
+    console.log(data);
     return data;
   }
 // data backend (body for fetch request)
@@ -62,21 +64,54 @@ class ExportCode extends Component {
   // }
   
 
+  
+// Current data object
+// body: {
+//   data: {
+//     ‘1’: { type: ‘Table1’, fields: [Object], fieldsIndex: 3, tableID: 1 },
+//     ‘2’: { type: ‘Table2’, fields: [Object], fieldsIndex: 2, tableID: 2 }
+//   },
+//   database: ‘MySQL’
+// }
+
+
+//Ideal data object
+  // data: {
+  //  Database1: {
+  //    data: {
+  //     ‘1’: { type: ‘Table1’, fields: [Object], fieldsIndex: 3, tableID: 1 },
+  //     ‘2’: { type: ‘Table2’, fields: [Object], fieldsIndex: 2, tableID: 2 }
+  //          },
+  //    database: ‘MySQL’
+  //    }
+  //  Database2: {
+  //    data: {
+  //      ‘1’: { type: ‘Table1’, fields: [Object], fieldsIndex: 3, tableID: 1 },
+  //      ‘2’: { type: ‘Table2’, fields: [Object], fieldsIndex: 2, tableID: 2 }
+  //    },
+  //    database: ‘MySQL’
+  //    }
+  //  }
+  //
+
   handleExport() {
     this.toggleLoader();
+    const data = {}
+    for (const [key, value] of Object.entries(this.props.databases)) {
 
+      const databaseName = value['name']
+      data[key] = this.changeSetsToArrays(value['tables'], this.props.databaseTypes[key], databaseName)
+    };
     // JSON.stringify doesn't work with Sets. Change Sets to arrays for export
-    const data = this.changeSetsToArrays();
-    console.log('data in export-button:', data);
-    conso
-    console.log('this.props.database in export-button:', this.props.database)
-
+    // const data = this.changeSetsToArrays();
+    console.log ('json stringify result', JSON.stringify(data));
     setTimeout(() => {
       fetch('/write-files', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        //  not sure why prop was passed as second argument
         body: JSON.stringify(data, this.props.database),
       })
         .then(res => res.blob())

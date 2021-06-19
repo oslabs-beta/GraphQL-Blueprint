@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  scratch:
+    docker:
+      - image: circleci/node:12.13.0
+    working_directory: ~/GRAPHQL-BLUEPRINT
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run pack
+      - run: npm run test
+
+workflows:
+  version: 2
+  concurrently:
+    jobs:
+      - scratch

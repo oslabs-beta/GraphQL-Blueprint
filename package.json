@@ -20,7 +20,8 @@
     "webpack": "webpack --watch --hot",
     "server": "nodemon server/index.js",
     "start": "nodemon server/index.js",
-    "test": "jest"
+    "test": "jest",
+    "webpack": "webpack --watch --hot"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -30,7 +31,7 @@
     "babelify": "^8.0.0",
     "browserify": "^16.2.2",
     "css-loader": "^1.0.0",
-    "jest": "^23.6.0",
+    "jest": "^24.9.0",
     "nodemon": "^1.18.9",
     "redux-devtools-extension": "^2.13.5",
     "style-loader": "^0.22.1",
@@ -41,6 +42,8 @@
     "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
     "babel-jest": "^23.6.0",
     "babel-preset-stage-2": "^6.24.1",
     "eslint-config-airbnb": "^17.1.0",

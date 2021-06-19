@@ -44,7 +44,15 @@ Lastly export your code!
 
 ## GraphQL Blueprint Authors
 
-Sean Yalda, Dylan Li, Kevin Berlanga, Newas Azad, Ethan Yeh
+[Sean Yalda]
+
+[Dylan Li]
+
+[Kevin Berlanga]
+
+[Newas Azad] (https://wwwlinkedin.com/in/newas-azad-0b0152134/) [@nazad23] (https://github.com/nazad23)
+
+[Ethan Yeh]
 
 ### GraphQL Designer Authors
 
@@ -58,7 +66,9 @@ Sean Yalda, Dylan Li, Kevin Berlanga, Newas Azad, Ethan Yeh
 
 ## Running Your Own Version
 
-Use `npm run dev` for hot module reloading
+Add `webpack": "webpack --watch --hot` to package.json file in scripts for hot module reloading. After adding, be sure to uncomment out "devtool" and "watch" keys from webpack.config file. 
+
+Be sure to undo above actions when creating pull request to pass Circle.Ci tests.
 
 To start the server:
 ```
