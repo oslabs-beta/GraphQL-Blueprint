@@ -70,6 +70,42 @@ export const handleNewProject = reset => ({
   payload: reset,
 });
 
+export const handleInjectDatabase = database => ({
+  type: types.HANDLE_INJECT_DATABASE,
+  payload: database,
+});
+
+// ----------------------------- Database App -------------------------------//
+
+export const saveDatabaseDataInput = state => ({
+  type: types.SAVE_DATABASE_DATA_INPUT,
+  payload: state,
+});
+
+export const deleteDatabase = databaseIndex => ({
+  type: types.DELETE_DATABASE,
+  payload: databaseIndex,
+});
+
+export const handleSelectedDatabase = databaseIndex => ({
+  type: types.HANDLE_SELECTED_DATABASE,
+  payload: databaseIndex,
+});
+
+export const handleDatabaseNameChange = databaseName => ({
+  type: types.HANDLE_DATABASE_NAME_CHANGE,
+  payload: databaseName,
+});
+
+export const handleDatabaseTypeChange = databaseType => ({
+  type: types.HANDLE_DATABASE_TYPE_CHANGE,
+  payload: databaseType,
+});
+
+export const openDatabaseCreator = () => ({
+  type: types.OPEN_DATABASE_CREATOR,
+});
+
 // ----------------------------- Query App -------------------------------//
 
 export const createQuery = query => ({
@@ -121,3 +157,10 @@ export const deletedFieldRelationUpdate = indexes => ({
   type: types.DELETED_FIELD_RELATION_UPDATE,
   payload: indexes,
 });
+
+export const saveSchemasToDatabases = () => {
+  return (dispatch, getState) => {
+    const { schema } = getState();
+  }
+}
+
