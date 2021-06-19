@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => ({
   //  requires a reducer to handleSelectedDatabase
   handleInjectDatabase: database => dispatch(actions.handleInjectDatabase(database)),
   handleSelectedDatabase: databaseIndex => dispatch(actions.handleSelectedDatabase(databaseIndex)),
-
+  openTableCreator: () => dispatch(actions.openTableCreator())
   //  fields dont exist in db view, so reducer may be unnecessary
   // deletedFieldRelationUpdate: indexes => dispatch(actions.deletedFieldRelationUpdate(indexes)),
 });
@@ -48,7 +48,8 @@ const Table = ({
   databases,
   handleInjectDatabase,
   deleteDatabase,
-  handleSelectedDatabase
+  handleSelectedDatabase,
+  openTableCreator
 }) => {
   const colors = ['darkcyan', 'dodgerblue', 'crimson', 'orangered', 'darkviolet',
     'gold', 'hotpink', 'seagreen', 'darkorange', 'tomato', 'mediumspringgreen',
@@ -57,7 +58,8 @@ const Table = ({
 
   function grabSelectedDatabase(e) {
     const selectedDatabase = databases[Number(e)];
-    return handleInjectDatabase(selectedDatabase)
+    openTableCreator()
+    handleInjectDatabase(selectedDatabase)
   };
 
   return (
