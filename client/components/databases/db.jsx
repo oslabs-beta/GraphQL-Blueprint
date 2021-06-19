@@ -4,7 +4,6 @@ import FlatButton from 'material-ui/FlatButton';
 import Delete from 'material-ui/svg-icons/action/delete';
 // import Close from 'material-ui/svg-icons/navigation/close';
 import * as actions from '../../actions/actions';
-import Field from './field.jsx';
 
 const style = {
   deleteStyle: {
@@ -57,10 +56,7 @@ const Table = ({
     'darkslategrey', 'goldenrod', 'deeppink'];
 
   function grabSelectedDatabase(e) {
-    
     const selectedDatabase = databases[Number(e)];
-    console.log(selectedDatabase);
-
     return handleInjectDatabase(selectedDatabase)
   };
 
@@ -93,8 +89,9 @@ const Table = ({
         <FlatButton 
           value={databaseData.databaseID}
           onClick={(e) => 
-            { grabSelectedDatabase(e.currentTarget.value);
-              document.getElementById('schemaTab').click()}}
+            { grabSelectedDatabase(e.currentTarget.value)
+              setTimeout(()=>{document.getElementById('schemaTab').click()}, 0)
+            }}
         >
             Edit Tables
         </FlatButton>
