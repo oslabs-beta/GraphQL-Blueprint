@@ -4,7 +4,6 @@ import FlatButton from 'material-ui/FlatButton';
 import Delete from 'material-ui/svg-icons/action/delete';
 // import Close from 'material-ui/svg-icons/navigation/close';
 import * as actions from '../../actions/actions';
-import Field from './field.jsx';
 
 const style = {
   deleteStyle: {
@@ -37,7 +36,7 @@ const mapDispatchToProps = dispatch => ({
   //  requires a reducer to handleSelectedDatabase
   handleInjectDatabase: database => dispatch(actions.handleInjectDatabase(database)),
   handleSelectedDatabase: databaseIndex => dispatch(actions.handleSelectedDatabase(databaseIndex)),
-
+  openTableCreator: () => dispatch(actions.openTableCreator())
   //  fields dont exist in db view, so reducer may be unnecessary
   // deletedFieldRelationUpdate: indexes => dispatch(actions.deletedFieldRelationUpdate(indexes)),
 });
@@ -49,7 +48,8 @@ const Table = ({
   databases,
   handleInjectDatabase,
   deleteDatabase,
-  handleSelectedDatabase
+  handleSelectedDatabase,
+  openTableCreator
 }) => {
   const colors = ['darkcyan', 'dodgerblue', 'crimson', 'orangered', 'darkviolet',
     'gold', 'hotpink', 'seagreen', 'darkorange', 'tomato', 'mediumspringgreen',
@@ -57,11 +57,9 @@ const Table = ({
     'darkslategrey', 'goldenrod', 'deeppink'];
 
   function grabSelectedDatabase(e) {
-    
     const selectedDatabase = databases[Number(e)];
-    console.log(selectedDatabase);
-
-    return handleInjectDatabase(selectedDatabase)
+    openTableCreator()
+    handleInjectDatabase(selectedDatabase)
   };
 
   return (
@@ -93,8 +91,9 @@ const Table = ({
         <FlatButton 
           value={databaseData.databaseID}
           onClick={(e) => 
-            { grabSelectedDatabase(e.currentTarget.value);
-              document.getElementById('schemaTab').click()}}
+            { grabSelectedDatabase(e.currentTarget.value)
+              setTimeout(()=>{document.getElementById('schemaTab').click()}, 0)
+            }}
         >
             Edit Tables
         </FlatButton>
