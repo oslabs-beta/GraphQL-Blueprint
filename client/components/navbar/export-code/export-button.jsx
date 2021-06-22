@@ -50,7 +50,7 @@ class ExportCode extends Component {
       }
     }
     const tableData = Object.assign({}, tables, changedTables);
-    const data = Object.assign({}, {'name': databaseName }, { 'data': tableData }, { 'database': databaseType});
+    const data = Object.assign({}, {'name': databaseName }, { 'data': tableData }, { 'databaseName': databaseType});
     console.log(data);
     return data;
   }
@@ -110,7 +110,7 @@ class ExportCode extends Component {
     console.log('this.props.database in export-button:', this.props.database)
 
     setTimeout(() => {
-      fetch('/write-files', {
+      fetch('/write-files-multiple', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
