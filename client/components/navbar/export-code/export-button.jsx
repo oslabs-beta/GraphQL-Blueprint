@@ -105,7 +105,7 @@ class ExportCode extends Component {
     // JSON.stringify doesn't work with Sets. Change Sets to arrays for export
     // const data = this.changeSetsToArrays();
     console.log ('json stringify result', JSON.stringify(data));
-    const data = this.changeSetsToArrays();
+    // const data = this.changeSetsToArrays();
     console.log('data in export-button:', data);
     console.log('this.props.database in export-button:', this.props.database)
 
