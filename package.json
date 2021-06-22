@@ -20,8 +20,7 @@
     "webpack": "webpack --watch --hot",
     "server": "nodemon server/index.js",
     "start": "nodemon server/index.js",
-    "test": "jest",
-    "webpack": "webpack --watch --hot"
+    "test": "jest"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
