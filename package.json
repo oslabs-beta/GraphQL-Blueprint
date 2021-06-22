@@ -17,6 +17,7 @@
   "scripts": {
     "pack": "webpack -p",
     "dev": "webpack-dev-server",
+    "webpack": "webpack --watch --hot",
     "server": "nodemon server/index.js",
     "start": "nodemon server/index.js",
     "test": "jest",
@@ -47,6 +48,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "eslint-config-airbnb": "^17.1.0",
     "express": "^4.16.3",
+    "express-zip": "^3.0.0",
     "material-ui": "^0.20.2",
     "pack": "^2.1.0",
     "react": "^16.6.3",
