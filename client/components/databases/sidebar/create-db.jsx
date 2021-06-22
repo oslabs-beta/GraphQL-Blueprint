@@ -116,13 +116,13 @@ const CreateDatabase = ({
         <h5 style={{ textAlign: 'center', marginTop: '-4px' }}>( Singular naming convention )</h5>
         
         <SelectField 
-          labelId="databaseType" 
+          labelid="databaseType" 
           id="select" 
           floatingLabelText="Choose Database Type" 
           value={databaseType}
           onChange={(e, index, value) => handleDatabaseTypeChange(value)}
         >
-          <MenuItem value='MongoDb' primaryText="MongoDB" />
+          <MenuItem value='MongoDB' primaryText="MongoDB" />
           <MenuItem value='PostgreSQL' primaryText="PostgreSQL" />
           <MenuItem value='MySQL' primaryText="MySQL" />
           

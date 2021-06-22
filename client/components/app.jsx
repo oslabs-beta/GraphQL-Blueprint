@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
+import { saveDatabaseDataInput } from '../actions/actions';
 
 // Components
 import MainNav from './navbar/navbar.jsx';
@@ -8,6 +9,7 @@ import Welcome from './welcome/welcome.jsx';
 import SchemaApp from './schema/schema-app.jsx';
 import DBApp from './databases/db-app.jsx';
 import CodeApp from './code/code-app.jsx';
+
 //import QueryApp from './query/query-app.jsx';
 
 // Material UI Components
@@ -32,13 +34,16 @@ const style = {
 
 const mapStateToProps = store => ({
   snackBar: store.general.statusMessage,
+  schemaObject: store.schema,
 });
 
 const mapDispatchToProps = dispatch => ({
   handleSnackbarUpdate: status => dispatch(actions.handleSnackbarUpdate(status)),
+  saveDatabaseDataInput: schemaObject => dispatch(actions.saveDatabaseDataInput(schemaObject)),
+  chooseDatabase: database => dispatch(actions.chooseDatabase(database)),
 });
 
-const App = ({ snackBar, handleSnackbarUpdate }) => {
+const App = ({ snackBar, handleSnackbarUpdate, schemaObject, saveDatabaseDataInput, chooseDatabase }) => {
   function handleRequestClose() {
     handleSnackbarUpdate('');
   }
@@ -48,11 +53,25 @@ const App = ({ snackBar, handleSnackbarUpdate }) => {
       <MainNav />
       <Welcome />
       <div className="app-body-container">
-        <Tabs className="tabs">
-          <Tab id="databasesTab" label="Databases" style={style.tabStyle}>
-            <DBApp />
+        <Tabs 
+          className="tabs" 
+          onChange={() => {
+            if (schemaObject.name) {
+              chooseDatabase(schemaObject.database)
+              saveDatabaseDataInput(schemaObject)}
+          }}
+        >
+          <Tab 
+            id="databasesTab" 
+            label="Databases" 
+            style={style.tabStyle}>
+              <DBApp />
           </Tab>
-          <Tab id="schemaTab" label="Tables" style={style.tabStyle}>
+          <Tab 
+            id="schemaTab" 
+            label="Tables" 
+            style={style.tabStyle} 
+            disabled={(schemaObject.name === "") ? true : false}>
             <SchemaApp />
           </Tab>
           {/* <Tab label="Queries" style={style.tabStyle}>
