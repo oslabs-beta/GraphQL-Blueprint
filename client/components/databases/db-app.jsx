@@ -42,7 +42,7 @@ const SchemaApp = ({ databases, selectedDatabase }) => {
       >
         <div id="sidebar-container">
           <CSSTransition
-            in={selectedDatabase.databaseID >= 0}
+            in={selectedDatabase.databaseID >= -1}
             key="table"
             timeout={200}
             classNames="fade"
