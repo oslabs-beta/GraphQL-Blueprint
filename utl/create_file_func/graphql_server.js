@@ -3,9 +3,11 @@ const tab = `  `;
 // Function that evokes all other helper functions
 function parseGraphqlServer(databases) {
   let query = "";
+  query += "const graphql = require('graphql');\n";
   for (const databaseIndex in databases) {
     const database = databases[databaseIndex];
     // database.data is same as database.tables
+
     query += buildRequireStatements(database.data, database.databaseName);
   }
   query += buildGraphqlVariables();
@@ -60,8 +62,7 @@ function parseGraphqlServer(databases) {
  * @returns {String} - All the require statements needed for the GraphQL server.
  */
 function buildRequireStatements(tables, database) {
-  let requireStatements = "const graphql = require('graphql');\n";
-
+  let requireStatements = "";
   if (database === "MongoDB") {
     for (const tableIndex in tables) {
       requireStatements += `const ${
