@@ -1,7 +1,7 @@
 // use graphqlkdesinger.com to see how folder structure supposed to look like
 // outside in
 // builddirectories working
-  // database folder has a folder for each database
+// database folder has a folder for each database
 // modify mutatations and queries in client, (both databases should be in one text file)
 //buildqueries and buildgraphql server
 const express = require("express");
@@ -100,7 +100,7 @@ app.post("/write-files", (req, res) => {
     );
     fs.writeFileSync(
       path.join(PATH, `build-files${dateStamp}/server/graphql-schema/index.js`),
-      parseGraphqlServer(data.data, data.databaseName)
+      parseGraphqlServer(data)
     );
 
     // Depends on database you select, creates files for selected database
@@ -118,24 +118,32 @@ app.post("/write-files", (req, res) => {
     //     }, 5000);
     //   });
     // });
-    multipleBuildClientQueries (data);
+    multipleBuildClientQueries(data);
     function multipleBuildClientQueries(obj) {
       // console.log('here at checkDataLength')
       // console.log(Object.keys(obj).length)
       if (Object.keys(obj).length <= 1) {
         // if length <= 1, run buildClientQueries function
         const Database1 = obj[Object.keys(obj)[0]];
-        console.log('obj.Database1.databaseName:', obj.Database1.databaseName);
-        console.log('obj:', obj)
+        console.log("obj.Database1.databaseName:", obj.Database1.databaseName);
+        console.log("obj:", obj);
         buildClientQueries(obj.Database1.data, dateStamp, () => {
-          if (obj.Database1.databaseName === "MongoDB") buildForMongo(obj.Database1.data, dateStamp);
-          if (obj.Database1.databaseName === "MySQL") buildForMySQL(obj.Database1.data, dateStamp);
-          if (obj.Database1.databaseName === "PostgreSQL") buildForPostgreSQL(obj.Database1.data, dateStamp);
+          if (obj.Database1.databaseName === "MongoDB")
+            buildForMongo(obj.Database1.data, dateStamp);
+          if (obj.Database1.databaseName === "MySQL")
+            buildForMySQL(obj.Database1.data, dateStamp);
+          if (obj.Database1.databaseName === "PostgreSQL")
+            buildForPostgreSQL(obj.Database1.data, dateStamp);
           sendResponse(dateStamp, res, () => {
             setTimeout(() => {
-              deleteTempFiles(obj.Database1.databaseName, obj.Database1.data, dateStamp, () => {
-                deleteTempFolders(dateStamp, () => {});
-              });
+              deleteTempFiles(
+                obj.Database1.databaseName,
+                obj.Database1.data,
+                dateStamp,
+                () => {
+                  deleteTempFolders(dateStamp, () => {});
+                }
+              );
             }, 5000);
           });
         });
@@ -163,13 +171,11 @@ app.post("/write-files", (req, res) => {
       //   }
       // }
     }
-    
   });
 });
 
 function callBuildDirectories(req, res, dateStamp) {
-  
-  const data = req.body; 
+  const data = req.body;
 
   buildDirectories(dateStamp, () => {
     fs.writeFileSync(
@@ -210,60 +216,64 @@ function callBuildDirectories(req, res, dateStamp) {
     );
     fs.writeFileSync(
       path.join(PATH, `build-files${dateStamp}/server/graphql-schema/index.js`),
-      parseGraphqlServer(data.data, data.databaseName)
+      parseGraphqlServer(data)
     );
   });
 }
-const storage = {dateStampStorage: [], dataStorage: [], databaseNameStorage: []}
+const storage = {
+  dateStampStorage: [],
+  dataStorage: [],
+  databaseNameStorage: [],
+};
 // Figure out what exactly is being built in directories, and figure out what is being deleted in deleteTemp and deleteFolders
 app.post("/write-files-multiple", (req, res) => {
-  multipleBuildClientQueries (req.body);
-  
+  multipleBuildClientQueries(req.body);
+
   // console.log('res.locals.storage', res.locals.storage)
 
   function multipleBuildClientQueries(obj) {
     const dateStamp = Date.now();
-    
+
     callBuildDirectories(req, res, dateStamp);
     for (let databaseNumber in obj) {
-      
-      const dbNumber = obj[databaseNumber]; 
-      
+      const dbNumber = obj[databaseNumber];
+
       // storage.dateStampStorage.push(dateStamp);
       // storage.dataStorage.push(dbNumber.data);
       // storage.databaseNameStorage.push(dbNumber.databaseName);
-      
+
       // e.g. databaseNumber -> 'Database1'
       // Everything inside 'Database1'
-      console.log('before buildClientQueries')
+      console.log("before buildClientQueries");
       // PUT OUTSIDE OF LOOP
       buildClientQueries(dbNumber.data, dateStamp, () => {
         // console.log('dbNumber:', dbNumber);
-        if (dbNumber.databaseName === "MongoDB") buildForMongo(dbNumber.data, dateStamp, dbNumber.name);
-        if (dbNumber.databaseName === "MySQL") buildForMySQL(dbNumber.data, dateStamp, dbNumber.name)
-        if (dbNumber.databaseName === "PostgreSQL") buildForPostgreSQL(dbNumber.data, dateStamp, dbNumber.name);
-        console.log('after buildForPostgreSQL')
+        if (dbNumber.databaseName === "MongoDB")
+          buildForMongo(dbNumber.data, dateStamp, dbNumber.name);
+        if (dbNumber.databaseName === "MySQL")
+          buildForMySQL(dbNumber.data, dateStamp, dbNumber.name);
+        if (dbNumber.databaseName === "PostgreSQL")
+          buildForPostgreSQL(dbNumber.data, dateStamp, dbNumber.name);
+        console.log("after buildForPostgreSQL");
       });
     }
     sendResponse(dateStamp, res, () => {
-    
-      console.log('in sendResponse in multipleBuildClientQueries')
+      console.log("in sendResponse in multipleBuildClientQueries");
       setTimeout(() => {
-        console.log('after setTimeout()')
-        console.log('before deleteTempFiles')
-       
+        console.log("after setTimeout()");
+        console.log("before deleteTempFiles");
+
         deleteTempFiles(obj, dateStamp, () => {
-          console.log('after deleteTempFiles');
+          console.log("after deleteTempFiles");
           deleteTempFolders(dateStamp, () => {});
-          console.log('after deleteTempFolders');
+          console.log("after deleteTempFolders");
         });
       }, 5000);
     });
   }
 
   //datestamps object
-  
-})
+});
 // middleware function for downloading files
 
 app.listen(PORT, () => {
@@ -293,7 +303,7 @@ function buildDirectories(dateStamp, cb) {
   fs.mkdirSync(path.join(PATH, `build-files${dateStamp}`, "server", "public"));
   return cb();
 }
-// Run outside of loop, add all tables to it as loop is overwriting 
+// Run outside of loop, add all tables to it as loop is overwriting
 // should be one docu with every query from every database
 function buildClientQueries(data, dateStamp, cb) {
   // console.log("data from buildClientQueries (data):", data)
@@ -303,7 +313,7 @@ function buildClientQueries(data, dateStamp, cb) {
   // );
   // console.log("cb:", cb);
 
-  // LOOP HERE 
+  // LOOP HERE
   fs.writeFileSync(
     path.join(PATH, `build-files${dateStamp}/client/graphql/queries/index.js`),
     parseClientQueries(data)
@@ -319,7 +329,15 @@ function buildClientQueries(data, dateStamp, cb) {
   return cb();
 }
 function buildDatabaseFolder(databaseName, dateStamp) {
-  fs.mkdirSync(path.join(PATH, `build-files${dateStamp}`, "server", "db", `${databaseName}`));
+  fs.mkdirSync(
+    path.join(
+      PATH,
+      `build-files${dateStamp}`,
+      "server",
+      "db",
+      `${databaseName}`
+    )
+  );
 }
 
 function buildForMongo(data, dateStamp, databaseName) {
@@ -330,7 +348,9 @@ function buildForMongo(data, dateStamp, databaseName) {
     fs.writeFileSync(
       path.join(
         PATH,
-        `build-files${dateStamp}/server/db/${databaseName}/${data[index].type.toLowerCase()}.js`
+        `build-files${dateStamp}/server/db/${databaseName}/${data[
+          index
+        ].type.toLowerCase()}.js`
       ),
       parseMongoSchema(data[index])
     );
@@ -338,29 +358,39 @@ function buildForMongo(data, dateStamp, databaseName) {
 }
 
 function buildForMySQL(data, dateStamp, databaseName) {
-
   buildDatabaseFolder(databaseName, dateStamp);
   fs.writeFileSync(
-    path.join(PATH, `build-files${dateStamp}/server/db/${databaseName}/sql_pool.js`),
+    path.join(
+      PATH,
+      `build-files${dateStamp}/server/db/${databaseName}/sql_pool.js`
+    ),
     sqlPool("MySQL")
   );
-  console.log('data in buildForMySQL:', data)
+  console.log("data in buildForMySQL:", data);
   fs.writeFileSync(
-    path.join(PATH, `build-files${dateStamp}/server/db/${databaseName}/mysql_scripts.sql`),
+    path.join(
+      PATH,
+      `build-files${dateStamp}/server/db/${databaseName}/mysql_scripts.sql`
+    ),
     // SERVER/DB/SCRIPTS
     parseMySQLTables(data)
   );
-
 }
 
 function buildForPostgreSQL(data, dateStamp, databaseName) {
   buildDatabaseFolder(databaseName, dateStamp);
   fs.writeFileSync(
-    path.join(PATH, `build-files${dateStamp}/server/db/${databaseName}/sql_pool.js`),
+    path.join(
+      PATH,
+      `build-files${dateStamp}/server/db/${databaseName}/sql_pool.js`
+    ),
     sqlPool("Postgres")
   );
   fs.writeFileSync(
-    path.join(PATH, `build-files${dateStamp}/server/db/${databaseName}/postgresql_scripts.sql`),
+    path.join(
+      PATH,
+      `build-files${dateStamp}/server/db/${databaseName}/postgresql_scripts.sql`
+    ),
     parsePostgresTables(data)
   );
 }
@@ -374,11 +404,17 @@ function deleteTempFiles(obj, dateStamp, cb) {
   // console.log(PATH, `build-files${dateStamp}/webpack.config.js`)
   fs.unlinkSync(path.join(PATH, `build-files${dateStamp}/client/index.js`));
   // console.log(PATH, `build-files${dateStamp}/client/index.js`)
-  fs.unlinkSync(path.join(PATH, `build-files${dateStamp}/client/graphql/queries/index.js`));
+  fs.unlinkSync(
+    path.join(PATH, `build-files${dateStamp}/client/graphql/queries/index.js`)
+  );
   // console.log(PATH, `build-files${dateStamp}/client/graphql/queries/index.js`)
-  fs.unlinkSync(path.join(PATH, `build-files${dateStamp}/client/graphql/mutations/index.js`));
+  fs.unlinkSync(
+    path.join(PATH, `build-files${dateStamp}/client/graphql/mutations/index.js`)
+  );
   // console.log(PATH, `build-files${dateStamp}/client/graphql/mutations/index.js`)
-  fs.unlinkSync(path.join(PATH, `build-files${dateStamp}/client/components/index.js`));
+  fs.unlinkSync(
+    path.join(PATH, `build-files${dateStamp}/client/components/index.js`)
+  );
   fs.unlinkSync(
     path.join(PATH, `build-files${dateStamp}/client/components/index.css`)
   );
@@ -399,46 +435,48 @@ function deleteTempFiles(obj, dateStamp, cb) {
     const database = dbNumber.databaseName;
     const data = dbNumber.data;
     if (database === "PostgreSQL") {
-        fs.unlinkSync(
-          path.join(PATH, `build-files${dateStamp}/server/db/${name}/sql_pool.js`)
-        );
-        fs.unlinkSync(
-          path.join(
-            PATH,
-            `build-files${dateStamp}/server/db/${name}/postgresql_scripts.sql`
-          )
-        );
+      fs.unlinkSync(
+        path.join(PATH, `build-files${dateStamp}/server/db/${name}/sql_pool.js`)
+      );
+      fs.unlinkSync(
+        path.join(
+          PATH,
+          `build-files${dateStamp}/server/db/${name}/postgresql_scripts.sql`
+        )
+      );
     }
-    
+
     if (database === "MySQL") {
-        fs.unlinkSync(
-          path.join(PATH, `build-files${dateStamp}/server/db/${name}/sql_pool.js`)
-        );
-        fs.unlinkSync(
-          path.join(PATH, `build-files${dateStamp}/server/db/${name}/mysql_scripts.sql`)
-        );
+      fs.unlinkSync(
+        path.join(PATH, `build-files${dateStamp}/server/db/${name}/sql_pool.js`)
+      );
+      fs.unlinkSync(
+        path.join(
+          PATH,
+          `build-files${dateStamp}/server/db/${name}/mysql_scripts.sql`
+        )
+      );
     }
-    
+
     if (database === "MongoDB") {
-        const indexes = Object.keys(data);
-    
-        function step(i) {
-          if (i < indexes.length) {
-            fs.unlinkSync(
-              path.join(
-                PATH,
-                `build-files${dateStamp}/server/db/${name}/${data[
-                  indexes[i]
-                ].type.toLowerCase()}.js`
-              )
-            );
-            step(i + 1);
-          }
+      const indexes = Object.keys(data);
+
+      function step(i) {
+        if (i < indexes.length) {
+          fs.unlinkSync(
+            path.join(
+              PATH,
+              `build-files${dateStamp}/server/db/${name}/${data[
+                indexes[i]
+              ].type.toLowerCase()}.js`
+            )
+          );
+          step(i + 1);
         }
-        step(0);
+      }
+      step(0);
     }
   }
- 
 
   return cb();
 }
@@ -455,7 +493,9 @@ function deleteTempFolders(dateStamp, cb) {
     path.join(PATH, `build-files${dateStamp}`, "client", "components")
   );
   fs.rmdirSync(path.join(PATH, `build-files${dateStamp}`, "server", "public"));
-  fs.rmdirSync(path.join(PATH, `build-files${dateStamp}`, "server", "db"), { recursive: true });
+  fs.rmdirSync(path.join(PATH, `build-files${dateStamp}`, "server", "db"), {
+    recursive: true,
+  });
   fs.rmdirSync(
     path.join(PATH, `build-files${dateStamp}`, "server", "graphql-schema")
   );
@@ -475,11 +515,11 @@ function sendResponse(dateStamp, res, cb) {
   // console.log('filePath inside sendResponse:', filePath);
   res.setHeader("Content-Type", "application/zip");
   res.setHeader("Content-disposition", "attachment");
-  console.log('end of sendResponse \n')
+  console.log("end of sendResponse \n");
   res.download(filePath, (err) => {
-    console.log('inside res.download')
+    console.log("inside res.download");
     // console.log('file:', file, '\n')
-    if (err) console.log('Error inside sendResponse:', err) 
+    if (err) console.log("Error inside sendResponse:", err);
     else console.log("Download Complete!");
     return cb();
   });
