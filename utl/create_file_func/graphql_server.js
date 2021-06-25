@@ -1,14 +1,16 @@
 const tab = `  `;
 
 // Function that evokes all other helper functions
+
 function parseGraphqlServer(databases) {
+  console.log('databases in parseGraphqlServer', databases)
   let query = "";
   query += "const graphql = require('graphql');\n";
   for (const databaseIndex in databases) {
     const database = databases[databaseIndex];
     // database.data is same as database.tables
 
-    query += buildRequireStatements(database.data, database.databaseName);
+    query += buildRequireStatements(database.data, database.databaseName, database.name);
   }
   query += buildGraphqlVariables();
 
@@ -61,16 +63,16 @@ function parseGraphqlServer(databases) {
  * @param {String} database - Represents the database selected (MongoDB, MySQL, or PostgreSQL)
  * @returns {String} - All the require statements needed for the GraphQL server.
  */
-function buildRequireStatements(tables, database) {
+function buildRequireStatements(tables, database, name) {
   let requireStatements = "";
   if (database === "MongoDB") {
     for (const tableIndex in tables) {
       requireStatements += `const ${
         tables[tableIndex].type
-      } = require('../db/${tables[tableIndex].type.toLowerCase()}.js');\n`;
+      } = require('../db/${name}/${tables[tableIndex].type.toLowerCase()}.js');\n`;
     }
   } else {
-    requireStatements += `const pool = require('../db/sql_pool.js');\n`;
+    requireStatements += `const pool = require('../db/${name}/sql_pool.js');\n`;
   }
   return requireStatements;
 }
