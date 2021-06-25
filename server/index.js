@@ -214,9 +214,11 @@ function callBuildDirectories(req, res, dateStamp) {
       path.join(PATH, `build-files${dateStamp}/server/public/styles.css`),
       ""
     );
+    console.log('data in backend index.js', data)
     fs.writeFileSync(
       path.join(PATH, `build-files${dateStamp}/server/graphql-schema/index.js`),
       parseGraphqlServer(data)
+      
     );
   });
 }
