@@ -57,7 +57,6 @@ const initialState = {
         //  replace action.payload with getState() from redux-thunk (maybe not)
         //  databaseState can be both selectedDB or schema state object (depends on what's being passed in as payload)
         const databaseState = action.payload;
-
         //  Saving a new database
         if (action.payload.databaseID < 0) {
           //  maybe 'field' here doesn't work
@@ -156,7 +155,6 @@ const initialState = {
           databaseIndex: counter,
           selectedDatabase: newSelectedDatabase,
         }
-
       // reducer from when you go from schemaView back to databse view. It saves the tables that user was working on in the schema state and the database state.
 
       // case types.SAVE_SCHEMA_TO_DATABASES:
