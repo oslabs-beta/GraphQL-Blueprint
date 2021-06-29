@@ -12,13 +12,15 @@ function parseSQLTables(tables) {
     if (!table) return ``;
 
     createTablesCode += `CREATE TABLE \`${table.type}\` (`;
-
     // create code for each field
     for (const fieldId in table.fields) {
+      // console.log('fieldId', fieldId)
       createTablesCode += `\n`;
       createTablesCode += createTableField(table.fields[fieldId]);
+      // console.log('createTablesCode', createTablesCode);
       // so long as it's not the last field, add a comma
       const fieldIds = Object.keys(table.fields);
+      
       if (fieldId !== fieldIds[fieldIds.length - 1]) {
         createTablesCode += `,`;
       }
@@ -62,13 +64,15 @@ function parseSQLTables(tables) {
   return createTablesCode;
 
   function createTableField(field) {
+    // console.log('inside createTableField')
+    // console.log('field');
     let fieldCode = ``;
     fieldCode += `${tab}\`${field.name}\`${tab}${checkDataType(field.type)}`;
     fieldCode += checkAutoIncrement(field.autoIncrement);
     fieldCode += checkRequired(field.required);
     fieldCode += checkUnique(field.unique);
     fieldCode += checkDefault(field.defaultValue, field.type);
-
+    // console.log('fieldCode before return', fieldCode);
     if (field.primaryKey) {
       primaryKey.push(field.name);
     }
@@ -85,6 +89,7 @@ function parseSQLTables(tables) {
         foreignKeys[field.tableNum] = [relationData];
       }
     }
+    
     return fieldCode;
   }
 
