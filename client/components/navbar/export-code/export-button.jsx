@@ -51,7 +51,6 @@ class ExportCode extends Component {
     }
     const tableData = Object.assign({}, tables, changedTables);
     const data = Object.assign({}, {'name': databaseName }, { 'data': tableData }, { 'databaseName': databaseType});
-    console.log(data);
     return data;
   }
 // data backend (body for fetch request)
@@ -103,12 +102,7 @@ class ExportCode extends Component {
       data[key] = this.changeSetsToArrays(value['tables'], this.props.databaseTypes[key], databaseName)
     };
     // JSON.stringify doesn't work with Sets. Change Sets to arrays for export
-    // const data = this.changeSetsToArrays();
-    console.log ('json stringify result', JSON.stringify(data));
-    // const data = this.changeSetsToArrays();
-    console.log('data in export-button:', data);
-    console.log('this.props.database in export-button:', this.props.database)
-
+    // const data = this.changeSetsToArrays(); 
     setTimeout(() => {
       fetch('/write-files-multiple', {
         method: 'POST',

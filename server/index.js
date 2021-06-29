@@ -95,7 +95,6 @@ app.post("/write-files-multiple", (req, res) => {
       path.join(PATH, `build-files${dateStamp}/server/public/styles.css`),
       ""
     );
-    console.log('data in backend index.js', data)
     fs.writeFileSync(
       path.join(PATH, `build-files${dateStamp}/server/graphql-schema/index.js`),
       parseGraphqlServer(data)
@@ -167,7 +166,6 @@ function buildDirectories(dateStamp, cb) {
 // Run outside of loop, add all tables to it as loop is overwriting
 // should be one docu with every query from every database
 function buildClientQueries(data, dateStamp, cb) {
-  console.log('data in buildClientQueries:', data);
   fs.writeFileSync(
     path.join(PATH, `build-files${dateStamp}/client/graphql/queries/index.js`),
     parseClientQueries(data)
@@ -220,7 +218,6 @@ function buildForMySQL(data, dateStamp, databaseName) {
     ),
     sqlPool("MySQL")
   );
-  console.log("data in buildForMySQL:", data);
   fs.writeFileSync(
     path.join(
       PATH,
@@ -251,21 +248,15 @@ function buildForPostgreSQL(data, dateStamp, databaseName) {
 
 function deleteTempFiles(obj, dateStamp, cb) {
   fs.unlinkSync(path.join(PATH, `build-files${dateStamp}/readme.md`));
-  // console.log(PATH, `build-files${dateStamp}/readme.md`)
   fs.unlinkSync(path.join(PATH, `build-files${dateStamp}/package.json`));
-  // console.log(PATH, `build-files${dateStamp}/package.json`)
   fs.unlinkSync(path.join(PATH, `build-files${dateStamp}/webpack.config.js`));
-  // console.log(PATH, `build-files${dateStamp}/webpack.config.js`)
   fs.unlinkSync(path.join(PATH, `build-files${dateStamp}/client/index.js`));
-  // console.log(PATH, `build-files${dateStamp}/client/index.js`)
   fs.unlinkSync(
     path.join(PATH, `build-files${dateStamp}/client/graphql/queries/index.js`)
   );
-  // console.log(PATH, `build-files${dateStamp}/client/graphql/queries/index.js`)
   fs.unlinkSync(
     path.join(PATH, `build-files${dateStamp}/client/graphql/mutations/index.js`)
   );
-  // console.log(PATH, `build-files${dateStamp}/client/graphql/mutations/index.js`)
   fs.unlinkSync(
     path.join(PATH, `build-files${dateStamp}/client/components/index.js`)
   );
@@ -364,15 +355,10 @@ function sendResponse(dateStamp, res, cb) {
     .zip(path.join(PATH, `build-files${dateStamp}`))
     .compress()
     .save(path.join(PATH, `graphql${dateStamp}.zip`));
-  // console.log('middle of sendResponse')
   const filePath = path.join(PATH, `graphql${dateStamp}.zip`);
-  // console.log('filePath inside sendResponse:', filePath);
   res.setHeader("Content-Type", "application/zip");
   res.setHeader("Content-disposition", "attachment");
-  console.log("end of sendResponse \n");
   res.download(filePath, (err) => {
-    console.log("inside res.download");
-    // console.log('file:', file, '\n')
     if (err) console.log("Error inside sendResponse:", err);
     else console.log("Download Complete!");
     return cb();
