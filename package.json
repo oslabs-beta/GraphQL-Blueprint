@@ -1,10 +1,10 @@
 {
-  "name": "graphqldesigner.com",
+  "name": "GraphQLBlueprint",
   "version": "1.0.0",
   "description": "A user friendly Graphql designer aimed to simplify creation and implementation of a full stack React Graphql app.",
   "main": "index.js",
   "keywords": [],
-  "author": "Tsion Adefres, Greg Shamalta, Patrick Slagle, James Sieu",
+  "author": "Ethan Yeh, Dylan Li, Kevin Berlanga, Sean Yalda",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GraphQL-Designer/graphqldesigner.com/issues"
