@@ -3,7 +3,6 @@ const tab = `  `;
 // Function that evokes all other helper functions
 
 function parseGraphqlServer(databases) {
-  console.log('databases in parseGraphqlServer', databases)
   let query = "";
   query += "const graphql = require('graphql');\n";
   for (const databaseIndex in databases) {
