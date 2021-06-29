@@ -112,19 +112,19 @@ function multipleBuildClientQueries(req, res, dateStamp) {
 
   for (let databaseNumber in obj) {
     const dbNumber = obj[databaseNumber];
-    for (const index in dbNumber.data) {
-      clientQueriesData[num] = dbNumber.data[index]
+    for (const index in dbNumber.tables) {
+      clientQueriesData[num] = dbNumber.tables[index]
       num++;
     }
 
     buildClientQueries(clientQueriesData, dateStamp, () => {
       // Builds folder structure
       if (dbNumber.databaseName === "MongoDB")
-        buildForMongo(dbNumber.data, dateStamp, dbNumber.name);
+        buildForMongo(dbNumber.tables, dateStamp, dbNumber.name);
       if (dbNumber.databaseName === "MySQL")
-        buildForMySQL(dbNumber.data, dateStamp, dbNumber.name);
+        buildForMySQL(dbNumber.tables, dateStamp, dbNumber.name);
       if (dbNumber.databaseName === "PostgreSQL")
-        buildForPostgreSQL(dbNumber.data, dateStamp, dbNumber.name);
+        buildForPostgreSQL(dbNumber.tables, dateStamp, dbNumber.name);
     });
   }
   sendResponse(dateStamp, res, () => {
@@ -278,7 +278,7 @@ function deleteTempFiles(obj, dateStamp, cb) {
   for (let dbNumber in obj) {
     const name = dbNumber.name;
     const database = dbNumber.databaseName;
-    const data = dbNumber.data;
+    const data = dbNumber.tables;
     if (database === "PostgreSQL") {
       fs.unlinkSync(
         path.join(PATH, `build-files${dateStamp}/server/db/${name}/sql_pool.js`)
