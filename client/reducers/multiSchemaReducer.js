@@ -102,7 +102,7 @@ const initialState = {
         };
       
       case types.HANDLE_DATABASE_TYPE_CHANGE:
-        console.log(action.payload);
+        // console.log(action.payload);
         newSelectedDatabase = Object.assign({}, state.selectedDatabase, { database: action.payload });
         
           return {
@@ -157,18 +157,6 @@ const initialState = {
         }
       // reducer from when you go from schemaView back to databse view. It saves the tables that user was working on in the schema state and the database state.
 
-      // case types.SAVE_SCHEMA_TO_DATABASES:
-      //   databaseNum = action.payload.databaseID
-
-      //   const newDatabase = JSON.parse(JSON.stringify(action.payload));
-      //   const newDatabases = JSON.parse(JSON.stringify(state.databases));
-
-      //   newDatabases[databaseNum] = newDatabase;
-
-      //   return {
-      //     ...state,
-      //     databases: newDatabases,
-      //   }
 
         default:
         return state;

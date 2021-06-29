@@ -50,65 +50,19 @@ class ExportCode extends Component {
       }
     }
     const tableData = Object.assign({}, tables, changedTables);
-    const data = Object.assign({}, {'name': databaseName }, { 'data': tableData }, { 'databaseName': databaseType});
-    console.log(data);
+    const data = Object.assign({}, {'name': databaseName }, { 'tables': tableData }, { 'databaseName': databaseType});
     return data;
   }
-// data backend (body for fetch request)
-  // data: {
-  //   data: {
-  //     '1': { type: 'Table1', fields: [Object], fieldsIndex: 3, tableID: 1 },
-  //     '2': { type: 'Table2', fields: [Object], fieldsIndex: 2, tableID: 2 }
-  //   },
-  //   database: 'MySQL'
-  // }
-  
-
-  
-// Current data object
-// body: {
-//   data: {
-//     ‘1’: { type: ‘Table1’, fields: [Object], fieldsIndex: 3, tableID: 1 },
-//     ‘2’: { type: ‘Table2’, fields: [Object], fieldsIndex: 2, tableID: 2 }
-//   },
-//   database: ‘MySQL’
-// }
-
-
-//Ideal data object
-  // data: {
-  //  Database1: {
-  //    data: {
-  //     ‘1’: { type: ‘Table1’, fields: [Object], fieldsIndex: 3, tableID: 1 },
-  //     ‘2’: { type: ‘Table2’, fields: [Object], fieldsIndex: 2, tableID: 2 }
-  //          },
-  //    database: ‘MySQL’
-  //    }
-  //  Database2: {
-  //    data: {
-  //      ‘1’: { type: ‘Table1’, fields: [Object], fieldsIndex: 3, tableID: 1 },
-  //      ‘2’: { type: ‘Table2’, fields: [Object], fieldsIndex: 2, tableID: 2 }
-  //    },
-  //    database: ‘MySQL’
-  //    }
-  //  }
-  //
 
   handleExport() {
     this.toggleLoader();
     const data = {}
     for (const [key, value] of Object.entries(this.props.databases)) {
-
       const databaseName = value['name']
       data[key] = this.changeSetsToArrays(value['tables'], this.props.databaseTypes[key], databaseName)
     };
     // JSON.stringify doesn't work with Sets. Change Sets to arrays for export
-    // const data = this.changeSetsToArrays();
-    console.log ('json stringify result', JSON.stringify(data));
-    // const data = this.changeSetsToArrays();
-    console.log('data in export-button:', data);
-    console.log('this.props.database in export-button:', this.props.database)
-
+    // const data = this.changeSetsToArrays(); 
     setTimeout(() => {
       fetch('/write-files-multiple', {
         method: 'POST',
@@ -124,6 +78,8 @@ class ExportCode extends Component {
           const element = document.createElement('a');
           document.body.appendChild(element);
           element.href = file;
+
+          // Multi-Project Feature: dynamic naming based on project name
           element.download = 'graphql.zip';
           element.click();
           this.toggleLoader();
