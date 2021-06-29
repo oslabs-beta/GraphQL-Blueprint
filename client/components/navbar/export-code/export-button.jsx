@@ -50,10 +50,19 @@ class ExportCode extends Component {
       }
     }
     const tableData = Object.assign({}, tables, changedTables);
-    const data = Object.assign({}, {'name': databaseName }, { 'data': tableData }, { 'database': databaseType});
+    const data = Object.assign({}, {'name': databaseName }, { 'data': tableData }, { 'databaseName': databaseType});
     console.log(data);
     return data;
   }
+// data backend (body for fetch request)
+  // data: {
+  //   data: {
+  //     '1': { type: 'Table1', fields: [Object], fieldsIndex: 3, tableID: 1 },
+  //     '2': { type: 'Table2', fields: [Object], fieldsIndex: 2, tableID: 2 }
+  //   },
+  //   database: 'MySQL'
+  // }
+  
 
   
 // Current data object
@@ -96,8 +105,12 @@ class ExportCode extends Component {
     // JSON.stringify doesn't work with Sets. Change Sets to arrays for export
     // const data = this.changeSetsToArrays();
     console.log ('json stringify result', JSON.stringify(data));
+    // const data = this.changeSetsToArrays();
+    console.log('data in export-button:', data);
+    console.log('this.props.database in export-button:', this.props.database)
+
     setTimeout(() => {
-      fetch('/write-files', {
+      fetch('/write-files-multiple', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
