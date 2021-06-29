@@ -9,13 +9,13 @@ function parseGraphqlServer(databases) {
     const database = databases[databaseIndex];
     // database.data is same as database.tables
 
-    query += buildRequireStatements(database.data, database.databaseName, database.name);
+    query += buildRequireStatements(database.tables, database.databaseName, database.name);
   }
   query += buildGraphqlVariables();
 
   // BUILD TYPE SCHEMA
   for (const databaseIndex in databases) {
-    const tables = databases[databaseIndex].data;
+    const tables = databases[databaseIndex].tables;
     const databaseName = databases[databaseIndex].databaseName;
     for (const tableIndex in tables) {
       query += buildGraphqlTypeSchema(tables[tableIndex], tables, databaseName);
@@ -27,7 +27,7 @@ function parseGraphqlServer(databases) {
 
   let firstRootLoop = true;
   for (const databaseIndex in databases) {
-    const tables = databases[databaseIndex].data;
+    const tables = databases[databaseIndex].tables;
     const databaseName = databases[databaseIndex].databaseName;
     for (const tableIndex in tables) {
       if (!firstRootLoop) query += ",\n";
@@ -43,7 +43,7 @@ function parseGraphqlServer(databases) {
 
   let firstMutationLoop = true;
   for (const databaseIndex in databases) {
-    const tables = databases[databaseIndex].data;
+    const tables = databases[databaseIndex].tables;
     const databaseName = databases[databaseIndex].databaseName;
     for (const tableIndex in tables) {
       if (!firstMutationLoop) query += ",\n";
