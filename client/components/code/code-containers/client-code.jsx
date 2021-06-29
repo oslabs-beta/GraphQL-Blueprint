@@ -13,7 +13,6 @@ const mapStateToProps = store => ({
 
 const createCombinedTables = (databases) => {
   let num = 0;
-  console.log('databases:', databases)
   const tablesCombined = {}
   for (const databaseIndex in databases) {
       const database = databases[databaseIndex];
@@ -29,7 +28,6 @@ const createCombinedTables = (databases) => {
 
 const CodeClientContainer = ({ databases }) => {
   const tables = createCombinedTables(databases);
-  console.log('tables in client-code.jsx', tables)
   const clientQueries = buildClientQueries(tables);
   const clientMutations = buildClientMutations(tables);
 
