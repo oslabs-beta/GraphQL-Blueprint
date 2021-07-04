@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Dialog from 'material-ui/Dialog';
+import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as actions from '../../actions/actions.js';
 
@@ -12,7 +13,6 @@ const mapStatetoProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  chooseDatabase: database => dispatch(actions.chooseDatabase(database)),
   handleNewProject: reset => dispatch(actions.handleNewProject(reset)),
 });
 
@@ -45,7 +45,6 @@ class Welcome extends React.Component {
 
   handleDatabaseClick(database) {
     this.props.handleNewProject(false);
-    this.props.chooseDatabase(database);
   }
 
   render() {
@@ -59,12 +58,24 @@ class Welcome extends React.Component {
           className="welcome-container"
           paperClassName="welcome-box"
         >
-          <div id="subheading">Rapidly prototype a full stack React GraphQL Application.</div>
+          <div id="subheading">A data modeling tool used to build React &amp; GraphQL Boilerplate.</div>
           <div className="iconContainer">
             <img alt="" id="icon_graphql" src="./images/graphql.png" />
             <img alt="" id="icon_express" src="./images/express.png" />
             <img alt="" id="icon_react" src="./images/react.png" />
           </div>
+          {/* <hr /> */}
+          {/* <div>
+            <h6>Create a new project</h6>
+            <TextField
+              floatingLabelText="Project Name"
+              id="projectName"
+              fullWidth={true}
+              autoFocus
+              onChange={(e) => tableNameChange(e.target.value)}
+              value=''
+            />
+          </div> */}
           <hr className="welcome-hr" />
           <div id="buttonsContainer">
             <RaisedButton onClick={() => this.handleClose()} buttonStyle={styles}>
