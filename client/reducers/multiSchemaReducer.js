@@ -1,6 +1,8 @@
 import * as types from '../actions/action-types';
 
 const initialState = {
+  id: '',
+  projectName: '',
   //  maps to each database wireframe
   databases: {},
 
@@ -157,8 +159,15 @@ const initialState = {
         }
       // reducer from when you go from schemaView back to databse view. It saves the tables that user was working on in the schema state and the database state.
 
+      case types.HANDLE_NEW_MULTI_PROJECT:
+        newState = Object.assign({}, initialState, { projectReset: action.payload });
+        
+        //  used to mimic a click to ensure view is on schemaTab
+        document.getElementById('databasesTab').click();
 
-        default:
+        return newState;
+
+      default:
         return state;
     }
   };
