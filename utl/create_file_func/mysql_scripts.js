@@ -12,13 +12,13 @@ function parseSQLTables(tables) {
     if (!table) return ``;
 
     createTablesCode += `CREATE TABLE \`${table.type}\` (`;
-
     // create code for each field
     for (const fieldId in table.fields) {
       createTablesCode += `\n`;
       createTablesCode += createTableField(table.fields[fieldId]);
       // so long as it's not the last field, add a comma
       const fieldIds = Object.keys(table.fields);
+      
       if (fieldId !== fieldIds[fieldIds.length - 1]) {
         createTablesCode += `,`;
       }
@@ -68,7 +68,6 @@ function parseSQLTables(tables) {
     fieldCode += checkRequired(field.required);
     fieldCode += checkUnique(field.unique);
     fieldCode += checkDefault(field.defaultValue, field.type);
-
     if (field.primaryKey) {
       primaryKey.push(field.name);
     }
@@ -85,6 +84,7 @@ function parseSQLTables(tables) {
         foreignKeys[field.tableNum] = [relationData];
       }
     }
+    
     return fieldCode;
   }
 
