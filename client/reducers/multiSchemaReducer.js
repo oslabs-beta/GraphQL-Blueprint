@@ -1,6 +1,8 @@
 import * as types from '../actions/action-types';
 
 const initialState = {
+  id: '',
+  projectName: '',
   //  maps to each database wireframe
   databases: {},
 
@@ -57,7 +59,6 @@ const initialState = {
         //  replace action.payload with getState() from redux-thunk (maybe not)
         //  databaseState can be both selectedDB or schema state object (depends on what's being passed in as payload)
         const databaseState = action.payload;
-
         //  Saving a new database
         if (action.payload.databaseID < 0) {
           //  maybe 'field' here doesn't work
@@ -103,7 +104,7 @@ const initialState = {
         };
       
       case types.HANDLE_DATABASE_TYPE_CHANGE:
-        console.log(action.payload);
+        // console.log(action.payload);
         newSelectedDatabase = Object.assign({}, state.selectedDatabase, { database: action.payload });
         
           return {
@@ -156,23 +157,17 @@ const initialState = {
           databaseIndex: counter,
           selectedDatabase: newSelectedDatabase,
         }
-
       // reducer from when you go from schemaView back to databse view. It saves the tables that user was working on in the schema state and the database state.
 
-      // case types.SAVE_SCHEMA_TO_DATABASES:
-      //   databaseNum = action.payload.databaseID
+      case types.HANDLE_NEW_MULTI_PROJECT:
+        newState = Object.assign({}, initialState, { projectReset: action.payload });
+        
+        //  used to mimic a click to ensure view is on schemaTab
+        document.getElementById('databasesTab').click();
 
-      //   const newDatabase = JSON.parse(JSON.stringify(action.payload));
-      //   const newDatabases = JSON.parse(JSON.stringify(state.databases));
+        return newState;
 
-      //   newDatabases[databaseNum] = newDatabase;
-
-      //   return {
-      //     ...state,
-      //     databases: newDatabases,
-      //   }
-
-        default:
+      default:
         return state;
     }
   };

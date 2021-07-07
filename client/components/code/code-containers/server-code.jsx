@@ -1,24 +1,31 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import buildServerCode from '../../../../utl/create_file_func/graphql_server';
+import React from "react";
+import { connect } from "react-redux";
+import buildServerCode from "../../../../utl/create_file_func/graphql_server";
 
 // styling
-import '../code.css';
+import "../code.css";
 
-const mapStateToProps = store => ({
-  database: store.schema.database,
-  tables: store.schema.tables,
+const mapStateToProps = (store) => ({
+  databases: store.multiSchema.databases,
 });
 
-const CodeServerContainer = ({ tables, database }) => {
-  const serverCode = buildServerCode(tables, database);
+// const convertTablesToData = (obj) => {
+//   const databasesCopy = JSON.parse(JSON.stringify(obj))
+//   for (const databaseIndex in databasesCopy) {
+//     databasesCopy[databaseIndex].data = databasesCopy[databaseIndex].tables;
+//     databasesCopy[databaseIndex].databaseName = databasesCopy[databaseIndex].database;
+//   }
+//   return databasesCopy
+// }
+
+
+const CodeServerContainer = ({databases}) => {
+  const serverCode = buildServerCode(databases);
   return (
     <div id="code-container-server">
       <h4 className="codeHeader">GraphQl Types, Root Queries, and Mutations</h4>
       <hr />
-      <pre>
-        {serverCode}
-      </pre>
+      <pre>{serverCode}</pre>
     </div>
   );
 };

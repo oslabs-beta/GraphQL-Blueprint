@@ -13,14 +13,18 @@ import ExportCode from './export-code/export-button.jsx';
 
 const mapDispatchToProps = dispatch => ({
   handleNewProject: reset => dispatch(actions.handleNewProject(reset)),
+  handleNewMultiProject: reset => dispatch(actions.handleNewMultiProject(reset)),
 });
 
-const MainNav = ({ handleNewProject }) => (
+const MainNav = ({ handleNewProject, handleNewMultiProject }) => (
   <div>
     <nav id="navbar">
       <div id="nav-left">
         <img alt="" id="logo" src="./images/Logo.svg" />
-        <FlatButton label="New Project" onClick={() => handleNewProject(true)} />
+        <FlatButton label="New Project" onClick={() => {
+          handleNewProject(true);
+          handleNewMultiProject(true);
+        }} />
         <ExportCode />
       </div>
       <div id="nav-right">
