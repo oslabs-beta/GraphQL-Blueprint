@@ -1,0 +1,24 @@
+.tree-container{
+  display: fixed;
+  overflow: auto;
+  min-height: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.node-title {
+  dx: -200;
+  fill: green;
+}
+
+.node__root > circle {
+  fill: red;
+}
+
+.node__branch > circle {
+  fill: yellow;
+}
+
+.node__leaf > circle {
+  fill: green;
+}

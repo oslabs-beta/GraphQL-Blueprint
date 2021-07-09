@@ -1,6 +1,8 @@
 // Welcome and Intro
 export const HANDLE_SNACKBAR_UPDATE = 'HANDLE_SNACKBAR_UPDATE';
 export const CHOOSE_DATABASE = 'CHOOSE_DATABASE';
+export const SHOW_MODAL = 'SHOW_MODAL'
+export const HIDE_MODAL = 'HIDE_MODAL'
 
 // Schema App
 export const OPEN_TABLE_CREATOR = 'OPEN_TABLE_CREATOR';

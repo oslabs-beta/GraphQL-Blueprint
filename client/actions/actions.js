@@ -12,6 +12,14 @@ export const handleSnackbarUpdate = status => ({
   payload: status,
 });
 
+export const hideModal = () => ({
+  type: types.HIDE_MODAL,
+});
+
+export const showModal = () => ({
+  type: types.SHOW_MODAL,
+});
+
 // ----------------------------- Schema App --------------------------------//
 export const openTableCreator = () => ({
   type: types.OPEN_TABLE_CREATOR,
