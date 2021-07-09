@@ -1,4 +1,5 @@
 import * as types from '../actions/action-types';
+import { saveState } from '../actions/localStorage';
 
 const initialState = {
   //  New state added to name database purpose (i.e. books, authors, etc.)
@@ -520,7 +521,7 @@ const reducers = (state = initialState, action) => {
     // used to change "projectReset" state (if state is true, the "welcome" component is shown )
     case types.HANDLE_NEW_PROJECT:
       newState = Object.assign({}, initialState, { projectReset: action.payload });
-
+      
       //  used to mimic a click to ensure view is on schemaTab
       document.getElementById('databasesTab').click();
 

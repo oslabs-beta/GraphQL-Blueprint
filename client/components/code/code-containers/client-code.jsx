@@ -8,9 +8,26 @@ import '../code.css';
 
 const mapStateToProps = store => ({
   tables: store.schema.tables,
+  databases: store.multiSchema.databases
 });
 
-const CodeClientContainer = ({ tables }) => {
+const createCombinedTables = (databases) => {
+  let num = 0;
+  const tablesCombined = {}
+  for (const databaseIndex in databases) {
+      const database = databases[databaseIndex];
+      for (const index in database.tables) {
+        tablesCombined[num] = database.tables[index]
+        num++;
+     }
+
+  }
+  return tablesCombined;
+}
+
+
+const CodeClientContainer = ({ databases }) => {
+  const tables = createCombinedTables(databases);
   const clientQueries = buildClientQueries(tables);
   const clientMutations = buildClientMutations(tables);
 

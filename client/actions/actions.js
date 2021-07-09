@@ -110,6 +110,11 @@ export const handleDatabaseTypeChange = databaseType => ({
   payload: databaseType,
 });
 
+export const handleNewMultiProject = reset => ({
+  type: types.HANDLE_NEW_MULTI_PROJECT,
+  payload: reset,
+});
+
 export const openDatabaseCreator = () => ({
   type: types.OPEN_DATABASE_CREATOR,
 });

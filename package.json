@@ -1,10 +1,10 @@
 {
-  "name": "graphqldesigner.com",
+  "name": "GraphQLBlueprint",
   "version": "1.0.0",
   "description": "A user friendly Graphql designer aimed to simplify creation and implementation of a full stack React Graphql app.",
   "main": "index.js",
   "keywords": [],
-  "author": "Tsion Adefres, Greg Shamalta, Patrick Slagle, James Sieu",
+  "author": "Ethan Yeh, Dylan Li, Kevin Berlanga, Sean Yalda",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GraphQL-Designer/graphqldesigner.com/issues"
@@ -17,10 +17,10 @@
   "scripts": {
     "pack": "webpack -p",
     "dev": "webpack-dev-server",
+    "webpack": "webpack --watch --hot",
     "server": "nodemon server/index.js",
     "start": "nodemon server/index.js",
-    "test": "jest",
-    "webpack": "webpack --watch --hot"
+    "test": "jest"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -47,6 +47,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "eslint-config-airbnb": "^17.1.0",
     "express": "^4.16.3",
+    "express-zip": "^3.0.0",
     "material-ui": "^0.20.2",
     "pack": "^2.1.0",
     "react": "^16.6.3",
