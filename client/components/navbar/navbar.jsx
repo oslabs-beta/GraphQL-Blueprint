@@ -25,16 +25,20 @@ const mapDispatchToProps = dispatch => ({
   handleNewProject: reset => dispatch(actions.handleNewProject(reset)),
   saveDatabaseDataInput: schemaObject => dispatch(actions.saveDatabaseDataInput(schemaObject)),
   handleOpen: () => dispatch(actions.showModal()),
-  handleClose: () => dispatch(actions.hideModal())
+  handleClose: () => dispatch(actions.hideModal()),
+  handleNewMultiProject: reset => dispatch(actions.handleNewMultiProject(reset))
 });
 
 
-const MainNav = ({ handleNewProject, modalState, handleClose, handleOpen, saveDatabaseDataInput, schemaObject }) => (
+const MainNav = ({ handleNewProject, handleNewMultiProject, modalState, handleClose, handleOpen, saveDatabaseDataInput, schemaObject }) => (
   <div>
     <nav id="navbar">
       <div id="nav-left">
         <img alt="" id="logo" src="./images/Logo.svg" />
-        <FlatButton label="New Project" onClick={() => handleNewProject(true)} />
+        <FlatButton label="New Project" onClick={() => {
+          handleNewProject(true);
+          handleNewMultiProject(true);
+        }} />
         <FlatButton 
           label="Tree View" 
           onClick={() => {
@@ -51,24 +55,9 @@ const MainNav = ({ handleNewProject, modalState, handleClose, handleOpen, saveDa
           onRequestClose={handleClose}
           autoDetectWindowHeight={true} 
         >
+          
           <TreeView/>
         </Dialog>
-        {/* <Popup
-          trigger={<FlatButton className="button" label="Tree View" />}
-          modal>
-          {close => (
-            <div className="modal">
-              <button className="close" onClick={close}>
-                &times;
-              </button>
-              <div className="header"> Tree View </div>
-              <div className="content">
-                {' '}
-                <TreeView/>
-              </div>
-            </div>
-          )}
-        </Popup> */}
         <ExportCode />
       </div>
       <div id="nav-right">
