@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -5,7 +7,7 @@
 }
 
 #wallpaper-schema{
-    background-image: url("./images/graphql_wallpaper.png");
+    /* background-image: url("./images/graphql_wallpaper.png"); */
     background-repeat: no-repeat; 
     background-size: 100% 100%; 
 }

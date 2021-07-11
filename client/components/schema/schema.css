@@ -9,7 +9,7 @@
 
 #sidebar-container {
   position: relative;
-  background-color:  rgb(44,48,56);
+  background-color:  rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -78,7 +78,7 @@
 
 .table-components-container{
   display: flex; 
-  background-color: rgb(54, 58, 66);
+  background-color: #FBFCFD;
   justify-content: flex-start; 
   align-items: flex-start; 
   flex-wrap: wrap; 
