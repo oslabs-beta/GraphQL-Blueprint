@@ -128,6 +128,9 @@ const CreateDatabase = ({
           selectedMenuItemStyle={{
             color: '#194A9A'
           }}
+          style={{
+            width: '100%'
+          }}
           value={databaseType}
           onChange={(e, index, value) => handleDatabaseTypeChange(value)}
         >
@@ -142,7 +145,10 @@ const CreateDatabase = ({
           fullWidth={true}
           secondary={true}
           type="submit"
-          style={{ marginTop: '25px' }}
+          style={{ 
+            marginTop: '25px', 
+            boxShadow: 'none',
+          }}
         />
       </form>
 
