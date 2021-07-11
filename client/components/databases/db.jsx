@@ -9,7 +9,8 @@ const style = {
   deleteStyle: {
     minWidth: '25px',
     position: 'absolute',
-    right: '10px',
+    right: '0',
+    top: '0',
     color: '#A1A1A1'
   },
   editStyle: {
@@ -21,7 +22,8 @@ const style = {
     fontSize: '14px',
     fontWeight: '500',
     float: 'right',
-    marginTop: '16px'
+    marginTop: '16px',
+    boxShadow: 'none'
   },
   idFiled: {
     width: '100%',
@@ -111,7 +113,7 @@ const Table = ({
           </div>
           <FlatButton
             className="delete-button"
-            icon={<Delete />}
+            icon={<box-icon name='trash'></box-icon>}
             value={databaseIndex}
             onClick={event => deleteDatabase(event.currentTarget.value)}
             style={style.deleteStyle}

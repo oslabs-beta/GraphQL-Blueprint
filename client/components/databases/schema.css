@@ -23,8 +23,8 @@
   position: relative;
   overflow: hidden;
   display: block;
-  width: 250px; 
-  margin: 40px; 
+  width: 100%; 
+  margin: 0; 
   border-radius: 8px;
   border: 1px solid #F1F1F1;
   background-color: rgb(255, 255, 255);
@@ -123,11 +123,13 @@
 }
 
 .table-components-container{
-  display: flex; 
+  display: grid; 
   background-color: #FBFCFD;
-  justify-content: flex-start; 
-  align-items: flex-start; 
-  flex-wrap: wrap; 
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: min-content;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+  margin: 32px;
   width: 100%;
   position: relative;
   height: auto; 
@@ -137,16 +139,17 @@
 
 .addField {
   display: flex;
+  left: 0;
   justify-content: center;
+  align-items: center;
   text-align: center;
-  height: 40px;
-  background-color: rgb(48, 48, 48);
-  color: white;
+  height: 30px;
+  background-color: transparent;
+  color: #000;
   cursor: pointer;
   position: relative;
-  width: 96%;
-  left: 5px;
-  margin: 5px 0;
+  width: 100%;
+  margin: 8px 0;
 }
 
 .fieldBreak {

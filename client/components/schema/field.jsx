@@ -69,7 +69,7 @@ const Field = ({
       <div className="field">
         <div className="fieldContainer1" style={{ backgroundColor: `${buttonColor}` }}>
           <div className="fieldContainer2" style={{ background: `${refColor}` }}>
-            <FlatButton
+            <div
               value={`${tableIndex} ${field.fieldNum}`}
               onClick={handleUpdateField}
               className="fieldButton"
@@ -78,7 +78,7 @@ const Field = ({
               <p style={{ fontSize: '1.1em' }}>
                 { generateFieldText() }
               </p>
-            </FlatButton>
+            </div>
             <FlatButton
               className="delete-button"
               icon={<Close />}

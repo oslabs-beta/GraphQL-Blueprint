@@ -11,6 +11,18 @@ h1,h2,h3,h4,h5,h6,p{
   margin-bottom: 10px; 
 }
 
+#create-table-form button[type="submit"] {
+  background-color: #194A9A!important;
+  border-color: #194A9A;
+  border-radius: 50px!important;
+  box-shadow: none;
+}
+
+#create-table-form button[type="submit"] span {
+  text-transform: capitalize!important;
+  letter-spacing: 0.02em!important;
+}
+
 #tableName{
   display: flex;
 }
