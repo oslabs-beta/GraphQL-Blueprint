@@ -10,6 +10,18 @@ const style = {
     minWidth: '25px',
     position: 'absolute',
     right: '10px',
+    color: '#A1A1A1'
+  },
+  editStyle: {
+    border: '2px solid #000',
+    padding: '4px 16px',
+    borderRadius: '50px',
+    height: 'auto',
+    lineHeight: 'auto',
+    fontSize: '14px',
+    fontWeight: '500',
+    float: 'right',
+    marginTop: '16px'
   },
   idFiled: {
     width: '100%',
@@ -63,17 +75,40 @@ const Table = ({
   };
 
   return (
-    <div className="table" style={{ border: `1px solid ${colors[databaseData.databaseID]}` }}>
+    <div className="table">
+      <div 
+        style={{
+          opacity: '0.15',
+          position: 'absolute',
+          bottom: '-40px',
+          right: '-20px',
+          width: '97px',
+          height: '101px',
+          backgroundImage: `url('images/${databaseData.database}.png')`,
+          backgroundSize: 'cover',
+        }}
+      ></div>
       <div>
         <div className="type">
-          <FlatButton
+          <div
             backgroundColor={colors[databaseData.databaseID]}
             value={databaseIndex}
             onClick={event => handleSelectedDatabase(event.currentTarget.value)}
             className="tableButton"
           >
-            <h4>{databaseData.name}</h4>
-          </FlatButton>
+            <div
+              className="db-logo"
+              style={{
+                backgroundImage: `url('images/${databaseData.database}.png')`,
+                backgroundSize: 'cover',
+              }}
+            >
+            </div>
+            <h4>
+              {databaseData.name}
+              <small>{databaseData.database} <span style={{color: '#939393'}}>•</span> {databaseData.tableIndex} tables</small>
+            </h4>
+          </div>
           <FlatButton
             className="delete-button"
             icon={<Delete />}
@@ -83,21 +118,17 @@ const Table = ({
           />
         </div>
       </div>
-      <div style={{ textAlign: 'center', color: '#ffffff', margin: '2rem 0' }}>
-        <h4 style={{ margin: '0.5rem 0' }}>{databaseData.database}</h4>
-        <p style={{ margin: '0.25rem 0' }}>{databaseData.tableIndex} tables</p>
-      </div>
-      <div className="addField">
         <FlatButton 
+          className="edit-tables"
           value={databaseData.databaseID}
           onClick={(e) => 
             { grabSelectedDatabase(e.currentTarget.value)
               setTimeout(()=>{document.getElementById('schemaTab').click()}, 0)
             }}
+            style={style.editStyle}
         >
             Edit Tables
         </FlatButton>
-      </div>
     </div>
   );
 }

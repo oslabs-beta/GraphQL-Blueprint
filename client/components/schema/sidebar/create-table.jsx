@@ -113,13 +113,19 @@ const CreateTable = ({
         {renderTableName()}
         <TextField
           floatingLabelText="Table Name"
+          floatingLabelFocusStyle={{
+            color: '#194A9A'
+          }}
+          underlineFocusStyle={{
+            borderColor: '#194A9A'
+          }}
           id="tableName"
           fullWidth={true}
           autoFocus
           onChange={(e) => tableNameChange(e.target.value)}
           value={tableName}
         />
-        <h5 style={{ textAlign: 'center', marginTop: '-4px' }}>( Singular naming convention )</h5>
+        <h5 style={{ textAlign: 'center', marginTop: '-4px', fontWeight: '300' }}>( Singular naming convention )</h5>
         <Checkbox
           style={{ marginTop: '10px' }}
           label="Unique ID"
