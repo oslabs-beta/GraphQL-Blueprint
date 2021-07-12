@@ -33,7 +33,7 @@ pre {
   margin: 0; 
   text-align: left; 
   color: white;
-  background-color: rgb(54, 58, 66);
+  background-color: #1f242f;
 }
 
 #code-container-client{
@@ -41,7 +41,7 @@ pre {
   width: 33.33%; 
   padding: 10px; 
   overflow: auto;
-  border-left: 5px solid rgb(44,48,56);
+  border-left: 5px solid #393f4a;
 }
 
 #code-container-database{
@@ -51,7 +51,7 @@ pre {
   width: 33.33%; 
   padding: 10px; 
   overflow: auto;
-  border-right: 5px solid rgb(44,48,56);
+  border-right: 5px solid #393f4a;
 }
 
 #code-container-server{
@@ -59,8 +59,8 @@ pre {
   width: 33.33%; 
   padding: 10px; 
   overflow: auto;
-  border-right: 5px solid rgb(44,48,56);
-  border-left: 5px solid rgb(44,48,56);
+  border-right: 5px solid #393f4a;
+  border-left: 5px solid #393f4a;
 }
 
 form {

@@ -92,7 +92,8 @@ const Table = ({
   }
 
   return (
-    <div className="table" style={{ border: `1px solid ${colors[tableData.tableID]}` }}>
+    <div className="table">
+      {/* style={{ border: `1px solid ${colors[tableData.tableID]}` }} */}
       <div>
         <div className="type">
           <div
