@@ -124,7 +124,12 @@ const initialState = {
       // -------------------------------- Select Database for Update -------------------------------//
       case types.HANDLE_SELECTED_DATABASE:
         databaseNum = Number(action.payload);
-        newSelectedDatabase = JSON.parse(JSON.stringify(state.databases[databaseNum]));
+        if(typeof databaseNum === 'number') {
+          newSelectedDatabase = Object.assign({}, state.databases[databaseNum]);
+        } else {
+          newSelectedDatabase = Object.assign({}, databaseReset);
+        }
+
         return {
           ...state,
           selectedDatabase: newSelectedDatabase,

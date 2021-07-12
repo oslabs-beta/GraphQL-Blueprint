@@ -93,10 +93,6 @@ const Table = ({
       <div>
         <div 
           className="type"
-          onClick={(event) => {
-            handleSelectedDatabase(event.currentTarget.value);
-            console.log('Clicked:', databaseData.databaseID);
-          }}
         >
           <div
             backgroundColor={colors[databaseData.databaseID]}
