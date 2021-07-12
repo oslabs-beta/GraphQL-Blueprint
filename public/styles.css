@@ -1,13 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
 body {
-    background-color: #FBFCFD;
+    background-color: #F2F4F6;
 }
 * {
     font-family: 'Ubuntu', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+pre {
+    font-family: monospace;
+}
+
+pre * {
+    font-family: monospace;
 }
 
 #wallpaper-schema{

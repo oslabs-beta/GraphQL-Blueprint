@@ -133,6 +133,7 @@ const CreateDatabase = ({
           }}
           value={databaseType}
           onChange={(e, index, value) => handleDatabaseTypeChange(value)}
+          required
         >
           <MenuItem value='MongoDB' primaryText="MongoDB" />
           <MenuItem value='PostgreSQL' primaryText="PostgreSQL" />
