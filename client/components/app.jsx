@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
+import  { BrowserRouter as Router, Switch, Route, browserHistory } from 'react-router-dom';
 import { saveDatabaseDataInput } from '../actions/actions';
 
 // Components
@@ -18,6 +19,8 @@ import Snackbar from 'material-ui/Snackbar';
 
 // Styling
 import './app.css';
+import SignUp from './navbar/auth/SignUp.jsx';
+import SignIn from './navbar/auth/SignIn.jsx';
 
 const style = {
   snackBarStyle: {
@@ -49,48 +52,54 @@ const App = ({ snackBar, handleSnackbarUpdate, schemaObject, saveDatabaseDataInp
   }
 
   return (
-    <div className="app-container">
-      <MainNav />
-      <Welcome />
-      <div className="app-body-container">
-        <Tabs 
-          className="tabs" 
-          onChange={() => {
-            if (schemaObject.name) {
-              chooseDatabase(schemaObject.database)
-              saveDatabaseDataInput(schemaObject)}
-          }}
-        >
-          <Tab 
-            id="databasesTab" 
-            label="Databases" 
-            style={style.tabStyle}>
-              <DBApp />
-          </Tab>
-          <Tab 
-            id="schemaTab" 
-            label="Tables" 
-            style={style.tabStyle} 
-            disabled={(schemaObject.name === "") ? true : false}>
-            <SchemaApp />
-          </Tab>
-          {/* <Tab label="Queries" style={style.tabStyle}>
-            <QueryApp />
-          </Tab> */}
-          <Tab label="Preview Code" style={style.tabStyle}>
-            <CodeApp />
-          </Tab>
-        </Tabs>
-        <Snackbar
-          open={!!snackBar}
-          message={snackBar}
-          autoHideDuration={3000}
-          onRequestClose={handleRequestClose}
-          bodyStyle={style.snackBarStyle}
-          contentStyle={style.snackBarFont}
-        />
+    <Router>
+      <div className="app-container">
+        <MainNav />
+        <Welcome />
+        <div className="app-body-container">
+          <Tabs 
+            className="tabs" 
+            onChange={() => {
+              if (schemaObject.name) {
+                chooseDatabase(schemaObject.database)
+                saveDatabaseDataInput(schemaObject)}
+            }}
+          >
+            <Tab 
+              id="databasesTab" 
+              label="Databases" 
+              style={style.tabStyle}>
+                <DBApp />
+            </Tab>
+            <Tab 
+              id="schemaTab" 
+              label="Tables" 
+              style={style.tabStyle} 
+              disabled={(schemaObject.name === "") ? true : false}>
+              <SchemaApp />
+            </Tab>
+            {/* <Tab label="Queries" style={style.tabStyle}>
+              <QueryApp />
+            </Tab> */}
+            <Tab label="Preview Code" style={style.tabStyle}>
+              <CodeApp />
+            </Tab>
+          </Tabs>
+          <Snackbar
+            open={!!snackBar}
+            message={snackBar}
+            autoHideDuration={3000}
+            onRequestClose={handleRequestClose}
+            bodyStyle={style.snackBarStyle}
+            contentStyle={style.snackBarFont}
+          />
+            <Switch>
+              <Route path='/signup' render={(props) => <SignUp {...props} isOpen={true} />} />
+              <Route path='/signin' render={(props) => <SignIn {...props} isOpen={true} />} />
+            </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 };
 

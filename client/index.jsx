@@ -17,8 +17,10 @@ const ThemedIndex = () => (
   </MuiThemeProvider>
 );
 
-render(
-  <Provider store={store}>
-    <ThemedIndex />
-  </Provider>, document.getElementById('app'),
-);
+store.firebaseAuthIsReady.then(() => {
+  render(
+    <Provider store={store}>
+      <ThemedIndex />
+    </Provider>, document.getElementById('app'),
+  );
+})

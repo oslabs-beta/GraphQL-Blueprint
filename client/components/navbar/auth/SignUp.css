@@ -1,0 +1,133 @@
+/* .dialog__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.signup__title {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.signup__container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 2px;
+  padding: 20px;
+}
+
+.signup__container > h1 {
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #f8f8f8;
+}
+
+.signup__container > form > h5 {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  text-align: left;
+  color: #f8f8f8;
+}
+
+.signup__input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.signup__icon {
+  position: absolute;
+  left: 10px;
+  color: gray;
+  z-index: 1;
+}
+
+.signup__input > input {
+  height: 40px;
+  align-self: center;
+  background-color: white;
+  width: 300px;
+  padding: 5px 10px 5px 50px;
+  border: none;
+  border-bottom: 1px solid gray;
+  outline: none;
+  border-radius: 2px;
+}
+
+.signup__button {
+  background: #5ea7ff;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #77b6ff;
+  border-radius: 20px;
+  outline: none;
+  cursor: pointer;
+}
+
+.signup__container > p {
+  align-self: center;
+  margin-top: 10px;
+  font-size: 12px;
+  text-align: justify; 
+  color: white;
+  padding: 2px;
+}
+
+.signup__login {
+  color: white;
+  font-size: 13px;
+  margin: 10px auto;
+}
+
+.signup__login > a {
+  color: #22426a;
+}
+
+.signup__createAccount {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup__Button {
+  align-self: center;
+}
+
+.signin__link {
+  margin-top: 5px;
+  color: white;
+}
+
+.signin__link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.signup__authError {
+  margin-bottom: 10px;
+}
+
+.signup__message {
+  color: rgb(189, 59, 59);
+  text-align: center;
+}

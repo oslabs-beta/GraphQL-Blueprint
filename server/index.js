@@ -53,7 +53,13 @@ app.use(express.static(path.join(__dirname, "../public")));
 // under each "type" folder, have a folder for each indivisual database, for cases where users want to create two or more of the same type of database
 // right now, everything is being created in the build-files folder
 
-
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 app.post("/write-files-multiple", (req, res) => {
   const dateStamp = Date.now();

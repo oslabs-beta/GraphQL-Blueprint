@@ -12,6 +12,9 @@ module.exports = {
   },
   mode: "development",
   // watch: true, //Bundle on saved changes
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
