@@ -232,7 +232,8 @@ const reducers = (state = initialState, action) => {
     // -------------------------- Select Table For Update -----------------------------//
     case types.HANDLE_SELECTED_TABLE:
       tableNum = Number(action.payload);
-      if(tableNum) {
+
+      if(typeof tableNum === 'number') {
         newSelectedTable = Object.assign({}, state.tables[tableNum]);
       } else {
         newSelectedTable = Object.assign({}, tableReset);
