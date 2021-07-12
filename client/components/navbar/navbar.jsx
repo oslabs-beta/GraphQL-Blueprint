@@ -11,10 +11,10 @@ import './navbar.css';
 
 // components
 import Team from './team/team-button.jsx';
+import Info from './info/info.jsx';
 import ExportCode from './export-code/export-button.jsx';
 import TreeView from './tree-view/treeView.jsx';
 import { Dialog } from 'material-ui';
-import { Tabs, Tab } from 'material-ui/Tabs';
 // import Info from './info/info';
 
 const mapStateToProps = store => ({
@@ -42,13 +42,36 @@ const MainNav = ({ handleNewProject, handleNewMultiProject, modalState, handleCl
     <nav id="navbar">
       <div id="nav-left">
         <img alt="" id="logo" src="./images/logo-horizontal.svg" />
+        <FlatButton label="New Project" onClick={() => {
+          handleNewProject(true);
+          handleNewMultiProject(true);
+        }} />
+        <FlatButton 
+          label="Tree View" 
+          onClick={() => {
+            handleOpen();
+            if (schemaObject.name){
+              saveDatabaseDataInput(schemaObject)
+            }}} />
+        <Dialog
+          paperClassName="tree-box"
+          actionsContainerClassName="tree-box2"
+          title='Tree View'
+          modal={false}
+          open={modalState}
+          onRequestClose={handleClose}
+          autoDetectWindowHeight={true} 
+        >
+          
+          <TreeView/>
+        </Dialog>
         <ExportCode />
       </div>
       <div id="nav-right">
-        {/* <Info/> */}
-        {/* <Team /> */}
-        <a href="https://github.com/GraphQL-Designer/graphqldesigner.com">
-          <img alt="" src="./images/githubicon.png" />
+        <Info/>
+        <Team />
+        <a href="https://github.com/oslabs-beta/GraphQL-Blueprint">
+          <box-icon type='logo' name='github'></box-icon>
         </a>
       </div>
     </nav>

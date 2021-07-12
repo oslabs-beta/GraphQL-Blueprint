@@ -79,6 +79,7 @@
 }
 
 .type {
+  cursor: pointer;
   display: flex; 
   justify-content: space-between;
   align-items: center;
@@ -108,33 +109,13 @@
   width: 96%;
 }
 
-.fieldButton {
-  width: 240px;
-  height: 100%;
-  display: flex; 
-  justify-content: space-between;
-  align-items: left;
-  margin-left: 5px;
-}
-
 .delete-button {
   position: absolute;
   right: 5px;
 }
 
-.table-components-container{
-  display: grid; 
-  background-color: #FBFCFD;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: min-content;
-  grid-column-gap: 32px;
-  grid-row-gap: 32px;
-  margin: 32px;
-  width: 100%;
-  position: relative;
-  height: auto; 
-  overflow-y: auto;
-  overflow-x: hidden;
+.delete-button svg {
+  fill: #A1A1A1;
 }
 
 .addField {

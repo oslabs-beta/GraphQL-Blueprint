@@ -9,7 +9,9 @@ const style = {
   deleteStyle: {
     minWidth: '25px',
     position: 'absolute',
-    right: '10px',
+    right: '0',
+    top: '0',
+    color: '#A1A1A1'
   },
   idFiled: {
     width: '100%',
@@ -119,7 +121,7 @@ const Table = ({
               width: '20px',
               fill: '#A1A1A1',
               marginRight: '6px',
-              marginTop: '4px'
+              marginTop: '4px',
             }}
           ></box-icon> <span> Add Field</span>
       </div>

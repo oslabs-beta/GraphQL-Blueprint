@@ -165,7 +165,7 @@ const TableOptions = ({
   }
 
   return (
-    <div id="fieldOptions">
+    <div id="fieldOptions create-table-form">
       {selectedField.tableNum > -1 && (
         <div id="options" style={{ width: '250px' }}>
           <FlatButton

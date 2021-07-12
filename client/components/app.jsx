@@ -27,8 +27,9 @@ const style = {
     color: 'white',
   },
   tabStyle: {
-    backgroundColor: 'rgb(38,42,48)',
-    color: 'white',
+    backgroundColor: '#FFF',
+    border: '1px solid #F1F1F1',
+    color: '#000',
   },
 };
 
