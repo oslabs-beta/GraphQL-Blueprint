@@ -97,8 +97,8 @@ const Table = ({
         <div className="type">
           <div
             backgroundColor={colors[tableData.tableID]}
-            value={tableIndex}
-            onClick={event => handleSelectedTable(event.currentTarget.value)}
+            data-value={tableIndex}
+            onClick={event => handleSelectedTable(event.currentTarget.getAttribute('data-value'))}
             className="tableButton"
           >
             <h4>{tableData.type}</h4>

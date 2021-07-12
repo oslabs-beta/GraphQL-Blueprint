@@ -100,8 +100,8 @@ const Table = ({
         >
           <div
             backgroundColor={colors[databaseData.databaseID]}
-            value={databaseIndex}
-            onClick={event => handleSelectedDatabase(event.currentTarget.value)}
+            data-value={databaseIndex}
+            onClick={event => handleSelectedDatabase(event.currentTarget.getAttribute("data-value"))}
             className="tableButton"
           >
             <div
