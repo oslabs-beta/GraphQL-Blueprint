@@ -91,7 +91,13 @@ const Table = ({
         }}
       ></div>
       <div>
-        <div className="type">
+        <div 
+          className="type"
+          onClick={(event) => {
+            handleSelectedDatabase(event.currentTarget.value);
+            console.log('Clicked:', databaseData.databaseID);
+          }}
+        >
           <div
             backgroundColor={colors[databaseData.databaseID]}
             value={databaseIndex}

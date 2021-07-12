@@ -55,12 +55,14 @@ const Field = ({
       return '';
     }
 
-    let fieldText = `${field.name} - `;
+    let fieldText = field.name;
+    fieldText += '<small>'
     fieldText += checkForArray('front', field.multipleValues);
     fieldText += field.type;
     fieldText += checkForRequired(field.required);
     fieldText += checkForUnique(field.unique);
     fieldText += checkForArray('back', field.multipleValues);
+    fieldText += '</small>'
     return fieldText;
   }
 
@@ -74,10 +76,8 @@ const Field = ({
               onClick={handleUpdateField}
               className="fieldButton"
               disabled={buttonDisabled}
+              dangerouslySetInnerHTML={{__html: generateFieldText()}}
             >
-              <p style={{ fontSize: '1.1em' }}>
-                { generateFieldText() }
-              </p>
             </div>
             <FlatButton
               className="delete-button"
