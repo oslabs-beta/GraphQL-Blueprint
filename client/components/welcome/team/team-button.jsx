@@ -32,16 +32,35 @@ class TeamButton extends Component {
             cursor: 'pointer',
             textDecoration: 'underline'
           }}
-        >Meet the Team</small>
+        >
+          Meet the Team
+        </small>
         <Dialog
           modal={true}
           open={showTeam}
           onClose={this.handleToggleTeam}
+          style={{
+            top: '4%'
+          }}
         >
           <TeamContainer />
-          <FlatButton style={{ justifyContent: 'flex-end' }} onClick={this.handleToggleTeam}>
-            Cancel
-          </FlatButton>
+          <div
+            style={{
+              textAlign: 'center'
+            }}>
+                <FlatButton 
+                  style={{ 
+                    padding: '0 1rem', 
+                    textAlign: 'center', 
+                    border: '2px solid #000',
+                    lineHeight: '1em',
+                    borderRadius: '25px'
+                  }} 
+                  onClick={this.handleToggleTeam}
+                >
+                  Great! Go Back.
+                </FlatButton>
+          </div>
         </Dialog>
       </div>
     );

@@ -7,10 +7,10 @@ const TeamMember = ({ name, photo, GitHub, LinkedIn }) => (
     <p id="team-title">Software Engineer</p>
     <div className="team-links">
       <a href={GitHub}>
-        <img alt="" src="./images/GitHub.png" />
+        <box-icon type='logo' name='github'></box-icon>
       </a>
       <a href={LinkedIn}>
-        <img alt="" src="./images/In-R.png" />
+        <box-icon name='linkedin-square' type='logo' ></box-icon>
       </a>
     </div>
   </div>

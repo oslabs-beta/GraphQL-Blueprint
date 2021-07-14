@@ -37,7 +37,16 @@ class Info extends React.Component {
     const { info } = this.state;
     return (
       <div>
-        <FlatButton onClick={this.handleInfoToggle}>About us</FlatButton > 
+        <FlatButton 
+          onClick={this.handleInfoToggle}
+          style={{
+            backgroundColor: '#fff',
+            height: '31px',
+            lineHeight: '31px',
+            fontSize: '0.9em',
+            fontWeight: '400',
+          }}
+        >About us</FlatButton > 
         <Dialog
           modal={true}
           open={info}

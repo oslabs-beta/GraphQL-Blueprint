@@ -8,32 +8,33 @@ const Team = () => (
   <div className="team-container">
     <div className="team">
       <div className="team-heading">
-        <h3>Meet the Team</h3>
+        <h4>Meet our Team</h4>
+        <p>GraphQL Blueprint is an open source project recently collaborated on by the following individuals. If this project is something you’d like to iterate on, reach out to any of us or checkout our GitHub repo!</p>
       </div>
       <div className="row">
         <TeamMember
-          name="Tsion Adefres"
-          photo="./images/Tsion.jpg"
-          GitHub="https://github.com/Tsionad"
-          LinkedIn="https://www.linkedin.com/in/tadefres/"
+          name="Dylan Li"
+          photo="./images/dylan-li.jpg"
+          GitHub="https://github.com/dylan2040"
+          LinkedIn="https://www.linkedin.com/in/dli107/"
         />
         <TeamMember
-          name="Patrick Slagle"
-          photo="./images/Patrick.jpg"
-          GitHub="https://github.com/patrickslagle"
-          LinkedIn="https://www.linkedin.com/in/patrickslagle/"
+          name="Sean Yalda"
+          photo="./images/sean-yalda.jpg"
+          GitHub="https://github.com/Seanathon"
+          LinkedIn="https://www.linkedin.com/in/sean-yalda/"
         />
         <TeamMember
-          name="James Sieu"
-          photo="./images/James.jpg"
-          GitHub="https://github.com/jamessieu"
-          LinkedIn="https://www.linkedin.com/in/james-sieu/"
+          name="Kevin Berlanga"
+          photo="./images/kevin-berlanga.jpg"
+          GitHub="https://github.com/kevinberlanga"
+          LinkedIn="https://www.linkedin.com/in/kevinberlanga/"
         />
         <TeamMember
-          name="Greg Shamalta"
-          photo="./images/Greg.jpg"
-          GitHub="https://github.com/grs83"
-          LinkedIn="https://www.linkedin.com/in/gregory-shamalta/"
+          name="Ethan Yeh"
+          photo="./images/ethan-yeh.jpg"
+          GitHub="https://github.com/ehwyeh"
+          LinkedIn="https://www.linkedin.com/in/ethan-yeh-171391172/"
         />
       </div>
     </div>
