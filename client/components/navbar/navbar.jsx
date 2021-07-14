@@ -10,8 +10,6 @@ import Popup from 'reactjs-popup';
 import './navbar.css';
 
 // components
-import Team from './team/team-button.jsx';
-import Info from './info/info.jsx';
 import ExportCode from './export-code/export-button.jsx';
 import TreeView from './tree-view/treeView.jsx';
 import { Dialog } from 'material-ui';
@@ -62,17 +60,12 @@ const MainNav = ({ handleNewProject, handleNewMultiProject, modalState, handleCl
           onRequestClose={handleClose}
           autoDetectWindowHeight={true} 
         >
-          
           <TreeView/>
         </Dialog>
-        <ExportCode />
       </div>
       <div id="nav-right">
-        <Info/>
-        <Team />
-        <a href="https://github.com/oslabs-beta/GraphQL-Blueprint">
-          <box-icon type='logo' name='github'></box-icon>
-        </a>
+        <ExportCode />
+        {/* login/signup go here */}
       </div>
     </nav>
   </div>

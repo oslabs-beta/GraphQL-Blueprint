@@ -9,7 +9,89 @@
   display: flex;
   flex-direction: column;
   height: 100%; 
+  position: relative;
 }
+
+.welcome-box box-icon {
+  fill: #fff;
+  cursor: pointer;
+  position: absolute;
+  left: -3rem;
+  height: 2rem;
+  width: 2rem;
+}
+
+.welcome-box > div {
+  padding: 0!important;
+}
+
+.welcome-split {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.welcome-split > div {
+  padding: 1rem;
+  text-align-last: left;
+  max-height: 500px;
+}
+
+.welcome-split div:first-child {
+  grid-column-start: 1;
+  grid-column-end: span 3;
+  color: #484b56;
+  line-height: 1.07em;
+}
+
+.welcome-split div:first-child a {
+  color: #484b56;
+}
+
+.welcome-split div:last-child {
+  padding: 0;
+  grid-column-start: 4;
+  grid-column-end: span 7;
+}
+.welcome-split div:last-child img {
+  object-fit: cover;
+  object-position: center; 
+  height: 100%;
+}
+
+.welcome-split div:first-child > ul > li:last-child {
+  margin-top: 2rem;
+}
+
+.logos-container {
+  padding-left: 0;
+  margin-top: 0.5rem!important;
+}
+
+.logos-container li {
+  float: left;
+  margin-right: 1rem;
+  height: 28px;
+}
+
+.logos-container li img {
+  object-fit: cover;
+  object-position: center; 
+}
+
+.welcome-split ul {
+  margin-top: 2rem; 
+  list-style-type: none;
+  font-size: 14px;
+}
+
+.welcome-split ul li {
+  margin-bottom: 1rem;
+  text-align: left;
+ }
+
+ .welcome-split small {
+   display: block;
+ }
 
 #icon_graphql{
   max-width: 25%;
