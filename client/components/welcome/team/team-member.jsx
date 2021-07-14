@@ -2,7 +2,7 @@ import React from 'react';
 
 const TeamMember = ({ name, photo, GitHub, LinkedIn }) => (
   <div className="team-member">
-    <img className="team-member-photo" src={photo} alt="" />
+    <img className="team-member-photo" src={photo} alt={name} />
     <h4>{name}</h4>
     <p id="team-title">Software Engineer</p>
     <div className="team-links">

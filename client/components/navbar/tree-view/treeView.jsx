@@ -116,14 +116,14 @@ const TreeView = (databases) => {
   const treeData=treeViewify(databases);
   return (
     // `<Tree />` will fill width/height of its container; in this case `#treeWrapper`.
-    <div id="treeWrapper" style={{ width: '80em', height: '35em' }}>
+    <div id="treeWrapper" style={{ height: '40em' }}>
       <Tree 
         data={(treeData)}
-        rootNodeClassName="node__root"
-        branchNodeClassName="node__branch"
-        leafNodeClassName="node__leaf"
-        renderCustomNodeElement={renderRectSvgNode}
-        orientation='vertical'
+          rootNodeClassName="node__root"
+          branchNodeClassName="node__branch"
+          leafNodeClassName="node__leaf"
+          orientation='vertical'
+          translate={{ x: '375', y: '165'}}
         />
     </div>
   );

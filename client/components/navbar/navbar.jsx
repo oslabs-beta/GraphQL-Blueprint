@@ -54,7 +54,6 @@ const MainNav = ({ handleNewProject, handleNewMultiProject, modalState, handleCl
         <Dialog
           paperClassName="tree-box"
           actionsContainerClassName="tree-box2"
-          title='Tree View'
           modal={false}
           open={modalState}
           onRequestClose={handleClose}
