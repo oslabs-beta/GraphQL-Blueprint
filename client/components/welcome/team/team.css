@@ -1,7 +1,6 @@
 .team{
   text-align: center;
-  color: rgba(255, 255, 255, 0.980); 
-  margin: 10px;
+  color: #484b56; 
   padding: 20px;
   display: flex; 
   flex-direction: column;
@@ -9,8 +8,9 @@
 
 }
 
-.team-heading h3{
-  font-size: 42px !important;
+.team-heading h4{
+  font-size: 21px !important;
+  font-weight: 700;
   font-weight: initial;
   align-items: flex-start;
   text-align: center;
@@ -27,6 +27,7 @@
 .team-member h4 {
   margin-top: 15px;
   font-size: 1.2rem;
+  font-weight: 600;
   display: flex;
   font-weight: initial;
   flex-direction: column;
