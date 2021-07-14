@@ -18,6 +18,12 @@
   padding: 8px;
 }
 
+.team-heading p {
+  font-size: 14px;
+  line-height: 1.34em;
+  margin-bottom: 1.25rem;
+}
+
 #team-title{
   font-size: 0.9rem;
   text-align: center;
@@ -49,9 +55,30 @@
 
 .row {
   margin-top: 12px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 16px;
+  row-gap: 16px;
+}
+
+@media screen and (max-width: 980px) {
+  .row {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .row {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.row .team-member {
+
 }
 
 .team-member-photo {

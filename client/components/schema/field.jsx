@@ -31,7 +31,7 @@ const Field = ({
 
   function handleUpdateField(event) {
     handleFieldsSelect({
-      location: event.currentTarget.value,
+      location: event.currentTarget.getAttribute('data-value'),
       submitUpdate: false,
     });
   }
@@ -69,10 +69,10 @@ const Field = ({
   return (
     <div>
       <div className="field">
-        <div className="fieldContainer1" style={{ backgroundColor: `${buttonColor}` }}>
-          <div className="fieldContainer2" style={{ background: `${refColor}` }}>
+        <div className="fieldContainer1" style={{ borderLeft: `10px solid ${buttonColor}` }}>
+          <div className="fieldContainer2" style={{ borderLeft: `10px solid ${refColor}` }}>
             <div
-              value={`${tableIndex} ${field.fieldNum}`}
+              data-value={`${tableIndex} ${field.fieldNum}`}
               onClick={handleUpdateField}
               className="fieldButton"
               disabled={buttonDisabled}
