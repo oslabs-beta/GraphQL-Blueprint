@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
-import Delete from 'material-ui/svg-icons/action/delete';
 // import Close from 'material-ui/svg-icons/navigation/close';
 import * as actions from '../../actions/actions';
 

@@ -144,3 +144,25 @@ pre * {
     opacity: 1;
     transition: opacity 350ms linear;
 }
+
+footer {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+}
+
+footer ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+footer ul li {
+    margin-right: 1rem;
+}
+
+footer ul li small {
+    text-decoration: none!important;
+    font-size: 1em;
+}

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
-import { saveDatabaseDataInput } from '../actions/actions';
 
 // Components
 import MainNav from './navbar/navbar.jsx';
@@ -9,7 +8,9 @@ import Welcome from './welcome/welcome.jsx';
 import SchemaApp from './schema/schema-app.jsx';
 import DBApp from './databases/db-app.jsx';
 import CodeApp from './code/code-app.jsx';
-
+import GitHubButton from 'react-github-btn'
+import Team from './welcome/team/team-button.jsx';
+import Info from './navbar/info/info.jsx';
 //import QueryApp from './query/query-app.jsx';
 
 // Material UI Components
@@ -91,6 +92,22 @@ const App = ({ snackBar, handleSnackbarUpdate, schemaObject, saveDatabaseDataInp
           contentStyle={style.snackBarFont}
         />
       </div>
+      <footer
+        style={{
+          position: 'absolute',
+          bottom: '2rem',
+          left: '2rem'
+        }}
+      >
+        <ul>
+          <li>
+            <GitHubButton href="https://github.com/oslabs-beta/GraphQL-Blueprint" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star oslabs-beta/GraphQL-Blueprint on GitHub">Star</GitHubButton>
+          </li>
+          <li>
+            <Info/>
+          </li>
+        </ul>
+      </footer>
     </div>
   );
 };
