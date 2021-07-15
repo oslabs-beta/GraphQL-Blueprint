@@ -97,6 +97,7 @@
   grid-row-gap: 32px;
   margin: 32px;
   width: 100%;
+  margin-bottom: 6rem;
   position: relative;
   height: auto; 
   overflow-y: auto;
