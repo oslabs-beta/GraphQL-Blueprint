@@ -58,6 +58,10 @@ const MainNav = ({ handleNewProject, handleNewMultiProject, modalState, handleCl
           open={modalState}
           onRequestClose={handleClose}
           autoDetectWindowHeight={true} 
+          contentStyle={{
+            maxWidth: '95%',
+            width: '100%'
+          }}
         >
           <TreeView/>
         </Dialog>
