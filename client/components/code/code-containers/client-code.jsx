@@ -5,6 +5,8 @@ import buildClientMutations from '../../../../utl/create_file_func/client_mutati
 
 // styling
 import '../code.css';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 const mapStateToProps = store => ({
   tables: store.schema.tables,
@@ -32,19 +34,20 @@ const CodeClientContainer = ({ databases }) => {
   const clientMutations = buildClientMutations(tables);
 
   return (
+    
     <div id="code-container-client">
       <h4 className="codeHeader">Client Queries</h4>
       <hr />
-      <pre>
+      <SyntaxHighlighter language="javascript" style={dracula}>
         {clientQueries}
-      </pre>
+      </SyntaxHighlighter>
       <br />
       <br />
       <h4 className="codeHeader">Client Mutations</h4>
       <hr />
-      <pre>
+      <SyntaxHighlighter language="javascript" style={dracula}>
         {clientMutations}
-      </pre>
+      </SyntaxHighlighter>
     </div>
   );
 };

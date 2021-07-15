@@ -107,20 +107,33 @@ const CreateDatabase = ({
         {renderDatabaseName()}
         <TextField
           floatingLabelText="Database Name"
+          floatingLabelFocusStyle={{
+            color: '#194A9A'
+          }}
+          underlineFocusStyle={{
+            borderColor: '#194A9A'
+          }}
           id="tableName"
           fullWidth={true}
           autoFocus
           onChange={(e) => databaseNameChange(e.target.value)}
           value={databaseName}
         />
-        <h5 style={{ textAlign: 'center', marginTop: '-4px' }}>( Singular naming convention )</h5>
+        <h5 style={{ textAlign: 'center', marginTop: '-4px', fontWeight: '300' }}>( Singular naming convention )</h5>
         
         <SelectField 
           labelid="databaseType" 
           id="select" 
           floatingLabelText="Choose Database Type" 
+          selectedMenuItemStyle={{
+            color: '#194A9A'
+          }}
+          style={{
+            width: '100%'
+          }}
           value={databaseType}
           onChange={(e, index, value) => handleDatabaseTypeChange(value)}
+          required
         >
           <MenuItem value='MongoDB' primaryText="MongoDB" />
           <MenuItem value='PostgreSQL' primaryText="PostgreSQL" />
@@ -133,7 +146,10 @@ const CreateDatabase = ({
           fullWidth={true}
           secondary={true}
           type="submit"
-          style={{ marginTop: '25px' }}
+          style={{ 
+            marginTop: '25px', 
+            boxShadow: 'none',
+          }}
         />
       </form>
 

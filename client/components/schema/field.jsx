@@ -31,7 +31,7 @@ const Field = ({
 
   function handleUpdateField(event) {
     handleFieldsSelect({
-      location: event.currentTarget.value,
+      location: event.currentTarget.getAttribute('data-value'),
       submitUpdate: false,
     });
   }
@@ -55,30 +55,30 @@ const Field = ({
       return '';
     }
 
-    let fieldText = `${field.name} - `;
+    let fieldText = field.name;
+    fieldText += '<small>'
     fieldText += checkForArray('front', field.multipleValues);
     fieldText += field.type;
     fieldText += checkForRequired(field.required);
     fieldText += checkForUnique(field.unique);
     fieldText += checkForArray('back', field.multipleValues);
+    fieldText += '</small>'
     return fieldText;
   }
 
   return (
     <div>
       <div className="field">
-        <div className="fieldContainer1" style={{ backgroundColor: `${buttonColor}` }}>
-          <div className="fieldContainer2" style={{ background: `${refColor}` }}>
-            <FlatButton
-              value={`${tableIndex} ${field.fieldNum}`}
+        <div className="fieldContainer1" style={{ borderLeft: `10px solid ${buttonColor}` }}>
+          <div className="fieldContainer2" style={{ borderLeft: `10px solid ${refColor}` }}>
+            <div
+              data-value={`${tableIndex} ${field.fieldNum}`}
               onClick={handleUpdateField}
               className="fieldButton"
               disabled={buttonDisabled}
+              dangerouslySetInnerHTML={{__html: generateFieldText()}}
             >
-              <p style={{ fontSize: '1.1em' }}>
-                { generateFieldText() }
-              </p>
-            </FlatButton>
+            </div>
             <FlatButton
               className="delete-button"
               icon={<Close />}

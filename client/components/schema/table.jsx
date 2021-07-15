@@ -1,16 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
-import Delete from 'material-ui/svg-icons/action/delete';
-// import Close from 'material-ui/svg-icons/navigation/close';
 import * as actions from '../../actions/actions';
 import Field from './field.jsx';
+import 'boxicons';
 
 const style = {
   deleteStyle: {
     minWidth: '25px',
     position: 'absolute',
-    right: '10px',
+    right: '0',
+    top: '0',
+    color: '#A1A1A1'
   },
   idFiled: {
     width: '100%',
@@ -91,20 +92,21 @@ const Table = ({
   }
 
   return (
-    <div className="table" style={{ border: `1px solid ${colors[tableData.tableID]}` }}>
+    <div className="table">
+      {/* style={{ border: `1px solid ${colors[tableData.tableID]}` }} */}
       <div>
         <div className="type">
-          <FlatButton
+          <div
             backgroundColor={colors[tableData.tableID]}
-            value={tableIndex}
-            onClick={event => handleSelectedTable(event.currentTarget.value)}
+            data-value={tableIndex}
+            onClick={event => handleSelectedTable(event.currentTarget.getAttribute('data-value'))}
             className="tableButton"
           >
             <h4>{tableData.type}</h4>
-          </FlatButton>
+          </div>
           <FlatButton
             className="delete-button"
-            icon={<Delete />}
+            icon={<box-icon name='trash' ></box-icon>}
             value={tableIndex}
             onClick={event => deleteTable(event.currentTarget.value)}
             style={style.deleteStyle}
@@ -113,9 +115,16 @@ const Table = ({
       </div>
         { renderFields() }
       <div onClick={() => addField(tableIndex)} className="addField">
-        <p style={{ marginTop: '10px' }}>
-            ADD FIELD
-        </p>
+          <box-icon 
+            name='plus-circle'
+            style={{
+              height: '20px',
+              width: '20px',
+              fill: '#A1A1A1',
+              marginRight: '6px',
+              marginTop: '4px',
+            }}
+          ></box-icon> <span> Add Field</span>
       </div>
     </div>
   );
