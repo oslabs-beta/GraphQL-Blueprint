@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
-import Delete from 'material-ui/svg-icons/action/delete';
 // import Close from 'material-ui/svg-icons/navigation/close';
 import * as actions from '../../actions/actions';
 
@@ -9,7 +8,21 @@ const style = {
   deleteStyle: {
     minWidth: '25px',
     position: 'absolute',
-    right: '10px',
+    right: '0',
+    top: '0',
+    color: '#A1A1A1'
+  },
+  editStyle: {
+    border: '2px solid #000',
+    padding: '4px 16px',
+    borderRadius: '50px',
+    height: 'auto',
+    lineHeight: 'auto',
+    fontSize: '14px',
+    fontWeight: '500',
+    float: 'right',
+    marginTop: '16px',
+    boxShadow: 'none'
   },
   idFiled: {
     width: '100%',
@@ -63,41 +76,62 @@ const Table = ({
   };
 
   return (
-    <div className="table" style={{ border: `1px solid ${colors[databaseData.databaseID]}` }}>
+    <div className="table">
+      <div 
+        style={{
+          opacity: '0.15',
+          position: 'absolute',
+          bottom: '-40px',
+          right: '-20px',
+          width: '97px',
+          height: '101px',
+          backgroundImage: `url('images/${databaseData.database}.png')`,
+          backgroundSize: 'cover',
+        }}
+      ></div>
       <div>
-        <div className="type">
-          <FlatButton
+        <div 
+          className="type"
+        >
+          <div
             backgroundColor={colors[databaseData.databaseID]}
-            value={databaseIndex}
-            onClick={event => handleSelectedDatabase(event.currentTarget.value)}
+            data-value={databaseIndex}
+            onClick={event => handleSelectedDatabase(event.currentTarget.getAttribute("data-value"))}
             className="tableButton"
           >
-            <h4>{databaseData.name}</h4>
-          </FlatButton>
+            <div
+              className="db-logo"
+              style={{
+                backgroundImage: `url('images/${databaseData.database}.png')`,
+                backgroundSize: 'cover',
+              }}
+            >
+            </div>
+            <h4>
+              {databaseData.name}
+              <small>{databaseData.database} <span style={{color: '#939393'}}>•</span> {databaseData.tableIndex} tables</small>
+            </h4>
+          </div>
           <FlatButton
             className="delete-button"
-            icon={<Delete />}
+            icon={<box-icon name='trash'></box-icon>}
             value={databaseIndex}
             onClick={event => deleteDatabase(event.currentTarget.value)}
             style={style.deleteStyle}
           />
         </div>
       </div>
-      <div style={{ textAlign: 'center', color: '#ffffff', margin: '2rem 0' }}>
-        <h4 style={{ margin: '0.5rem 0' }}>{databaseData.database}</h4>
-        <p style={{ margin: '0.25rem 0' }}>{databaseData.tableIndex} tables</p>
-      </div>
-      <div className="addField">
         <FlatButton 
+          className="edit-tables"
           value={databaseData.databaseID}
           onClick={(e) => 
             { grabSelectedDatabase(e.currentTarget.value)
               setTimeout(()=>{document.getElementById('schemaTab').click()}, 0)
             }}
+            style={style.editStyle}
         >
             Edit Tables
         </FlatButton>
-      </div>
     </div>
   );
 }

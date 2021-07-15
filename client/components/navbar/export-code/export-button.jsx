@@ -94,7 +94,7 @@ class ExportCode extends Component {
   render() {
     return (
       <div>
-        <FlatButton style={{ color: '#FF4280' }} label="Export Code" onClick={this.handleExport} />
+        <FlatButton style={{ color: '#194A9A' }} label="Export Code" onClick={this.handleExport} />
         {this.state.showLoader && <Loader/>}
       </div>
     )

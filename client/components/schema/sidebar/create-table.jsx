@@ -15,18 +15,21 @@ import './sidebar.css';
 
 const style = {
   paper: {
-    display: 'flex',
-    marginTop: '5px',
-    marginBottom: '5px',
-    marginRight: '5px',
-    marginLeft: '5px',
-    backgroundColor: 'rgb(54, 58, 66)',
-    paddingLeft: '0px',
-    paddingRight: '0px',
+    display: 'block',
+    width: '80%',
+    margin: 'auto',
+    borderRadius: '8px',
+    backgroundColor: '#F2F3F3',
+    boxShadow: 'none',
+    padding: '0px 16px 8px'
   },
   relationDesc: {
     fontSize: '12px',
   },
+  listItems: {
+    fontSize: '14px',
+    padding: '12px 8px 8px',
+  }
 };
 
 const mapStateToProps = store => ({
@@ -113,13 +116,19 @@ const CreateTable = ({
         {renderTableName()}
         <TextField
           floatingLabelText="Table Name"
+          floatingLabelFocusStyle={{
+            color: '#194A9A'
+          }}
+          underlineFocusStyle={{
+            borderColor: '#194A9A'
+          }}
           id="tableName"
           fullWidth={true}
           autoFocus
           onChange={(e) => tableNameChange(e.target.value)}
           value={tableName}
         />
-        <h5 style={{ textAlign: 'center', marginTop: '-4px' }}>( Singular naming convention )</h5>
+        <h5 style={{ textAlign: 'center', marginTop: '-4px', fontWeight: '300' }}>( Singular naming convention )</h5>
         <Checkbox
           style={{ marginTop: '10px' }}
           label="Unique ID"
@@ -133,22 +142,26 @@ const CreateTable = ({
           fullWidth={true}
           secondary={true}
           type="submit"
-          style={{ marginTop: '25px' }}
+          style={{ 
+            marginTop: '25px',
+            boxShadow: 'none',
+          }}
         />
       </form>
       <br />
       <br />
       <div>
         <Paper style={style.paper}>
-        <List style={{paddingLeft: "18px"}}>
-          <ListItem key="legend" disabled={true} style={{fontSize: "20px"}}><strong>Legend</strong></ListItem>
+        <List style={{paddingLeft: "0"}}>
+          <ListItem key="legend" disabled={true} style={style.listItems}><strong>Legend</strong></ListItem>
           <Divider />
-          <ListItem key="legend-required" disabled={true}>Required : !</ListItem>
-          <ListItem key="unique" disabled={true}>Unique : *</ListItem>
-          <ListItem key="multiple-values" disabled={true}>Multiple Values : [ ]</ListItem>
+          <ListItem key="legend-required" disabled={true} style={style.listItems}>Required : !</ListItem>
+          <ListItem key="unique" disabled={true} style={style.listItems}>Unique : *</ListItem>
+          <ListItem key="multiple-values" disabled={true} style={style.listItems}>Multiple Values : [ ]</ListItem>
           <ListItem
             key="relation"
             disabled={true}
+            style={style.listItems}
             nestedItems={[
               <ListItem key="relation-desc1" disabled={true} style={style.relationDesc}>
                 Diagonal color on field (Name) indicates field is referenced by another field of that same color
