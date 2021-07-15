@@ -5,6 +5,7 @@
   flex-direction: column; 
   width: 100%;
   height: 100vh; 
+  padding-bottom: 10rem;
 }
 
 .app-header{
