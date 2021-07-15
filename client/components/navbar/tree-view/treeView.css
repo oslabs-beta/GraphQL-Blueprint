@@ -1,0 +1,58 @@
+.tree-container{
+  display: fixed;
+  overflow: auto;
+  min-height: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.tree-box {
+  background-color: #282A36!important;
+  padding: 0;
+}
+
+.tree-box > div {
+  padding: 0!important;
+}
+
+.rd3t-svg {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.node-title {
+  /* dx: -200; */
+  fill: green;
+}
+
+.node__root > circle {
+  fill: #FA8CA0;
+}
+
+.rd3t-label,
+.rd3t-label__title,
+.rd3t-label__attribute {
+  fill: #F8F8F2;
+  stroke: #F8F8F2!important;
+}
+
+.rd3t-link {
+  stroke: #8BE9FD!important;
+}
+
+
+.node__branch > circle {
+  fill: #F1FA8C;
+}
+
+.node__leaf > circle {
+  fill: #9BFA8C;
+}
+
+.rd3t-node,
+.rd3t-leaf-node{
+  stroke: none!important;
+}
+
+.rd3t-g {
+  transform: translate(364.457, 145.335) scale(0.807761, 0.807761);
+}

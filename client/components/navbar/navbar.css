@@ -1,5 +1,5 @@
 #navbar{
-  background-color: rgb(50,54,60);
+  background-color: rgb(255, 255, 255);
   width: 100%;
   height: 50px; 
   display: flex; 
@@ -42,3 +42,28 @@
   align-items: center;
 }
 
+.tree-box{
+  min-width: 400px;
+  min-height: 500px; 
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+}
+
+.tree-box2{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.node__root > circle {
+  fill: red;
+}
+
+.node__branch > circle {
+  fill: yellow;
+}
+
+.node__leaf > circle {
+  fill: green;
+}

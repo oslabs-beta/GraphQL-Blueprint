@@ -3,6 +3,7 @@ import * as types from '../actions/action-types';
 const initialState = {
   statusMessage: '',
   modalProps: {},
+  open: false
 };
 
 const generalReducers = (state = initialState, action) => {
@@ -13,15 +14,19 @@ const generalReducers = (state = initialState, action) => {
         ...state,
       };
     
-    //  NOT USED
+    // to show tree modal
     case types.SHOW_MODAL:
       return {
         ...state,
+        open: true
       };
 
-    //  NOT USED
+    //  to hide tree modal
     case types.HIDE_MODAL:
-      return initialState;
+      return {
+        ...state,
+        open: false
+      };
 
     //  used in APP prop, to reset "snackbar" state (displayed message) within Snackbar back to '' on close.
     case types.HANDLE_SNACKBAR_UPDATE:

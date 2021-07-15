@@ -9,7 +9,7 @@
 
 #sidebar-container {
   position: relative;
-  background-color:  rgb(44,48,56);
+  background-color:  rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -54,6 +54,14 @@
   left: 5px;
 }
 
+.table .fieldContainer1 .delete-button {
+  opacity: 0;
+}
+
+.table .fieldContainer1:hover .delete-button {
+  opacity: 1;
+}
+
 .fieldContainer2 {
   position: relative;
   display: flex;
@@ -64,11 +72,16 @@
 
 .fieldButton {
   width: 240px;
-  height: 100%;
   display: flex; 
-  justify-content: space-between;
-  align-items: left;
+  justify-content: flex-start;
+  align-items: center;
   margin-left: 5px;
+  cursor: pointer;
+}
+
+.fieldButton small {
+  margin: 0 1rem;
+  font-style: italic;
 }
 
 .delete-button {
@@ -77,16 +90,48 @@
 }
 
 .table-components-container{
-  display: flex; 
-  background-color: rgb(54, 58, 66);
-  justify-content: flex-start; 
-  align-items: flex-start; 
-  flex-wrap: wrap; 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: min-content;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+  margin: 32px;
   width: 100%;
+  margin-bottom: 6rem;
   position: relative;
   height: auto; 
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+@media only screen and (max-width: 1400px) {
+  .table-components-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .table-components-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .table-components-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media only screen and (min-width: 2120px) {
+  .table-components-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media only screen and (min-width: 2350px) {
+  .table-components-container {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 .addField {
