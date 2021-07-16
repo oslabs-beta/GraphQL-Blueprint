@@ -1,13 +1,11 @@
 # GraphQL Blueprint
 
-GraphQL Blueprint helps you build full stack apps with boilerplate code. Currently on a React, Express, Apollo stack, you can template out GraphQL code by modeling your database schema with our easy-to-use interface.
+[GraphQL Blueprint](http://graphqlblueprint.xyz/) helps you build full stack apps with boilerplate code. Currently on a React, Express, Apollo stack, you can template out GraphQL code by modeling your database schema with our easy-to-use interface.
 
 ### GraphQL Blueprint is cloned from a previous open source project called GraphQL Designer. 
-More information:
-
 [GraphQL Designer](http://graphqldesigner.com/) is a prototyping tool to develop full-stack GraphQL applications.
 
-With a few simple inputs, GraphQL Designer auto generates code for download, to start and implement your new application including GraphQL root queries, schemas, mutations, and client queries. Also available for download are the NoSQL schemas or SQL build scripts, and a server file.
+With a few simple inputs, GraphQL Blueprint auto generates code for download, to start and implement your new application including GraphQL root queries, schemas, mutations, and client queries. Also available for download are the NoSQL schemas or SQL build scripts, and a server file.
 
 https://user-images.githubusercontent.com/5971166/125996657-d0959cbd-840d-4577-a09d-99e1cc5bdbcc.mp4
 
@@ -26,11 +24,11 @@ For example, adding a new GraphQL type "User" with the fields "id", "age", and "
 
 You will notice that all these items revolve around a similar piece of information - User and its fields: id, age, and messages.
 
-GraphQL Designer solves this repetition by requiring the developer just to enter the information once. Once a GraphQL type is created on this platform, root queries, mutations, client queries, and a NoSQL schema or SQL create script is auto generated and ready for download. After download, the code can be simply dragged and dropped into your code base or favorite text editor!
+GraphQL Blueprint solves this repetition by requiring the developer just to enter the information once. Once a GraphQL type is created on this platform, root queries, mutations, client queries, and a NoSQL schema or SQL create script is auto generated and ready for download. After download, the code can be simply dragged and dropped into your code base or favorite text editor!
 
 ## How To Use
 
-Visit [GraphQL Designer](http://graphqldesigner.com/) and choose a database model to implement (MongoDB or MySQL). Based on the database selected, our application will generate the code for your database schemas or build scripts and GraphQL resolvers.
+Visit [GraphQL Blueprint](http://graphqlblueprint.xyz/) and choose a database model to implement (MongoDB or MySQL). Based on the database selected, our application will generate the code for your database schemas or build scripts and GraphQL resolvers.
 
 Next create a table for every GraphQL type your application will need. Each table created will also represent the structure of your NoSQL schema or SQL table. Each created table in our application can have several fields, which not only becomes a GraphQL field, but a SQL column or NoSQL key as well.
 
