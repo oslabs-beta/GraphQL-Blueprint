@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import FlatButton from 'material-ui/FlatButton';
 import * as actions from '../../actions/actions';
 
-// Reactjs-Popup Component
-import Popup from 'reactjs-popup';
-
 // styling
 import './navbar.css';
 
@@ -13,7 +10,6 @@ import './navbar.css';
 import ExportCode from './export-code/export-button.jsx';
 import TreeView from './tree-view/treeView.jsx';
 import { Dialog } from 'material-ui';
-// import Info from './info/info';
 
 const mapStateToProps = store => ({
   modalState: store.general.open,
