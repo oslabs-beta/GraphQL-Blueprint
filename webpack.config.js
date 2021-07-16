@@ -7,7 +7,7 @@ module.exports = {
   entry: "./index.jsx",
   output: {
     path: path.join(__dirname, "/public"),
-    filename: "main.js",
+    filename: '[name].js',
     publicPath: "/public",
   },
   mode: "development",
@@ -30,6 +30,16 @@ module.exports = {
     ],
   },
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: module => /node_modules/.test(module.resource),
+          enforce: true,
+        },
+      },
+    },
     minimizer: [new UglifyJsPlugin()],
   },
 };
