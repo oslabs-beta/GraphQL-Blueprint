@@ -9,7 +9,7 @@ More information:
 
 With a few simple inputs, GraphQL Designer auto generates code for download, to start and implement your new application including GraphQL root queries, schemas, mutations, and client queries. Also available for download are the NoSQL schemas or SQL build scripts, and a server file.
 
-![](graphql.gif)
+https://user-images.githubusercontent.com/5971166/125996657-d0959cbd-840d-4577-a09d-99e1cc5bdbcc.mp4
 
 ## Background
 
