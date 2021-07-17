@@ -2,18 +2,15 @@
 
 GraphQL Blueprint helps you build full stack apps with boilerplate code. Currently on a React, Express, Apollo stack, you can template out GraphQL code by modeling your database schema with our easy-to-use interface.
 
-### GraphQL Blueprint is cloned from a previous open source project called GraphQL Designer. 
-More information:
+Using a data modeling interface with a few simple inputs, GraphQL Designer auto generates code for download, to start and implement your new application including GraphQL root queries, schemas, mutations, and client queries. Also available for download are the NoSQL schemas or SQL build scripts, and a server file.
 
-[GraphQL Designer](http://graphqldesigner.com/) is a prototyping tool to develop full-stack GraphQL applications.
 
-With a few simple inputs, GraphQL Designer auto generates code for download, to start and implement your new application including GraphQL root queries, schemas, mutations, and client queries. Also available for download are the NoSQL schemas or SQL build scripts, and a server file.
+https://user-images.githubusercontent.com/5971166/126023310-2eefd773-9848-4f79-8760-1a3b86df954c.mp4
 
-![](GraphQLBlueprint.mp4)
 
 ## Background
 
-GraphQL is an emerging open source data query and manipulation language that can be a preferred method over RESTful architecture, fulfilling queries with less API calls, and limiting over-fetching and under-fetching of data. Although GraphQL is a powerful query language, starting a new GraphQL application can be time consuming due to its redundant structure. This repetitive code can make developing a GraphQL application more intuitive, but this could also mean that for every GraphQL type created, a large amount of additional code would be required.
+GraphQL is an open source data query and manipulation language that can be a preferred method over RESTful architecture, fulfilling queries with less API calls, and limiting over-fetching and under-fetching of data. Although GraphQL is a powerful query language, starting a new GraphQL application can be time consuming due to its redundant structure. This repetitive code can make developing a GraphQL application more intuitive, but this could also mean that for every GraphQL type created, a large amount of additional code would be required.
 
 For example, adding a new GraphQL type "User" with the fields "id", "age", and "messages" may require the following:
 - A root query for an individual User by id
@@ -30,29 +27,40 @@ GraphQL Designer solves this repetition by requiring the developer just to enter
 
 ## How To Use
 
-Visit [GraphQL Designer](http://graphqldesigner.com/) and choose a database model to implement (MongoDB or MySQL). Based on the database selected, our application will generate the code for your database schemas or build scripts and GraphQL resolvers.
+Visit [GraphQL Designer](http://graphqldesigner.com/) and choose one or many database models to implement (MongoDB, PostgreSQL or MySQL). our application will generate the code for your database schemas, build scripts and GraphQL resolvers.
 
-Next create a table for every GraphQL type your application will need. Each table created will also represent the structure of your NoSQL schema or SQL table. Each created table in our application can have several fields, which not only becomes a GraphQL field, but a SQL column or NoSQL key as well.
+Next create a table for every GraphQL type your application will need. Each table created will also represent the structure of your NoSQL schema or SQL table. Each created table in our application can have several fields, which not only becomes a GraphQL field, but a SQL column or NoSQL key as well. 
 
 ![](Screenshots/Screenshot-SchemaUpdated.png)
+![](Screenshots/Screenshot-TableSchemaUpdated.png)
 
 The fields can be customized to meet your desired database structure, and using relations, can dynamically make the resolvers for each GraphQL type. By default at this point, our application can auto generate a server file, database setup code, and GraphQL types, root queries, mutations, and client queries.
 
 ![](Screenshots/Screenshot-CodeUpdated.png)
 
-Lastly export your code!
+Lastly export your code! The download folder will contain a readme file that describes the organization of the boilerplate code is organized and how to run it.
+
+Check out our issues panel to learn how you can contribute and if you like our app, please give it a star!
 
 ## GraphQL Blueprint Authors
 
-[Sean Yalda]
+[Sean Yalda](https://www.linkedin.com/in/sean-yalda/)
+[@seanathon](https://github.com/Seanathon)
 
-[Dylan Li]
+[Ethan Yeh](https://www.linkedin.com/in/ethan-yeh-171391172/)
+[@ehwyeh](https://github.com/ehwyeh)
 
-[Kevin Berlanga]
+[Kevin Berlanga](https://www.linkedin.com/in/kevinberlanga/)
+[@kevinberlanga](https://github.com/kevinberlanga)
 
-[Newas Azad] (https://wwwlinkedin.com/in/newas-azad-0b0152134/) [@nazad23] (https://github.com/nazad23)
+[Dylan Li](https://www.linkedin.com/in/dli107/) 
+[@dylan2040](https://github.com/dylan2040)
 
-[Ethan Yeh]
+[Newas Azad](https://wwwlinkedin.com/in/newas-azad-0b0152134/) [@nazad23](https://github.com/nazad23)
+
+
+### GraphQL Blueprint is forked and iterated upon from a previous open source project called GraphQL Designer. 
+More information: [GraphQL Designer](http://graphqldesigner.com/) is a prototyping tool to develop full-stack GraphQL applications. It allowed you to model one database schema. We expanded upon it by allowing a multi-database schema, syntax highlighting, graph view, and persistant state with local storage among other things.
 
 ### GraphQL Designer Authors
 
