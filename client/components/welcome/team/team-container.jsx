@@ -8,8 +8,7 @@ const Team = () => (
   <div className="team-container">
     <div className="team">
       <div className="team-heading">
-        <h4>Meet our Team</h4>
-        <p>GraphQL Blueprint is an open source project recently collaborated on by the following individuals. If this project is something you’d like to iterate on, reach out to any of us or checkout our <a href="https://github.com/oslabs-beta/GraphQL-Blueprint">GitHub repo</a>!</p>
+        <p><b>The faces behind GraphQL Blueprint.</b><br />Learn more about this open source project or fork it at our <a href="https://github.com/oslabs-beta/GraphQL-Blueprint">GitHub repo</a>!</p>
       </div>
       <div className="row">
         <TeamMember

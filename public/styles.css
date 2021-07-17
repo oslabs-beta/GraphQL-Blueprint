@@ -166,3 +166,94 @@ footer ul li small {
     text-decoration: none!important;
     font-size: 1em;
 }
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: #F2F4F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    /* transition: all 1s linear; */
+}
+
+#loader.hide {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all 1s linear;
+}
+
+.loading-graphic,
+.loading-text {
+    text-align: center;
+}
+
+.loading-text {
+    font-style: italic;
+}
+
+.loading-graphic svg {
+    width: 45%;
+    height: 45%;
+}
+
+.loading-text {
+    margin-top: 1rem;
+    animation-fill-mode: both;
+    animation-direction: alternate;
+    animation-name: colorfill;
+    animation-iteration-count: infinite;
+    animation-duration: 1.5s, 2s, 2.75s;
+    animation-delay: 0s, 0.75s, 1.25s;
+}
+
+.loading-graphic path {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 0, 0, 0, 390;
+    fill-opacity: 0;
+    stroke-opacity: 1;
+    animation-timing-function: ease-in-out; 
+    animation-fill-mode: both;
+    animation-direction: alternate;
+    animation-name: dash;
+    animation-iteration-count: infinite;
+    
+    /* HALF-TIME */
+    /* animation-duration: 1.5s, 2s, 2.75s;
+    animation-delay: 0s, 0.75s, 1.25s; */
+    
+    /* TIME  */
+    animation-duration: 3s, 4s, 2s;
+    animation-delay: 0s, 1s, 1s;
+  }
+  
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 390;
+      stroke-dasharray: 0, 0, 390, 0;
+    }
+  }
+  
+  @keyframes strokefade {
+    to {
+      stroke-opacity: 0;
+    }
+  }
+  
+  @keyframes colorfill {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 100;
+    }
+  }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 
@@ -9,7 +9,6 @@ import SchemaApp from './schema/schema-app.jsx';
 import DBApp from './databases/db-app.jsx';
 import CodeApp from './code/code-app.jsx';
 import GitHubButton from 'react-github-btn'
-import Team from './welcome/team/team-button.jsx';
 import Info from './navbar/info/info.jsx';
 //import QueryApp from './query/query-app.jsx';
 
@@ -49,6 +48,11 @@ const App = ({ snackBar, handleSnackbarUpdate, schemaObject, saveDatabaseDataInp
   function handleRequestClose() {
     handleSnackbarUpdate('');
   }
+
+  useEffect(() => {
+    const loader = document.getElementById('loader');
+    setTimeout(() => loader.classList.add('hide'), 160);
+  });
 
   return (
     <div className="app-container">
