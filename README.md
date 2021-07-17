@@ -1,8 +1,8 @@
 # GraphQL Blueprint
 
-GraphQL Blueprint helps you build full stack apps with boilerplate code. Currently on a React, Express, Apollo stack, you can template out GraphQL code by modeling your database schema with our easy-to-use interface.
+[GraphQL Blueprint](http://graphqlblueprint.xyz) helps you build full stack apps with boilerplate code. Currently on a React, Express, Apollo stack, you can template out GraphQL code by modeling your database schema with our easy-to-use interface.
 
-Using a data modeling interface with a few simple inputs, GraphQL Designer auto generates code for download, to start and implement your new application including GraphQL root queries, schemas, mutations, and client queries. Also available for download are the NoSQL schemas or SQL build scripts, and a server file.
+Our interface provides you the ability, with a few simple inputs, to auto generate boilerplate code for download. As you can see in the video below, it resembles the activity of data modeling (another use case of GraphQL Blueprint). The boilerplate code gives you a head start to develop your new application including GraphQL root queries, schemas, mutations, and client queries. Also available for download are the NoSQL schemas or SQL build scripts, and a server file. Neat, right?
 
 
 https://user-images.githubusercontent.com/5971166/126023310-2eefd773-9848-4f79-8760-1a3b86df954c.mp4
@@ -27,7 +27,7 @@ GraphQL Designer solves this repetition by requiring the developer just to enter
 
 ## How To Use
 
-Visit [GraphQL Designer](http://graphqldesigner.com/) and choose one or many database models to implement (MongoDB, PostgreSQL or MySQL). our application will generate the code for your database schemas, build scripts and GraphQL resolvers.
+Visit [GraphQL Blueprint](http://graphqlblurprint.xyz/) and choose one or many database models to implement (MongoDB, PostgreSQL or MySQL). our application will generate the code for your database schemas, build scripts and GraphQL resolvers.
 
 Next create a table for every GraphQL type your application will need. Each table created will also represent the structure of your NoSQL schema or SQL table. Each created table in our application can have several fields, which not only becomes a GraphQL field, but a SQL column or NoSQL key as well. 
 
