@@ -87,4 +87,4 @@ npm run server
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/GraphQL-Designer/graphqldesigner.com/blob/master/LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/oslabs-beta/GraphQL-Blueprint/blob/main/LICENSE.md) file for details.
