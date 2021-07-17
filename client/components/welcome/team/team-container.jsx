@@ -8,7 +8,7 @@ const Team = () => (
   <div className="team-container">
     <div className="team">
       <div className="team-heading">
-        <p>The faces behind GraphQL Blueprint. Learn more about this open source project or fork it at our <a href="https://github.com/oslabs-beta/GraphQL-Blueprint">GitHub repo</a>!</p>
+        <p><b>The faces behind GraphQL Blueprint.</b><br />Learn more about this open source project or fork it at our <a href="https://github.com/oslabs-beta/GraphQL-Blueprint">GitHub repo</a>!</p>
       </div>
       <div className="row">
         <TeamMember
