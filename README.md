@@ -23,7 +23,7 @@ For example, adding a new GraphQL type "User" with the fields "id", "age", and "
 
 You will notice that all these items revolve around a similar piece of information - User and its fields: id, age, and messages.
 
-GraphQL Designer solves this repetition by requiring the developer just to enter the information once. Once a GraphQL type is created on this platform, root queries, mutations, client queries, and a NoSQL schema or SQL create script is auto generated and ready for download. After download, the code can be simply dragged and dropped into your code base or favorite text editor!
+GraphQL Blueprint solves this repetition by requiring the developer just to enter the information once. Once a GraphQL type is created on this platform, root queries, mutations, client queries, and a NoSQL schema or SQL create script is auto generated and ready for download. After download, the code can be simply dragged and dropped into your code base or favorite text editor!
 
 ## How To Use
 
